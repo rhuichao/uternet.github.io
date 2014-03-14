@@ -1,0 +1,7 @@
+baseurl:   /
+plugins:   ./_plugins
+layouts:   ./_layouts
+keep_files: ['.git','.svn']
+timezone:  nil
+encoding:  nil
+ 
