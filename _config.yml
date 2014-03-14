@@ -2,4 +2,4 @@ baseurl:   /
 plugins:   ./_plugins
 layouts:   ./_layouts
 keep_files: ['.git','.svn']
- 
+permalink: /:year-:month-:day/:title.html 
