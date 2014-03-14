@@ -1,5 +1,5 @@
 body {
-    font-family: "SimSun", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-family: "DejaVu Serif", serif;
     font-size: 18px;
     margin: 5% 20% 5% 20%;
     padding: 2% 5% 5% 5%;
@@ -10,27 +10,29 @@ body {
 
 
 H2 {
-    font-family: "SimSun", "STKai", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-family: "DejaVu Serif", serif;
     margin-bottom: 60px;
     margin-bottom: 40px;
     padding: 5px;
     border-bottom: 2px LightGrey solid;
     width: 80%;
     line-height: 150%;
-    color: DarkGreen;
+/*    color: DarkGreen;*/
 }
 
 
 H3 {
-    font-family: "SimSun", "STKai", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-family: "DejaVu Serif", serif;
     margin-top: 40px;
     margin-bottom: 30px;
-    border-bottom: 1px LightGrey solid;
     width: 80%;
     line-height: 150%;
-    color: DarkBlue;
+/*    color: DarkBlue;*/
 }
 
+.post {
+    font-size: 16px;
+}
 
 li {
     margin-left: 10px;
@@ -43,6 +45,10 @@ blockquote {
     margin-left: 20px;
 }
 
+.meta {
+  color: #aaa;
+  font-size: 12px;
+}
 
 pre {
     font-size: 75%;
