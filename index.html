@@ -2,9 +2,11 @@
 layout: default
 title: 老朱的间歇性折腾
 ---
+<blockquote>
+<a href="http://www.mindomo.com/view.htm?m=9d8e168a65ea44ee88ec69f8d11727d3">草稿的思维导图</a>
+</blockquote>
 
-<h2>{{ page.title }}</h2>
-<p>最新文章</p>
+
 <ul>
 	{% for post in site.posts %}
 		<li>{{ post.date | date_to_string }} <a href="{{ post.url }}"> {{ post.title }} </a></li>

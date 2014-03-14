@@ -1,0 +1,31 @@
+---
+layout: nil
+---
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+  <title>http://uternet.github.io</title>
+  <link href="http://uternet.github.io"/>
+  <link type="application/atom+xml" rel="self" href="http://uternet.github.io/atom.xml"/>
+  <updated>{{ site.time | date_to_xmlschema }}</updated>
+  <id>http://uternet.github.io</id>
+  <author>
+    <name>Yin Wang</name>
+    <email>yinwang0@gmail.com</email>
+  </author>
+
+  {% for post in site.posts %}
+  <entry>
+    <id>http://uternet.github.io{{ post.id }}</id>
+    <link type="text/html" rel="alternate" href="http://uternet.github.io{{ post.url }}"/>
+    <title>{{ post.title | xml_escape }}</title>
+    <updated>{{ post.date | date_to_xmlschema }}</updated>
+    <author>
+      <name>Yin Wang</name>
+      <uri>http://uternet.github.io</uri>
+    </author>
+    <content type="html">{{ post.content | xml_escape }}</content>
+  </entry>
+  {% endfor %}
+ 
+</feed>
