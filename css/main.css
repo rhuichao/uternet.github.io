@@ -52,6 +52,7 @@ blockquote {
 }
 
 pre {
+    font-family: "DejaVu Sans Mono", "Courier New", "Terminal", mono;
     font-size: 90%;
     border: solid 1px #ddd;
     background-color: #eef;
