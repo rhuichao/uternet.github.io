@@ -1,11 +1,15 @@
-<!DOCTYPE html>
-<html
-  <head>
-	<title>Hello</title>
-  </head>
+---
+layout: default
+title: 老朱的间歇性折腾
+---
 
-<body>
+<h2>{{ page.title }}</h2>
+<p>最新文章</p>
+<ul>
+	{% for post in site.posts %}
+		<li>{{ post.date | date_to_string }} <a href={{
+site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
 
-<h1>Hello, World!<h1>
-</body>
-</html>
+	{% endfor %}
+
+</ul>
