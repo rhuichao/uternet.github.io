@@ -24,11 +24,3 @@ URScheme，是一个可以将scheme代码编译成原生机器码的编译器。
     ./urscheme-compiler < compiler.scm > compiler.s1
     gcc -nostdlib -m32 -Wa,-adhlns=tmp.s.lst compiler.s1 -o urscheme-compiler1
 
-这是一段C代码测试
-
-    #include <stdio.h>
-    int main()
-    {
-        printf("Hello, World!\n");
-        return 0;
-    }
