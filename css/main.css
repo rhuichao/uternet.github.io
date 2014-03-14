@@ -51,7 +51,7 @@ blockquote {
   font-size: 12px;
 }
 
-pre {
+body.pre {
     font-family: Monaco, Liberation Mono, Courier, monospace;
     font-size: 90%;
     border: solid 1px #ddd;
