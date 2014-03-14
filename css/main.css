@@ -1,4 +1,4 @@
-body {
+html,body {
     font-family: "DejaVu Serif", serif;
     font-size: 18px;
     margin: 5% 10% 5% 10%;
@@ -51,7 +51,7 @@ blockquote {
   font-size: 12px;
 }
 
-body.pre {
+pre {
     font-family: Monaco, Liberation Mono, Courier, monospace;
     font-size: 90%;
     border: solid 1px #ddd;
