@@ -19,7 +19,7 @@ URScheme，是一个可以将scheme代码编译成原生机器码的编译器。
 
 其中，compiler.s就是汇编代码，urscheme-compiler是最终生成的可执行文件。可以看到，它并不使用命令行参数，而是通过输入重定向读入scheme源码，然后再通过输出重定向将汇编代码写入另一个文件，然后再调用gcc编译汇编代码，最终生成可执行文件。
 
-一旦生成urscheme-compiler，它就可以实现自举：
+一旦在chicken的帮助下生成了编译器的可执行文件urscheme-compiler，它就可以实现自我编译：
 
     ./urscheme-compiler < compiler.scm > compiler.s1
     gcc -nostdlib -m32 -Wa,-adhlns=tmp.s.lst compiler.s1 -o urscheme-compiler1
