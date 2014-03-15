@@ -1,4 +1,4 @@
-name:      老朱的间歇性折腾
+name:      间歇性折腾
 pygments:  true
 source:    .
 destination: ./_site
@@ -7,5 +7,5 @@ layouts:   ./_layouts
 keep_files: ['.git','.svn']
 permalink: /:year-:month-:day/:title.html 
 baseurl:   /
-paginate:  5
-paginate_path: "blog/page:num"
+paginate:  20
+paginate_path: "page:num"

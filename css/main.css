@@ -31,10 +31,6 @@ H3 {
 /*    color: DarkBlue;*/
 }
 
-.post {
-    font-size: 16px;
-}
-
 li {
     margin-left: 10px;
 }
@@ -46,11 +42,22 @@ blockquote {
     margin-left: 20px;
 }
 
-.meta {
+#post {
+    font-size: 16px;
+}
+
+#meta {
   color: #aaa;
   font-size: 12px;
 }
 
+#paginator {
+    color: #aaa;
+    font-size: 12px;
+    border-top: 2px LightGrey solid;
+    padding:   10px 0px 10px 0px;
+    width: 81%;
+}
 pre {
     font-family: Monaco, Liberation Mono, Courier, monospace;
     font-size: 90%;
