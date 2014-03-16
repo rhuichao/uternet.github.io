@@ -14,7 +14,7 @@ date:   2014-03-16
 + :executable t   导出为可执行文件
 + :compression t  压缩core image，可以大大压缩导出后的文件体积，如果不加这个参数，一个单纯的hello world有将近30M那么大，加上compresson后被压缩到只有9M左右。要使用本参数，需要在编译SBCL时打开开关。我没有尝试过官网的预编译版本，不过可以确定的是Debian仓库中的SBCL是没有打开这个开关的。最后下载了SBCL的源码自己编译解决。
 
-具体用法：<http://www.sbcl.org/manual/&#35Saving-a-Core-Image>
+具体用法：<http://www.sbcl.org/manual/#Saving-a-Core-Image>
 
 示例(fib.lisp)：
 
