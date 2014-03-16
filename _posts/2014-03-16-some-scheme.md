@@ -14,7 +14,7 @@ date:   2014-03-13
 
 （不加 -s 选项的话，执行完脚本会进入REPL环境，不会自动退出）
 
-3、编译成本地代码:
+####3、编译成本地代码:
 
     csc hello.scm
 
@@ -22,26 +22,26 @@ date:   2014-03-13
 
 
 ###二、Gambit-C
-1、Read-Eval-Print Loop：
+####1、Read-Eval-Print Loop：
 
     gsi
 
-2、脚本：
+####2、脚本：
 
     #!/path/bin/gsi-script
 
-3、编译：
+####3、编译：
 
     gsc [-o outfile] -exe hello.scm
 
 （这个也是先翻译成C，再用gcc编译，不过和chicken比起来可执行文件的体积太大了，一个hello world有4M那么大，strip后还有3.5M）
 
 ###三、Larceny
-1、Read-Eval-Print Loop:
+####1、Read-Eval-Print Loop:
 
     larceny
 
-2、脚本：
+####2、脚本：
 
 1)R5RS脚本：
 
@@ -51,7 +51,8 @@ date:   2014-03-13
 
     scheme-script hello.scm
 
-3、编译的方法暂时没找到，这个实现有三个版本：
+####3、编译的方法暂时没找到   
+这个实现有三个版本：
 
 >Larceny compiles directly to native machine code for the Intel IA32 or SPARC architectures.
 >Petit Larceny is a portable implementation that compiles to C instead of machine code.
@@ -69,16 +70,16 @@ date:   2014-03-13
     (load "filename.fasl")
 
 ###四、Guile
-1、Read-Eval-Print Loop：
+####1、Read-Eval-Print Loop：
 
     guile
 
-2、脚本：
+####2、脚本：
 
     #!/path/bin/guile -s
 
 ###五、DrRacket
-1、Read-Eval-Print Loop：
+####1、Read-Eval-Print Loop：
 
 1）Racket:
 
@@ -89,11 +90,11 @@ date:   2014-03-13
 
     plt-r5rs
 
-2、以脚本方式运行：
+####2、以脚本方式运行：
 
     racket -r file.scm
     mzscheme -r file.scm
 
-3、启动GUI环境的IDE:
+####3、启动GUI环境的IDE:
 
     drracket
