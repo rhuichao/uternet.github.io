@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+        
+	<title>几种Scheme实现的基本用法</title>
+</head>
+
+<body>
+	<h2><a href="/">间歇性折腾</a></h2>
+	
+	<h3>几种Scheme实现的基本用法</h3>
+<p id="meta">13 Mar 2014</p>
+
+<div id="post">
+<h3 id="chicken">一、Chicken</h3>
+
+<h4 id="1readevalprint_loop">1、Read-Eval-Print Loop:</h4>
+
+<pre><code>csi</code></pre>
+
+<h4 id="2">2、脚本:</h4>
+
+<pre><code>#!/path/bin/csi -s</code></pre>
+
+<p>（不加 -s 选项的话，执行完脚本会进入REPL环境，不会自动退出）</p>
+
+<h4 id="3">3、编译成本地代码:</h4>
+
+<pre><code>csc hello.scm</code></pre>
+
+<p>（先转译成C，再用gcc编译）</p>
+
+<h3 id="gambitc">二、Gambit-C</h3>
+
+<h4 id="1readevalprint_loop_2">1、Read-Eval-Print Loop：</h4>
+
+<pre><code>gsi</code></pre>
+
+<h4 id="2_2">2、脚本：</h4>
+
+<pre><code>#!/path/bin/gsi-script</code></pre>
+
+<h4 id="3_2">3、编译：</h4>
+
+<pre><code>gsc [-o outfile] -exe hello.scm</code></pre>
+
+<p>（这个也是先翻译成C，再用gcc编译，不过和chicken比起来可执行文件的体积太大了，一个hello world有4M那么大，strip后还有3.5M）</p>
+
+<h3 id="larceny">三、Larceny</h3>
+
+<h4 id="1readevalprint_loop_3">1、Read-Eval-Print Loop:</h4>
+
+<pre><code>larceny</code></pre>
+
+<h4 id="2_3">2、脚本：</h4>
+
+<p>1)R5RS脚本：</p>
+
+<pre><code>larceny -nobanner -- hello.scm</code></pre>
+
+<p>2)R6RS脚本：</p>
+
+<pre><code>scheme-script hello.scm</code></pre>
+
+<h4 id="3_3">3、编译的方法暂时没找到</h4>
+
+<p>这个实现有三个版本：</p>
+
+<blockquote>
+<ul>
+<li>Larceny compiles directly to native machine code for the Intel IA32 or SPARC architectures.</li>
+
+<li>Petit Larceny is a portable implementation that compiles to C instead of machine code.</li>
+
+<li>Common Larceny runs in the Common Language Runtime (CLR) of Microsoft .NET, generating IL, which is JIT-compiled to native machine code by the CLR.</li>
+</ul>
+</blockquote>
+
+<p>以我蹩脚的方言水平，第一个，就是默认的Larceny，把REPL环境中输入的每一条指令都编译成机器码；而Petit Larceny则把它翻译成C代码；第三个，Common Larceny则是在.net环境上运行的。</p>
+
+<p>嗯！虽然不能编译可执行文件的方法，不过这个实现在一些基准测试中成绩很靠前，值得关注。 对了，在REPL环境中可以用下面的指令编译：</p>
+
+<pre><code>(compile-file &quot;filename.scm&quot;)</code></pre>
+
+<p>得到一个编译后的 .fasl 文件,然后载入</p>
+
+<pre><code>(load &quot;filename.fasl&quot;)</code></pre>
+
+<h3 id="guile">四、Guile</h3>
+
+<h4 id="1readevalprint_loop_4">1、Read-Eval-Print Loop：</h4>
+
+<pre><code>guile</code></pre>
+
+<h4 id="2_4">2、脚本：</h4>
+
+<pre><code>#!/path/bin/guile -s</code></pre>
+
+<h3 id="drracket">五、DrRacket</h3>
+
+<h4 id="1readevalprint_loop_5">1、Read-Eval-Print Loop：</h4>
+
+<p>1）Racket:</p>
+
+<pre><code>racket
+mzscheme</code></pre>
+
+<p>2）R5RS:</p>
+
+<pre><code>plt-r5rs</code></pre>
+
+<h4 id="2_5">2、以脚本方式运行：</h4>
+
+<pre><code>racket -r file.scm
+mzscheme -r file.scm</code></pre>
+
+<h4 id="3guiide">3、启动GUI环境的IDE:</h4>
+
+<pre><code>drracket</code></pre>
+</div>
+ 
+</body>
+</html>
+ 
