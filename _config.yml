@@ -4,5 +4,5 @@ destination: ./_site
 layouts:   ./_layouts
 permalink: /:year-:month-:day/:title.html 
 baseurl:   /
-paginate:  5
+paginate:  10
 paginate_path: "page:num"
