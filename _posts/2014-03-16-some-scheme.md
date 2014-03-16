@@ -42,19 +42,19 @@ date:   2014-03-13
     larceny
 
 2、脚本：
-R5RS脚本：
+1)R5RS脚本：
 
     larceny -nobanner -- hello.scm
 
-R6RS脚本：
+2)R6RS脚本：
 
     scheme-script hello.scm
 
 3、编译的方法暂时没找到，这个实现有三个版本：
 
-Larceny compiles directly to native machine code for the Intel IA32 or SPARC architectures.
-Petit Larceny is a portable implementation that compiles to C instead of machine code.
-Common Larceny runs in the Common Language Runtime (CLR) of Microsoft .NET, generating IL, which is JIT-compiled to native machine code by the CLR. 
+>Larceny compiles directly to native machine code for the Intel IA32 or SPARC architectures.
+>Petit Larceny is a portable implementation that compiles to C instead of machine code.
+>Common Larceny runs in the Common Language Runtime (CLR) of Microsoft .NET, generating IL, which is JIT-compiled to native machine code by the CLR. 
 
 以我蹩脚的方言水平，第一个，就是默认的Larceny，把REPL环境中输入的每一条指令都编译成机器码；而Petit Larceny则把它翻译成C代码；第三个，Common Larceny则是在.net环境上运行的。
 
