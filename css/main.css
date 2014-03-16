@@ -1,5 +1,5 @@
 body {
-    font-family: "DejaVu Serif", serif;
+    font-family: "DejaVu Serif", "SimSun", serif;
     font-size: 18px;
     margin: 5% 10% 5% 10%;
     padding: 2% 5% 2% 5%;
@@ -10,7 +10,7 @@ body {
 
 
 H2 {
-    font-family: "DejaVu Serif", serif;
+    font-family: "DejaVu Serif", "SimSun", serif;
     margin-bottom: 60px;
     margin-bottom: 40px;
     padding: 5px;
@@ -22,7 +22,7 @@ H2 {
 
 
 H3 {
-    font-family: "DejaVu Serif", serif;
+    font-family: "DejaVu Serif", "SimSun", serif;
     margin-top: 40px;
     margin-bottom: 30px;
     width: 80%;
@@ -59,7 +59,7 @@ blockquote {
     width: 81%;
 }
 pre {
-    font-family: Monaco, Liberation Mono, Courier, monospace;
+    font-family: "Monaco", "Liberation Mono", "Courier", monospace;
     font-size: 90%;
     border: solid 1px #ddd;
     background-color: #eef;
