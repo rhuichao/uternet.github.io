@@ -3,9 +3,6 @@ layout: post
 title:  几种Scheme实现的基本用法
 date:   2014-03-13
 ---
-几种Scheme实现的用法
-
- 
 ###一、Chicken
 ####1、Read-Eval-Print Loop:
 
