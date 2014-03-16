@@ -42,6 +42,7 @@ date:   2014-03-13
     larceny
 
 2、脚本：
+
 1)R5RS脚本：
 
     larceny -nobanner -- hello.scm
@@ -78,6 +79,7 @@ date:   2014-03-13
 
 ###五、DrRacket
 1、Read-Eval-Print Loop：
+
 1）Racket:
 
     racket
@@ -88,7 +90,6 @@ date:   2014-03-13
     plt-r5rs
 
 2、以脚本方式运行：
-
 
     racket -r file.scm
     mzscheme -r file.scm
