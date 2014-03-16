@@ -4,11 +4,11 @@ title:  几种Scheme实现的基本用法
 date:   2014-03-13
 ---
 ###一、Chicken
-1、Read-Eval-Print Loop:
+####1、Read-Eval-Print Loop:
 
     csi
 
-2、脚本:
+####2、脚本:
 
     #!/path/bin/csi -s
 
