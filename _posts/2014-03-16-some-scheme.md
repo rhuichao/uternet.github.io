@@ -43,11 +43,11 @@ date:   2014-03-13
 
 ####2、脚本：
 
-1)R5RS脚本：
++  1)R5RS脚本：
 
     larceny -nobanner -- hello.scm
 
-2)R6RS脚本：
++ 2)R6RS脚本：
 
     scheme-script hello.scm
 
