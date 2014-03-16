@@ -60,4 +60,24 @@ date:   2014-03-16
     real    0m5.051s
     user    0m4.984s
     sys     0m0.048s
+    
+编译SBCL源码的方法：
+
+要编译SBCL，需要系统中先有一个可运行的SBCL来实现自举，`apt-get install sbcl`安装源里的包就行。  
+编译选项上要打开compression开关，prefix不用指定，默认为`/usr/local`，我认为把编译安装的软件安装到/usr/local底下是个好习惯。  
+不会同apt安装的软件发生冲突。
+
+    sh make.sh --with-sb-core-compression
+    
+编译完全后可以运行下测试看看：
+
+    cd tests && sh run-tests.sh
+    
+我测试了一下，有错误发生。Google得到的回答是MS没有大问题。。。   
+如果要安装文档（man info 等）
+
+    cd doc/manual && make
+
+一切准备停当后可以卸载掉apt安装的SBCL，然后运行install.sh脚本进行安装自己编译的版本。
+
 
