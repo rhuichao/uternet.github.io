@@ -36,14 +36,14 @@
 */
 body {
     font-family: "dejavu_serifbook", sans;
-    font-size: 16px;
+    font-size: 14px;
     margin: 5% 10% 5% 10%;
     padding: 2% 5% 2% 5%;
     width: 40em
     line-height: 150%;
     border: 1px solid LightGrey;
 }
- 
+
 
 H2 {
     font-family: "dejavu_serifbook", "simsun", serif;
