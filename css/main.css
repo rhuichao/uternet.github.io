@@ -71,6 +71,10 @@ li {
     margin-left: 10px;
 }
 
+#title_list{
+    line-height: 300%
+}
+
 
 blockquote {
     border-left: 4px lightgrey solid;
