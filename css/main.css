@@ -35,7 +35,7 @@
 }
 */
 body {
-    font-family: "dejavu_serifbook", sans;
+    font-family: "Dejavu Serif", "dejavu_serifbook", serif;
     font-size: 20px;
     margin: 5% 10% 5% 10%;
     padding: 2% 5% 2% 5%;
@@ -46,7 +46,7 @@ body {
 
 
 H2 {
-    font-family: "dejavu_serifbook", "simsun", serif;
+    font-family: "Dejavu Serif", "dejavu_serifbook", "simsun", serif;
     margin-bottom: 60px;
     margin-bottom: 40px;
     padding: 5px;
@@ -58,7 +58,7 @@ H2 {
 
 
 H3 {
-    font-family: "dejavu_serifbook", "simsun", serif;
+    font-family: "Dejavu Serif", "dejavu_serifbook", "simsun", serif;
     margin-top: 40px;
     margin-bottom: 30px;
     width: 80%;
@@ -95,7 +95,7 @@ blockquote {
     width: 81%;
 }
 pre {
-    font-family: "courierregular", monospace;
+    font-family: "Courier", "courierregular", monospace;
     font-size: 90%;
     border: solid 1px #ddd;
     background-color: #eef;
