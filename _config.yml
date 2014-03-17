@@ -1,14 +1,8 @@
-name:      间歇性折腾
-source:    .
-destination: ./_site
-layouts:   ./_layouts
-permalink: /:year-:month-:day/:title.html 
-baseurl:   /
-paginate:  6
-paginate_path: "page:num"
-markdown:   redcarpet
-markdown_ext: markdown,mkd,mkdn,md
-redcarpet: 
-  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "strikethrough", "superscript", "with_toc_data"]
-pygments:  true
-
+permalink:     /:year-:month-:day/:title.html
+url:           http://uternet.github.io
+author:        Geek_Gig
+paginate:      6
+markdown:      redcarpet
+pygments:      true
+safe:          true
+auto:          true

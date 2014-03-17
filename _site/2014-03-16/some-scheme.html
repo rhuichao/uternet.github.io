@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+        
+	<title>几种Scheme实现的基本用法</title>
+</head>
+
+<body>
+	<h2><a href="/">间歇性折腾</a></h2>
+	
+	<h3>几种Scheme实现的基本用法</h3>
+<p id="meta">16 Mar 2014</p>
+
+<div id="post">
+<h3>一、Chicken</h3>
+
+<h4>1、Read-Eval-Print Loop:</h4>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">csi
+</code></pre></div>
+<h4>2、脚本:</h4>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">#!/path/bin/csi -s
+</code></pre></div>
+<p>（不加 -s 选项的话，执行完脚本会进入REPL环境，不会自动退出）</p>
+
+<h4>3、编译成本地代码:</h4>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">csc hello.scm
+</code></pre></div>
+<p>（先转译成C，再用gcc编译）</p>
+
+<h3>二、Gambit-C</h3>
+
+<h4>1、Read-Eval-Print Loop：</h4>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">gsi
+</code></pre></div>
+<h4>2、脚本：</h4>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">#!/path/bin/gsi-script
+</code></pre></div>
+<h4>3、编译：</h4>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">gsc [-o outfile] -exe hello.scm
+</code></pre></div>
+<p>（这个也是先翻译成C，再用gcc编译，不过和chicken比起来可执行文件的体积太大了，一个hello world有4M那么大，strip后还有3.5M）</p>
+
+<h3>三、Larceny</h3>
+
+<h4>1、Read-Eval-Print Loop:</h4>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">larceny
+</code></pre></div>
+<h4>2、脚本：</h4>
+
+<p>1)R5RS脚本：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">larceny -nobanner -- hello.scm
+</code></pre></div>
+<p>2)R6RS脚本：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">scheme-script hello.scm
+</code></pre></div>
+<h4>3、编译的方法暂时没找到</h4>
+
+<p>这个实现有三个版本：</p>
+
+<blockquote>
+<ul>
+<li> Larceny compiles directly to native machine code for the Intel IA32 or SPARC architectures.</li>
+<li> Petit Larceny is a portable implementation that compiles to C instead of machine code.</li>
+<li> Common Larceny runs in the Common Language Runtime (CLR) of Microsoft .NET, generating IL, which is JIT-compiled to native machine code by the CLR. </li>
+</ul>
+</blockquote>
+
+<p>以我蹩脚的方言水平，第一个，就是默认的Larceny，把REPL环境中输入的每一条指令都编译成机器码；而Petit Larceny则把它翻译成C代码；第三个，Common Larceny则是在.net环境上运行的。</p>
+
+<p>嗯！虽然不能编译可执行文件的方法，不过这个实现在一些基准测试中成绩很靠前，值得关注。
+对了，在REPL环境中可以用下面的指令编译：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">(compile-file &quot;filename.scm&quot;)
+</code></pre></div>
+<p>得到一个编译后的 .fasl 文件,然后载入</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">(load &quot;filename.fasl&quot;)
+</code></pre></div>
+<h3>四、Guile</h3>
+
+<h4>1、Read-Eval-Print Loop：</h4>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">guile
+</code></pre></div>
+<h4>2、脚本：</h4>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">#!/path/bin/guile -s
+</code></pre></div>
+<h3>五、DrRacket</h3>
+
+<h4>1、Read-Eval-Print Loop：</h4>
+
+<p>1）Racket:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">racket
+mzscheme
+</code></pre></div>
+<p>2）R5RS:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">plt-r5rs
+</code></pre></div>
+<h4>2、以脚本方式运行：</h4>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">racket -r file.scm
+mzscheme -r file.scm
+</code></pre></div>
+<h4>3、启动GUI环境的IDE:</h4>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">drracket
+</code></pre></div>
+</div>
+ 
+</body>
+</html>
+ 
