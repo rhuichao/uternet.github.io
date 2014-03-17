@@ -67,7 +67,7 @@ date:   2014-03-16
 
 </code></pre>
 
-编译SBCL源码的方法：
+*编译SBCL源码的方法：*
 
 要编译SBCL，需要系统中先有一个可运行的SBCL来实现自举，`apt-get install sbcl`安装源里的包就行。  
 编译选项上要打开compression开关，prefix不用指定，默认为`/usr/local`，我认为把编译安装的软件安装到/usr/local底下是个好习惯。不会同apt安装的软件发生冲突。
