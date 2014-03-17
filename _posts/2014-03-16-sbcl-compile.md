@@ -30,8 +30,7 @@ date:   2014-03-16
 
 然后在SBCL中load:
 
-    $ sbcl
-    This is SBCL 1.1.16, an implementation of ANSI Common Lisp.
+    sbcl
     More information about SBCL is available at <http://www.sbcl.org/>.
 
     SBCL is free software, provided as is, with absolutely no warranty.
@@ -39,24 +38,15 @@ date:   2014-03-16
     BSD-style licenses.  See the CREDITS and COPYING files in the
     distribution for more information.
     
-    * (load "fib.lisp")
+    (load "fib.lisp")
 
     T
-    * (save-lisp-and-die "fib" :toplevel 'main :executable t :compression t)
-    [undoing binding stack and other enclosing state... done]
-    [saving current Lisp image into fib:
-    writing 3528 bytes from the read-only space at 0x0x1000000
-    compressed 4096 bytes into 1227 at level -1
-    writing 2272 bytes from the static space at 0x0x1100000
-    compressed 4096 bytes into 933 at level -1
-    writing 29634560 bytes from the dynamic space at 0x0x9000000
-    compressed 29634560 bytes into 9021703 at level -1
-    done]
+    (save-lisp-and-die "fib" :toplevel 'main :executable t :compression t)
     
     ls -l 
     -rwxr-xr-x 1 user user 9891868  3月 16 11:05 fib
     
-    $ time ./fib
+    time ./fib
     165580141
 
     real    0m5.051s
