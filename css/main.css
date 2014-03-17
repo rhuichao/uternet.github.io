@@ -35,7 +35,7 @@
 }
 */
 body {
-    font-family: "dejavu_serifbook", "simsun", serif;
+    font-family: "dejavu_serifbook", sans;
     font-size: 18px;
     margin: 5% 10% 5% 10%;
     padding: 2% 5% 2% 5%;
