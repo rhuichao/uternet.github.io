@@ -2,13 +2,28 @@
 layout: default
 title: 间歇性折腾
 ---
-
+<!--
 <ul>
 	{% for post in paginator.posts %}
 		<li id="title_list">{{ post.date | date:%Y-%m-%d }} <a href="{{ post.url }}"> {{ post.title }} </a></li>
 
 	{% endfor %}
 
+</ul>
+-->
+
+<ul class="listing">
+    {% for post in paginator.posts %}
+        {% capture y %}{{post.date | date:"%Y"}}{% endcapture %}
+        {% if year != y %}
+            {% assign year = y %}
+    <li class="listing-seperator">{{ y }}</li>
+    {% endif %}
+    <li class="listing-item">
+        <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+        <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
 </ul>
 
 <p id="paginator">
