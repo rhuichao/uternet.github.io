@@ -95,7 +95,7 @@ blockquote {
     width: 81%;
 }
 pre {
-    font-family: "Courier", monospace;
+    font-family: "Monaco", monospace;
     font-size: 90%;
     border: solid 1px #ddd;
     background-color: #eef;
