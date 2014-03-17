@@ -17,11 +17,11 @@
          url('fonts/dejavuserif-webfont.woff') format('woff'),
          url('fonts/dejavuserif-webfont.ttf') format('truetype'),
          url('fonts/dejavuserif-webfont.svg#dejavu_serifbook') format('svg');
-    font-weight: 800;
+    font-weight: normal;
     font-style: normal;
 
 }
-
+/*
 @font-face {
     font-family: 'monacoregular';
     src: url('fonts/monaco-webfont.eot');
@@ -33,9 +33,9 @@
     font-style: normal;
 
 }
-
+*/
 body {
-    font-family: "dejavu_serifbook", serif;
+    font-family: "dejavu_serifbook", "simsun", serif;
     font-size: 18px;
     margin: 5% 10% 5% 10%;
     padding: 2% 5% 2% 5%;
