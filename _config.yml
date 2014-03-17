@@ -4,7 +4,7 @@ destination: ./_site
 layouts:   ./_layouts
 permalink: /:year-:month-:day/:title.html 
 baseurl:   /
-paginate:  5
+paginate:  6
 paginate_path: "page:num"
 markdown:   redcarpet
 markdown_ext: markdown,mkd,mkdn,md
