@@ -73,11 +73,16 @@ ol ul, ul ol, ul ul, ol ol {
 
 /*代码块*/
 pre code{
-    margin:1em 0;font-size:13px;line-height:1.6;display:block;overflow:auto;
+    margin:1em 0;
+    font-size:13px;
+    line-height:1.6;
+    display:block;
+    overflow:auto;
 }
 
 pre,code{
-    font-family:Menlo,"Andale Mono",Consolas,"Courier New",Monaco,monospace;font-size:13px;
+    font-family:Menlo,"Andale Mono",Consolas,"Courier New",Monaco,monospace;
+    font-size:13px;
 }
 
 code{
@@ -86,12 +91,16 @@ code{
 
 /*引用块*/
 blockquote{
-    display:block;text-align:justify;border-left:4px solid #eeeeee;
-    margin:1em 0em;padding-left:1.5em;
+    display:block;
+    text-align:justify;
+    border-left:4px solid #eeeeee;
+    margin:1em 0em;
+    padding-left:1.5em;
 }
 
 blockquote p{
-    margin:0;padding:.5em 0;
+    margin:0;
+    padding:.5em 0;
 }
 
 #container{
@@ -108,7 +117,12 @@ blockquote p{
 }
 
 .content img{
-    max-width:600px;display:block;margin:4px auto;-webkit-box-shadow:#999 1px 1px 4px;-moz-box-shadow:#999 1px 1px 4px;box-shadow:#999 1px 1px 4px;
+    max-width:600px;
+    display:block;
+    margin:4px auto;
+    -webkit-box-shadow:#999 1px 1px 4px;
+    -moz-box-shadow:#999 1px 1px 4px;
+    box-shadow:#999 1px 1px 4px;
 }
 /* 
 #tag_cloud{
