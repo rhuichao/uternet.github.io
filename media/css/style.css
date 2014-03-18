@@ -162,37 +162,6 @@ header{
 }
 
 /******************************导航条-HOME ABOUT ...***********************/
-/*
-#nav_menu {
-    list-style-type:none;
-    margin:0;
-    padding:0;
-    overflow:hindden;
-}
-
-.menu_item{
-    float:left;
-}
-
-
-.menu_item a{
-        display:block;
-        width:120px;
-        font-weight:bold;
-        color:#FFFFFF;
-        background-color:#bebebe;
-        text-align:center;
-        padding:4px;
-        text-decoration:none;
-        text-transform:uppercase;
-}
-
-.menu_item a:hover,a:active {
-        background-color:#cc0000;
-}      
-*/
-
-
 nav{
     /*font-family:"Electrolize",sans-serif;*/
     font-size:1.1em;
