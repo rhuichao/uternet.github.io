@@ -1,9 +1,25 @@
 ---
 layout: default
 ---
-<h3>{{ page.title }}</h3>
-<p id="meta">{{ page.date | date_to_string }}</p>
-
-<div id="post">
+<section class="post">
 {{ content }}
-</div>
+</section>
+
+<section class="meta">
+<br/><br/>
+
+<span>
+    <a {% if page.previous %} href="{{ site.url }}{{ page.previous.url }}" class="pageNav"{% endif %} {% unless page.previous %} class="pageNavInvalid" {% endunless %} >Previous</a>
+        &nbsp;&nbsp;&nbsp;
+    <a {% if page.next %} href="{{ site.url }}{{ page.next.url }}" class="pageNav"{% endif %} {% unless page.next %} class="pageNavInvalid" {% endunless %} >Next</a>
+</span>
+<hr>
+<span class="author">
+  <a href="http://geek-zh.tk">{{ site.author }}</a>
+</span>
+<span class="time">
+  /
+  <time datetime="{{ page.date | date:"%Y-%m-%d" }}">{{ page.date | date:"%Y-%m-%d" }}</time>
+</span>
+
+
