@@ -1,4 +1,4 @@
-permalink:     /:year-:month-:day/:title
+permalink:     /:year-:month-:day/:title.html
 url:           http://geek-zh.tk
 author:        Geek_Pig
 paginate:      15
