@@ -17,7 +17,7 @@ body{
     word-spacing:1px;
     margin-left:auto;
     margin-right:auto;
-    font-family:"Hiragino Sans GB","Microsoft YaHei",Trebuchet,"Trebuchet MS",Tahoma,"Lucida Grande","Lucida Sans Unicode",Verdana,sans-serif;
+    font-family:"garamond-premier-pro","Hiragino Sans GB","Microsoft YaHei",Trebuchet,"Trebuchet MS",Tahoma,"Lucida Grande","Lucida Sans Unicode",Verdana,sans-serif;
     color:#000000;
     background-color:#ffffff;
     line-height: 150%;
@@ -206,28 +206,28 @@ nav a:hover{
 
 /*******************************标题-h1 h2 h3...**************************/
 h1{
-    font-family:"Galdeano","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-family:"garamond-premier-pro","Galdeano","Hiragino Sans GB","Microsoft YaHei",sans-serif;
     font-size:1.6em;color:#000;
     line-height: 150%;
     text-shadow: 0px 1px 0px rgb(255, 255, 255), 0px 1px 2px rgba(170, 170, 170, 0.8);
 }
 
 h2{
-    font-family:"Galdeano","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-family:"garamond-premier-pro","Galdeano","Hiragino Sans GB","Microsoft YaHei",sans-serif;
     font-size:1.4em;color:#111;
     line-height: 150%;
     text-shadow: 0px 1px 0px rgb(255, 255, 255), 0px 1px 2px rgba(170, 170, 170, 0.8);
 }
 
 h3{
-    font-family:"Galdeano","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-family:"garamond-premier-pro","Galdeano","Hiragino Sans GB","Microsoft YaHei",sans-serif;
     font-size:1.2em;color:#222;
     line-height: 150%;
     text-shadow: 0px 1px 0px rgb(255, 255, 255), 0px 1px 2px rgba(170, 170, 170, 0.8);
 }
 
 h4{
-    font-family:"Galdeano","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-family:"garamond-premier-pro","Galdeano","Hiragino Sans GB","Microsoft YaHei",sans-serif;
     font-size:1em;color:#333;
     line-height: 150%;
     text-shadow: 0px 1px 0px rgb(255, 255, 255), 0px 1px 2px rgba(170, 170, 170, 0.8);
