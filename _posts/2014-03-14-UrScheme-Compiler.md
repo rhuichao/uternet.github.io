@@ -30,3 +30,10 @@ URScheme，是一个可以将scheme代码编译成原生机器码的编译器。
     urscheme-compiler < $1 > /tmp/tmp.s
     gcc -nostdlib -m32 -Wa,-adhlns=/tmp/tmp.s.lst /tmp/tmp.s -o a.out
     
+事实上，这个编译器从scheme源码生成标准的AT&T格式的汇编代码，我们可以不用gcc，而用标准的GNU汇编器和链接器生成ELF可执行文件。
+
+   as -o foo.o foo.s
+   ld -s -o foo foo.o
+   
+Linux 平台的标准汇编器是 GAS，上面的第一条命令将汇编代码 foo.s 汇编成目标文件 foo.o
+Linux 使用 ld 作为标准的链接程序，第二条命令使用 ld 将目标代码与库函数链接成可执行文件 foo
