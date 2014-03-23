@@ -87,7 +87,7 @@ pre,code{
 
 code{
     background-color: rgb(247, 247, 247) ;
-    border: 1px solid rgb(204, 204, 204);
+    border: 1px dashed rgb(204, 204, 204);
     padding: 5px 5px 5px 5px;
 }
 
