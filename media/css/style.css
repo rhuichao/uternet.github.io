@@ -74,7 +74,7 @@ ol ul, ul ol, ul ul, ol ol {
 /*代码块*/
 pre code{
     margin:1em 0;
-    font-size:13px;
+    font-size:14px;
     line-height:1.6;
     display:block;
     overflow:auto;
@@ -82,7 +82,7 @@ pre code{
 
 pre,code{
     font-family:"inconsolata",Menlo,"Andale Mono",Consolas,"Courier New",Monaco,monospace;
-    font-size:13px;
+    font-size:14px;
 }
 
 code{
