@@ -87,6 +87,8 @@ pre,code{
 
 code{
     background-color: rgb(247, 247, 247) ;
+    border: 1px solid rgb(204, 204, 204);
+    padding: 2px 2px 5px;
 }
 
 /*引用块*/
