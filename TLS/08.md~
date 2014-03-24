@@ -4,263 +4,213 @@ title: lambda the ultimate
 ---
 
 ---
-<table><tr><td>
+
 还记得我们第五章末的rember和insertL吗
 
-</td><td>
-
 我们用equal?替换了eq?
-</td></tr>
-<tr><td>
+
 
 
 你能用你eq?或者equal?写一个函数rember-f吗
 
-</td><td>
-
 还不能，因为我们还没告诉你怎么弄
 
-</td></tr>
-<tr><td>
+
 
 你如何用rember删除 (b c a) 中的第一个a元素吗
 
-</td><td>
-
 把参数a和(b c a)传给rember
 
-</td></tr><tr><td>
+
 
 
 你如何用rember删除 (b c a) 中的第一个c元素吗
-</td><td>
+
 把参数c和(b c a)传给rember
 
-</td></tr><tr><td>
+
 
 你如何能够把rember-f的eq?用eq?代替
-</td><td>
+
 把equal? 作为参数传给 rember
 
 笔记：这和C语言的函数指针作用一样啊。
 
-</td></tr><tr><td>
 
-(rember-f test? a l)  
-是什么，其中  
-test?是=，  
-a是5，  
-l是(6 3 5 3)
-</td><td>
 
-(6 2 3)  
+(rember-f test? a l)是什么，其中test?是=，a是5，l是(6 3 5 3)
 
+(6 2 3)
 注：
 Lisp:(rember-f (function =) 5 '(6 2 5 3))
 
-</td></tr><tr><td>
 
-(rember-f test? a l)   
-是什么，其中   
-test? 是eq?，   
-a是jelly，   
-l是(jelly beans are good)
-</td><td>
+
+(rember-f test? a l) 是什么，其中test? 是eq?，a是jelly，l是(jelly beans are good)
+
 (beans are good)
 
-</td></tr><tr><td>
 
 
-(rember-f test? a l)   
-是什么，其中  
-test? 是equal?，   
-a是(pop corn)，   
-l是(lemonade (pop corn) and (cake))
-</td><td>
+
+(rember-f test? a l) 是什么，其中test? 是equal?，a是(pop corn)，l是(lemonade (pop corn) and (cake))
+
 (lemonade and (cake))
 
-</td></tr><tr><td>
+
 
 试着写出函数 rember-f
-</td><td>
 
-```
 (define rember-f
   (lambda (test? a l)
     ((null? l) (quote ()))
     (else (cond
             ((test? (car l) a) (cdr l))
             (else (cons (car l) (rember-f test? a (cdr l))))))))
-```
-			
-注：  
-Lisp：(funcall test? (car l) a)   
-当调用一个函数参数或者未定义函数时使用funcall。
+注：
+Lisp：(funcall test? (car l) a)。当调用一个函数参数或者未定义函数时使用funcall。
 
 
-</td></tr><tr><td>
+
 
 那简短版呢
-</td><td>
 
-```
 (define rember-f
   (lambda (test? a l)
     ((null? l) (quote ()))
     ((test? (car l) a) (cdr l))
     (else (cons (car l) (rember-f test? a (cdr l))))))
-```
 
-</td></tr><tr><td>
 
-若test?是eq?，   
-(rember-f test? a l)   
-如何工作的
-</td><td>
+
+若test?是eq?，(rember-f test? a l)如何工作的
+
 若test?是eq?，(rember-f test? a l)如同rember。
 
-</td></tr><tr><td>
 
-若test?是eq?，  
-(rember-f test? a l)  
-如何工作的
-</td><td>
+
+若test?是eq?，(rember-f test? a l)如何工作的
+
 这是用equal?替换了eq?的rember
 
-</td></tr><tr><td>
+
 
 现在我们有三个函数做差不多的事情
-</td><td>
+
 是的：
 用=的rember
 用equal?的rember
 用eq?的rember
-还有
 rember-f
 
-</td></tr><tr><td>
+
 
 而 rember-f 的行为可以向其它的那样
-</td><td>
-Let's generate all versions with rember-f
 
-</td></tr><tr><td>
+
 
 函数可以返回什么类型的值
-</td><td>
+
 表和原子
 
-</td></tr><tr><td>
+
 
 函数本身呢
-</td><td>
+
 可以的，只是你还不知道
 
-</td></tr><tr><td>
+
 
 你能说说(lambda (a l) ...)是什么吗
-</td><td>
+
 一个函数，有a和l两个参数。
 
-</td></tr><tr><td>
+
 
 (lambda (a) (lambda (x) (eq? x a)))是什么吗
-</td><td>
+
 这是一个函数，当a传入参数a返回函数(lambda (x) (eq? x a))，a就是那个参数。
 
-</td></tr><tr><td>
+
 
 这就是所谓的"Curry-ing?"
-</td><td>
+
 感谢您，Moses Schonfinkel (1889-1942)
 
-</td></tr><tr><td>
+
 
 这不叫"Schonfinkel-ing"
-</td><td>
+
 感谢您，Haskell B.Curry (1900-1982)
 
-</td></tr><tr><td>
+
 
 用(define ...)给函数定义一个函数名
-</td><td>
 
-```
 (define eq?-c
   (lambda (a)
     (lambda (x)
       (eq? x a))))
-```
 
-注：  
-
-```
+注：
 Lisp：
 (defun eq?-c (a)
   (function
     (lambda (x)
       (eq x a))))
-```
 
-</td></tr><tr><td>
+
 
 (eq?-c k)是什么，其中k是 salad
-</td><td>
+
 这是一个函数，把x作为函数参数测试其是否与salad是eq?相等的
 
-</td></tr><tr><td>
 
-所以让我们用(define ...)为它定义一个函数名  
-(define eq?-salad (eq?-c k))   
-其中k是salad
 
-注：  
-Lisp：  
-(setq eq?-salad (eq?-c 'salad))    
-使用setq定义的函数能够用funcall调用。
-</td><td>
+所以让我们用(define ...)为它定义一个函数名
+(define eq?-salad (eq?-c k))，其中k是salad
+
+注：
+Lisp：
+(setq eq?-salad (eq?-c 'salad))。使用setq定义的函数能够用funcall调用。
+
 好。
 
-</td></tr><tr><td>
-
-(eq?-salad y)    
-其中y是salad
-</td><td>
-\#t
 
 
+(eq?-salad y)其中y是salad
 
-注：  
-Lisp：  
-(funcall eq?-salad y)   
-因为eq?-salad还没有定义
+#t
 
-</td></tr><tr><td>
+
+
+注：
+Lisp：
+(funcall eq?-salad y)，因为eq?-salad还没有定义
+
+
 
 
 (eq?-salad y)其中y是tuna
-</td><td>
-\#f
 
-</td></tr><tr><td>
+#f
+
+
 
 
 我们需要给 eq?-salad定义吗
-</td><td>
+
 不需要，我们可以这样((eq?-c x) y)，其中x是salad，y是tuna
 
-注：  
-Lisp：  
-(funcall (eq?-c x) y)   
-因为(eq?-c x)是为定义的函数
+注：
+Lisp：
+(funcall (eq?-c x) y),因为(eq?-c x)是为定义的函数
 
-</td></tr><tr><td>
+
 
 
 现在重写 rember-f 为一个参数test?的函数，返回一个如同用eq?替换test?的rember。
-</td><td>
 
-```
 (define rember-f
   (lambda (test?)
     (lambda (a l)
@@ -268,45 +218,39 @@ Lisp：
         ((null? l) (quote ()))
         ((test? (car l) a) (cdr l))
         (else (cons (car l) ...))))))
-```
 
 一个好开端
 
-</td></tr><tr><td>
+
 
 请用你自己的话描述(rember-f test?)的结果，其中test?是eq?
-</td><td>
+
 结果是一个带两个参数a，l的函数。它比较表和a，并且删除第一个出现的a。
 
-</td></tr><tr><td>
+
 
 给(rember-f test?)的返回值起个名字，其中test?是eq?
-</td><td>
+
 (define rember-eq? (rember-f test?))，其中test?是eq?
 
-</td></tr><tr><td>
 
-(rember-eq? a l)   
-是什么，其中   
-a是tuna，   
-l是(tuna salad is good)
 
-</td><td>
+(rember-eq? a l)是什么，其中a是tuna，l是(tuna salad is good)
+
+
 (salad is good)
 
-</td></tr><tr><td>
+
 
 
 若test?是eq?，我们需要把(rember-f test?)其名为 rember-eq?吗
-</td><td>
+
 不需要，我们可以直接 ((rember-f test?) a l)，其中test?是eq?，a是ntua，l是(tuna salad is good)。
 
-</td></tr><tr><td>
+
 
 现在完成 rember-f 中的(cons (car l) ...)行让 rember-f 能够运行
-</td><td>
 
-```
 (define rember-f
   (lambda (test?)
     (lambda (a l)
@@ -314,127 +258,108 @@ l是(tuna salad is good)
         ((null? l) (quote ()))
         ((test? (car l) a) (cdr l))
         (else (cons (car l) ((rember-f test?) a (cdr l))))))))
-```
-
-</td></tr><tr><td>
 
 
-((rember-f eq?) a l)   
-是什么，其中   
-a是tuna，   
-l是(shrimp salad and tuna salad)
-</td><td>
+
+
+((rember-f eq?) a l)是什么，其中a是tuna，l是(shrimp salad and tuna salad)
+
 (shrimp salad and salad)
 
-</td></tr><tr><td>
 
 
-((rember-f eq?) a l)   
-是什么，其中   
-a是eq?，   
-l是(equal? eq? eqan? eqlist? eqpair?)
-</td><td>
+
+((rember-f eq?) a l)是什么，其中a是eq?，l是(equal? eq? eqan? eqlist? eqpair?)
+
 (equal? eqan? eqlist? eqpair?)
 
-</td></tr><tr><td>
+
 
 
 现在，把insertL改为insertL-f，方法可把rember改为rember-f一样。
-</td><td>
 
-```
 (define insertL-f
   (lambda (test?)
     (lambda (new old l)
       ((null? l) (quote ()))
       ((test? (car l) old) (cons new (cons old (cdr l))))
       (else (cons (car l) ((insertL-f test?) new old (cdr l)))))))
-```
 
-</td></tr><tr><td>
+
 
 作为练习，再写出insertR
-</td><td>
 
-```
 (define insertR-f
   (lambda (test?)
     (lambda (new old l)
       ((null? l) (quote ()))
       ((test? (car l) old) (cons old (cons new (cdr l))))
       (else (cons (car l) ((insertR-f test?) new old (cdr l)))))))
-```
 
-</td></tr><tr><td>
+
 
 insertR-f 和 insertL-f 相似吗
-</td><td>
+
 只有中间的一点点不一样
 
-</td></tr><tr><td>
+
 
 你能写出既能在左边插入又能在右边插入的函数insert-g吗
-</td><td>
+
 如果你能，给自己来点咖啡蛋糕放松放松吧!不能也无所谓，别放弃，等下你就能看到了。
 
-</td></tr><tr><td>
+
 
 
 哪一片段不一样
-</td><td>
-第二行稍有不同。在insertL中是
-`((eq? (car l) old) (cons new (cons old (cdr l))))`
-但是在insertR中是
-`((eq? (car l) old) (cons old (cons new (cdr l))))`
 
-</td></tr><tr><td>
+第二行稍有不同。在insertL中是
+((eq? (car l) old) (cons new (cons old (cdr l))))
+但是在insertR中是
+((eq? (car l) old) (cons old (cons new (cdr l))))
+
+
 
 请描述出来！
-</td><td>
-我们这样说：   
+
+我们这样说：
 “两个函数cons old和new到cdr l上的顺序不一样。
 
-</td></tr><tr><td>
+
 
 
 所以我们怎样消除差别
-</td><td>
+
 你大概猜出来了：h传入一个函数来描述适当的cons方式。
 
-</td></tr><tr><td>
 
-定义一个 seqL 函数   
-用来：获取三个参数，第二个参数cons到第三个参数上，第一个参数cons到前面的结果上。
-</td><td>
 
-```
+定义一个 seqL 函数用来：获取三个参数，第二个参数cons到第三个参数上，第一个参数cons到前面的结果上。
+
 (define setL
-  (lambda (new old l)
+  (lambda (new    old l)
     (cons new (cons old l))))
-```
 
-</td></tr><tr><td>
+
 
 那下边这个呢
 define setR
-  (lambda (new old l)
+  (lambda (new    old l)
     (cons old (cons new l))))
-</td><td>
+
 定义一个 seqL 函数用来：获取三个参数，第一个参数cons到第三个参数上，第二个参数cons到前面的结果上。
 
-</td></tr><tr><td>
+
 
 
 你知道为什么我们写这两个函数吗
-</td><td>
+
 因为他们表达出了insertL和insertR的不同之处
 
-</td></tr><tr><td>
+
 
 试试用一个参数seq写出函数 insert-g，其中在seq为seqL时返回insertL，在seq是seqR时，返回insertR
-</td><td>
 
-```
 (define insert-g
   (lambda (seq)
     (lambda (new old l)
@@ -442,144 +367,123 @@ define setR
         ((null? l) (quote ()))
         ((eq? (car l) old) (seq new old (cdr l)))
         (else (cons (car l) ((insert-g seq) new old (cdr l))))))))
-```
 
-</td></tr><tr><td>
+
 
 
 现在用 insert-g 定义 insertL
-</td><td>
+
 (define insertL (insert-g seqL))
 
-</td></tr><tr><td>
+
 
 还有 insertR
-</td><td>
+
 (define insertR (insert-g seqR))
 
-</td></tr><tr><td>
+
 
 两个函数有什么异样的
-</td><td>
+
 之前我们可能会这样写 (define insertL (insert-g seq))，其中seq是seqL，以及(define insertR (insert-g seq))，其中seq是seqR。
 
 但是对于对函数传递参数，“其中...”是不需要的。
 
-</td></tr><tr><td>
+
 
 需要给seqL和seqR命名吗
-</td><td>
+
 不必，我们直接在定义里传递它们。
 
-</td></tr><tr><td>
+
 
 再次定义 insertL，这次不要用seqL
-</td><td>
 
-```
 (define insertL
   (insert-g
     (lambda (new old l)
       (cons new (cons old l)))))
-```
 
 笔记：就是把seqL的定义直接替换(define insertL (insert-g seqL))中的seqL。
 
-</td></tr><tr><td>
+
 
 这个更好点吗
-</td><td>
+
 是的，因为你不需要记住许多名字。你可以
 (rember func-name "your-mind")，其中 func-name是seqL
 
-</td></tr><tr><td>
+
 
 你还记得 subst 的定义吗
-</td><td>
 
-```
 (define subst
   (lambda (new old l)
     (cond
       ((null? l) (quote ()))
       ((eq? (car l) old) (cons new (cdr l)))
       (else (cons (cdr l) (subst new old (cdr l)))))))
-```
 
-</td></tr><tr><td>
+
 
 这个看起来类似吗
-</td><td>
+
 是的，就像 insertL 和 insertR。仅仅cond的第二行不一样。
 
-</td></tr><tr><td>
+
 
 为subst定义一个类似seqL或者seqR的函数
-</td><td>
 
-```
 (define seqS
   (lambda (new old l)
     (cons new l)))
-```
 
-</td></tr><tr><td>
+
 
 
 现在用 insert-g 定义subst
-</td><td>
+
 (define subst (insert-g seqS))
 
-</td></tr><tr><td>
+
 
 
 那你认为yyy是什么
-
-```
 (define yyy
    (lambda (a l)
       ((insert-g seqrem) #f a l))
-```
-
 其中
-
-```
 (define seqrem
   (lambda (new old l) l))
-```
-</td><td>  
-  
-Surprise！这是我们的老朋友 rember。   
-提示：一步步推导(yyy a l)，其中a 是 sausage，l是(pizza with sausage and bacon)   
-\#f是其什么作用的？
 
-笔记：首先 (insert-gseqrem)返回的是一个函数。该函数输入new，old，l三个参数，输出时当发现l中的某个元素与old相同就跳过，恰好与rember的作用类似，只是new参数多余了。于是当定义yyy函数时，对(insert-g seqrem)函数带入的三个参数中，第一个是与函数作用无关的，可以是任意的，取个#f也无妨。
+Surprise！这是我们的老朋友 rember。
+提示：一步步推导(yyy a l)，其中a 是 sausage，l是(pizza with sausage and bacon)
+#f是其什么作用的？
+
+笔记：首先 (insert-g seqrem)返回的是一个函数。该函数输入new，old，l三个参数，输出时当发现l中的某个元素与old相同就跳过，恰好与rember的作用类似，只是new参数多余了。于是当定义yyy函数时，对(insert-g seqrem)函数带入的三个参数中，第一个是与函数作用无关的，可以是任意的，取个#f也无妨。
 
 各位看官就自己判断，个人认为这样没错。
 
-</td></tr>
-</table>
 
 
-<center>领略到了抽象的力量了吧</center>
 
-```
-	从通用模式抽象出新的函数。
-```
+领略到了抽象的力量了吧
 
-<table><tr><td>
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+从通用模式抽象出新的函数。
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
 
 
 我们之前见到过一些相像的函数吗
-</td><td>
+
 有的
 
-</td></tr><tr><td>
+
 
 还记得第六章的 value 吗
-</td><td>
 
-```
 (define value
   (lambda (nexp)
     (cond
@@ -587,15 +491,14 @@ Surprise！这是我们的老朋友 rember。
       ((eq? (car (cdr nexp)) (quote +)) (+ (value (car nexp)) (car (cdr (cdr nexp)))))
       ((eq? (car (cdr nexp)) (quote ×)) ('× (value (car nexp)) (car (cdr (cdr nexp)))))
       (else ('^ (value (car nexp)) (car (cdr (cdr nexp))))))))
-```
 
-</td></tr><tr><td>
+
 
 看出相似性了没
-</td><td>
+
 最后三行除了+，×，^之外都一样。
 
-</td></tr><tr><td>
+
 
 
 你能写出一个 atom-to-function 吗，要满足下面的条件：
@@ -604,73 +507,58 @@ Surprise！这是我们的老朋友 rember。
 如果(eq? x (eqote ×)) 返回函数×
 否则返回函数^
 
-</td><td>
-
-```
 (define atom-to-function
   (lambda (x)
     (cond
       ((eq? x(quote +)) +)
       ((eq? x(quote +)) ×)
       (else ^))))
-```
 
-</td></tr><tr><td>
 
-(atom-to-function (operator nexp))   
-是什么，其中   
-nexp是 (+5 3)
-</td><td>
+
+(atom-to-function (operator nexp)) 是什么，其中 nexp是 (+5 3)
+
 函数+，而不是原子+。
 
-</td></tr><tr><td>
+
 
 
 你能用 atom-to-function 写出cond-两行的value吗
-</td><td>
-当然 
 
-```
+当然
 (define (nexp)
   (lambda (nexp)
     (cond
       ((atom? nexp) nexp)
       (else
        ((atom-to-function (operator nexp)) (value (1st-sub-exp nexp)) (value (2nd-sub-exp nexp)))))))
-```
 
-</td></tr><tr><td>
+
+
 
 
 这个版本是不是比第一个版本简短多了？
-</td><td>
+
 是的，但是都OK。我们没改变含义。
 
-</td></tr><tr><td>
+
 
 来一个苹果怎么样
-</td><td>
+
 One a day keeps the doctor away。每天坚持吃个苹果，永远无需大夫看我。
 
-</td></tr><tr><td>
+
 
 下面是 multirember
-
-```
 (define multirember
   (lambda (a lat)
     (cond
       ((null? lat) (quote ()))
       ((eq? a (car lat)) (multirember a (cdr lat)))
       (else (cons (car lat) ((multirember test?) a (cdr lat)))))))
-```
-	  
 写一个函数 multirember-f
-</td><td>
 
 没问题。
-
-```
 (define multirember
   (lambda (test?)
     (lambda (a lat)
@@ -678,121 +566,99 @@ One a day keeps the doctor away。每天坚持吃个苹果，永远无需大夫�
         ((null? lat) (quote ()))
         ((eq? a (car lat)) ((multirember test?) a (cdr lat)))
         (else (cons (car lat) (multirember a (cdr lat))))))))
-```
-
-</td></tr><tr><td>
 
 
-((multirember-f test?) a lat)   
-是什么，其中   
-test是 eq?，   
-a是tuna，   
-lat是 (shrimp salad tuna salad and tuna)
-</td><td>
+
+
+((multirember-f test?) a lat) 是什么，其中test是 eq?，a是tuna，lat是 (shrimp salad tuna salad and tuna)
+
 (shrimp salad salad and)
 
-</td></tr><tr><td>
+
 
 
 难道不是easy的很吗
-</td><td>
+
 是啊
 
-</td></tr><tr><td>
+
 
 用 multirember-f 定义 multirember-eq?
-</td><td>
 
-```
 (define multirember-eq?
   (multirember-f test?)
-```
 
-</td></tr><tr><td>
+
+
 
 我们真的需要给 multirember-f 传递tuna吗
-</td><td>
+
 当 multirember-f 访问lat中所有元素时，它总是寻找tuna
 
-</td></tr><tr><td>
+
 
 当 multirember-f 访问lat时test?改变吗
-</td><td>
+
 不会，test?一直是eq?，如同a总是tuna。
 
-</td></tr><tr><td>
+
 
 我们能把a和test?合并吗
-</td><td>
+
 其实，test?可以是一个参数，与tuna比较
 
-</td></tr><tr><td>
+
 
 怎么做
-</td><td>
+
 新参数test?取得一个参数并把它同tuna比较
 
-</td></tr><tr><td>
+
 
 下面是一种写法
 
-```
 (define eq?-tuna
   (eq?-c k))
-```
-  
 其中k是tuna，你能想出一个其他方法来表示吗
 
-</td><td>
-
 下面是另一种方法
-
-```
 (define eq?-tuna
   (eq?-c (quote tuna)))
-```
 
-</td></tr><tr><td>
+
 
 你见过包含原子的定义吗
-</td><td>
+
 见过，0，(quote ×),(quote +),还有更多
 
-</td></tr><tr><td>
+
 
 或许我们现在该写一个与 multirember-f 类似的 multiremberT 函数。 multiremberT用 eq?-tuna函数和lat来计算，而不是输入参数test?返回一个函数。
-</td><td>
+
 这个没什么难度
 
-```
 (define multiremberT
   (lambda (test? lat)
     (cond
       ((null? lat) (quote ()))
       ((test? (car lat)) (multiremberT test? (cdr lat)))
       (else (cons (car lat) (multiremberT test? (cdr lat)))))))
-```
 
-</td></tr><tr><td>
 
-(multiremberT test? lat)   
-其中   
-test?是eq?-tuna，   
-lat是(shrimp salad tuna salad and tuna)
-</td><td>
+
+(multiremberT test? lat)，其中test?是eq?-tuna，lat是(shrimp salad tuna salad and tuna)
+
 (shrimp salad salad and)
 
-</td></tr><tr><td>
+
 
 简单吗
-</td><td>
+
 不算难
 
-</td></tr><tr><td>
+
 
 那这个呢
-
-```
 (define multirember&co
   (lambda (a lat col)
     (cond
@@ -801,141 +667,116 @@ lat是(shrimp salad tuna salad and tuna)
                                                        (col newlat
                                                             (cons (car lat) seen)))))
       (else (multirember&co a (cdr lat) (lambda (newlat seen) (col (cons (car lat) newlat)
-```
-</td><td>	  
 看起来好复杂！
 
-</td></tr><tr><td>
+
 
 这个看起来简单点：
-
-```
 (define a-friend
   (lambda (x y)
     (null? y)))
-```
-	
-</td><td>
+
 是的，这个很简单。这个函数输入两个参数并查询第二个参数是否为空表，而忽视第一个参数。
 
-</td></tr><tr><td>
 
 
-(multirember&co a lat col)是什么，   
-其中a是tuna，   
-lat是(strawberries tuna and swordifish),   
-col是a-friend
-</td><td>
+
+(multirember&co a lat col)是什么，其中a是tuna，lat是(strawberries tuna and swordifish),col是a-friend
+
 这个可不简单。
 
-</td></tr><tr><td>
 
-所以让我们试试简单点的例子吧。   
-(multirember&co a lat col)，   
-其中a是tuna，lat是()，   
-col是 a-friend
-</td><td>
-\#t真，因为给的参数得到第一个分支查询， a-friend保证第二个参数为空。
+
+所以让我们试试简单点的例子吧。(multirember&co a lat col)，其中a是tuna，lat是()，col是 a-friend
+
+#t真，因为给的参数得到第一个分支查询， a-friend保证第二个参数为空。
 
 
 
 笔记：这一章稍有难度，于是使用 DrRacket 的调试功能来分析。但是ubuntu自带的版本5.1.3的 DrRacket 有bug，用了一段时间UI就一直花下去了，而且调试功能一直不能用。还是在官网下了最新版5.3，调试功能终于可以用了。现在可以方便的细致分析lambda这一章后边的代码了。
 
-</td></tr><tr><td>
 
-(multirember&co a lat col)是什么，   
-其中a是tuna，  
-lat是(tuna)，   
-lat是 a-friend
-</td><td>
+
+(multirember&co a lat col)是什么，其中a是tuna，lat是(tuna)，lat是 a-friend
+
 multirember&co 查询(eq? (car lat) (quote tuna))，其中lat是(tuna)。然后递归()。
 
-</td></tr><tr><td>
+
 
 multirember&co自然递归的其它参数是什么
-</td><td>
+
 第一个参数时tuna。第三个参数是一个新的函数
 
-</td></tr><tr><td>
+
 
 第三个参数名是什么
-</td><td>
+
 col
 
-</td></tr><tr><td>
+
 
 你知道现在col表示什么吗
-</td><td>
+
 col是“collector”的简称，有时称为“continuation”连续。
 
-</td></tr><tr><td>
+
 
 这是新的collector
-
-```
 (define new-friend
   (lambda (newlat seen)
     (col newlat
       (cons (car lat) seen))))
-```
-	  
 其中(car lat)是tuna，col是 a-friend，你把这个定义稍稍改写一下吗
 
-</td><td>
-
-```
 (define new-friend
   (lambda (newlat seen)
     (col newlat
       (cons (quote tuna) seen))))
-```
 
-</td></tr><tr><td>
+
 
 我们能在这个定义里把col替换为 a-friend 吗
-</td><td>
-可以：
 
-```
+可以：
 (define new-friend
   (lambda (newlat seen)
     (a-friend newlat
       (cons (quote tuna) seen))))
-```
-	  
 笔记：就是cond第二个分支的那个lambda匿名函数
 
-</td></tr><tr><td>
+
 
 
 现在呢？
-</td><td>
+
 multirember&co 查找出(null? lat)是真，也就是它把collector作用在了两个空表上。
 
-</td></tr><tr><td>
+
 
 
 这是哪个collector？
-</td><td>
+
 new-friend
 
-</td></tr><tr><td>
+
 
 a-friend 与 new-friend有何不同
-</td><td>
+
 new-friend使用 a-friend 查询空表，还有值(cons (quote tuna) (quote ()))
 
-</td></tr><tr><td>
+
 
 
 原来那个 collector 对这个参数做什么了
-</td><td>
+
 返回#f，因为第二个参数是(tuna),不是空表。
-</td></tr></table>
+
+
+
+
+
 ==================================================
 笔记：在DrRacket中调试上边这个例子
-
-```
 (define a 'tuna)
 (define lat '(tuna))
 (define a-friend
@@ -952,18 +793,16 @@ new-friend使用 a-friend 查询空表，还有值(cons (quote tuna) (quote ()))
                                           (col (cons (car lat) newlat) seen)))))))
 
 (multirember&co a lat a-friend)
-```
-
 点菜单栏的“调试”按钮，以后一直“step”,下面用>表示那个绿色的指示运行到哪里的三角形
 
-\>指示cond时，   
-stack栏是  
-(cond ...)  
-(multirember&co ...)  
+>指示cond时，
+stack栏是
+(cond ...)
+(multirember&co ...)
 
-Variables栏是  
-a => tuna  
-lat => (tuna)  
+Variables栏是
+a => tuna
+lat => (tuna)
 col => #<procedure:a-friend>
 
 
@@ -971,15 +810,15 @@ col => #<procedure:a-friend>
 
 
 
-\>指示第二个分支的(cdr lat)之后，递归了，跳回指示cond  
-stack栏是  
-(cond ...)  
-(multirember&co ...)  
+>指示第二个分支的(cdr lat)之后，递归了，跳回指示cond
+stack栏是
+(cond ...)
+(multirember&co ...)
 
-Variables栏是  
-a => tuna  
-lat => ()  
-col => #<procedure:...e/multirember&co:11:53>  
+Variables栏是
+a => tuna
+lat => ()
+col => #<procedure:...e/multirember&co:11:53>
 就是说col现在是位于11行，第二个分支中定义的lambda匿名函数而不是 a-friend了。
 
 
@@ -988,89 +827,61 @@ col => #<procedure:...e/multirember&co:11:53>
 
 
 
->指示(col newlat (cons (car lat) seen))  
-stack栏是  
-(col ...)  
-(multirember&co ...)  
+>指示(col newlat (cons (car lat) seen))
+stack栏是
+(col ...)
+(multirember&co ...)
 
-Variables栏是  
-newlat => ()  
-seen => ()  
-a => tuna  
-lat => (tuna)  
-col => #<procedure:a-friend>  
+Variables栏是
+newlat => ()
+seen => ()
+a => tuna
+lat => (tuna)
+col => #<procedure:a-friend>
 这个lat怎么又是(tuna)了呢？其实它更本就没变。当进入递归时
-
-```
 ((eq? (car lat) a) (multirember&co a (cdr lat) (lambda (newlat seen)
                                                        (col newlat (cons (car lat) seen)))))
-```													   
-													   
 注意这几个lat还都是(tuna)，只有 multirember&co的第二个参数(cdr lat)减去了第一个原子。
 从variables知道(col newlat (cons (car lat) seen)))))是#f，因为newlat是空表(其实没用)，(cons (car lat) seen)是(tuna),不是空表。
 笔记end
-
 ==================================================
 
 
 
-<table><tr><td>
 
-(multirember&co a lat a-friend)   
-是什么值，其中   
-a是tuna，  
-lat是(and tuna)
-</td><td>
+
+(multirember&co a lat a-friend)是什么值，其中a是tuna，lat是(and tuna)
+
 这次 multirember&co 对另一个friend递归
-
-```
 (define latest-friend
   (lambda (newlat seen)
     (a-friend (cons (quote and) newlat) seen)))
-```
 
-</td></tr><tr><td>
+
 
 这次这个 multirember&co 的递归的值是什么
-</td><td>
-\#f，因为(a-friend ls1 ls2)是#f，其中ls1是(and)，ls2是(tuna)。
 
-</td></tr><tr><td>
+#f，因为(a-friend ls1 ls2)是#f，其中ls1是(and)，ls2是(tuna)。
+
+
 
 
 (multirember&co a lat f)做些什么
-</td><td>
+
 查询lat中的每一个atoma原子看和a是否eq？。不同的放在ls1，相同的放在ls2，最后，它确定(f ls1 ls2)的值。
 
 笔记：ls1就是那个newlat,seen就是ls2。准确的的说最后ls1是当那个(car lat)不是a时不断(cons (car lat) newlat)得到的一个表；ls2是当(car lat)是a时，不断(cons (car lat))的一个表。(f ls1 ls2)为真值表示没有把a找到并放入ls2，最后所有的原子都到了newlat中，seen一直为空；假表示ls2中找到了所有的a，它是非空了。函数 multirember&co在递归的三个分支中使用了不同的col函数去处理，最后递归的结果是把lat分成两个lat，以是否是a为条件。其中每深一次的递归 multirember&co 代入的col都是比上一层的递归多一层col。
 
-</td></tr><tr><td>
 
-最后的问题：  
-(multirember&co (quote tuna) ls col)   
-的值是什么，其中   
-ls是(strawberries tuna and swordifish)，   
-col是
 
-```
+最后的问题：(multirember&co (quote tuna) ls col)的值是什么，其中ls是(strawberries tuna and swordifish)，col是
 (define last-friend
   (lambda (x y)
     (length x)))
-```	
-	
-</td><td>
+
 3，因为ls包含三个不是tuna的原子，所以 last-friend作用于(strawberries and swordifish)和(tuna)
-</td></tr><tr><td>
-
-
-是的！
-</td><td>
-这可真是奇怪的食物，不过我们已经见识过外国菜了。
-
-</td></tr></table>
 
 ==================================================
-
 笔记：使用DrRacket的调试功能step一步步查看运行过程可以容易的理解代码，这里就不细细的贴上来了。因为scheme是 S-expression表达式，于是这次直接展开scheme代码来推导。定义的 last-friend 作为参数col传入 multirember&co。在(null? ls)为真值，即所有的原子都查完了的时候才依是否是a把原子分到了x和y两个表中。
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 查询l的第一个原子 strawberries 时，递归第三分支
@@ -1181,20 +992,27 @@ col是
 
 scheme太数学了！
 end笔记
-
 ==================================================
 
-```
-    第十戒
 
-    用函数，一次collect不止一个值
-```
 
-<table><tr><td>
+
+
+是的！
+
+这可真是奇怪的食物，不过我们已经见识过外国菜了。
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+第十戒
+
+用函数，一次collect不止一个值
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
 
 下面这个是老朋友
-
-```
 (define multiinsertL
   (lambda (new old lat)
     (cond
@@ -1202,13 +1020,9 @@ end笔记
       (else (cond
               ((eq? old (car lat)) (cons new (cons old (multiinsertL new old (cdr lat)))))
               (else (cons (car lat) (multiinsertL new old (cdr lat)))))))))
-```
 
 还记得 multiinsertR 吗
-</td><td>
 当然了
-
-```
 (define multiinsertR
   (lambda (new old lat)
     (cond
@@ -1216,18 +1030,16 @@ end笔记
       (else (cond
               ((eq? old (car lat)) (cons old (cons new (multiinsertR new old (cdr lat)))))
               (else (cons (car lat) (multiinsertR new old (cdr lat)))))))))
-```
 
-</td></tr><tr><td>
+
+
 
 现在试试写个 multiinsertLR
 提示： 如果oldL和oldR是不同的，multiinsertLR 把 new 插入到 oldL 的左边和 oldR的右边
 
-</td><td>
+
 
 下面这个把两个函数和在一起了
-
-```
 (define multiinsertLR
   (lambda (new oldL oldR lat)
     (cond
@@ -1235,27 +1047,23 @@ end笔记
       ((eq? (car lat) oldL) (cons new (cons oldR (multiinsertLR new oldL oldR (cdr lat)))))
       ((eq? (car lat) oldR) (cons oldR (cons new (multiinsertLR new oldL oldR (cdr lat)))))
       (else (cons (car lat) (multiinsertLR new oldL oldR (cdr lat)))))))
-```
 
-</td></tr><tr><td>
+
 
 multiinsertLR&co 之与 multiinsert 如同multirember&co 之与 multirember
-</td><td>
+
 这意味着 multiinsertLR&co 需要比 multiinsertLR 更多的参数的参数？
 
-</td></tr><tr><td>
+
 
 是的。参数是什么呢？
-</td><td>
+
 是一个collector函数
 
-</td></tr><tr><td>
+
 
 当 multiinsertLR&co 完成，它会对new lat，对左插入的数，右插入的数使用col。你能写出 multiinsertLR&co 的要略吗
 
-</td><td>
-
-```
 (define multiinsertLR&co
   (lambda (new oldL oldR lat col)
     (cond
@@ -1263,45 +1071,42 @@ multiinsertLR&co 之与 multiinsert 如同multirember&co 之与 multirember
       ((eq? (car lat) oldL) (multiinsertLR&co new oldL oldR (cdr lat) (lambda (newlat L R) ...)))
       ((eq? (car lat) oldR) (multiinsertLR&co new oldL oldR (cdr lat) (lambda (newlat L R) ...)))
       (else (multiinsertLR&co new oldL oldR (cdr lat) (lambda (newlat L R) ...))))))
-```
 
-</td></tr><tr><td>
+
 
 为什么当(nul? lat)为真时，col作用于(quote () 0 0)
-</td><td>
+
 空lat既没有oldL也也没有oldR。这表示oldL和oldR发现了0次， multiinsertLR 当lat为空时返回的是 ()。
 
-</td></tr><tr><td>
+
 
 那么(multiinsertLR&co (quote  cranberries) (quote fish) (quote chips) (quote ()) col) 的值是什么
-</td><td>
+
 是(col (quote ()) 0 0)，但是因为我们步子到col是什么，还无法确定它。
 
-</td></tr><tr><td>
+
 
 当(car lat) 既不等于 oldL也不等于oldR是, multiinsertLR&co 对三个参数作用新的collctor对吗
-</td><td>
+
 是的，第一个参数是lat， 原本是 multiinsertL 作用(cdr lat), old， 和old。第二个和第三个是对应插入olL左边和oldR右边的次数。
 
-</td></tr><tr><td>
+
 
 然后，因仅当出现oldL或者oldR才复制，所以 multiinsertLR&co 会对(cons (car lat) newlat)使用col对吗
-</td><td>
+
 是的，没错。所以我们知道了最后一个分支情况的collector了
 (lambda (newlat L R)
   (col (cons (car lat) newlat) L R))
 
-</td></tr><tr><td>
+
 
 为什么col的第二个和第三个参数是L和R
-</td><td>
+
 如果(car lat) 即不是oldL也不是oldR，我们不需要插入任何新的元素。所以L和R对(cdr lat)和lat都是对的。
 
-</td></tr><tr><td>
+
 
 下面这个是我们现在得到的，新添了一个collector
-
-```
 (define multiinsertLR&co
   (lambda (new oldL oldR lat col)
     (cond
@@ -1311,66 +1116,52 @@ multiinsertLR&co 之与 multiinsert 如同multirember&co 之与 multirember
       ((eq? (car lat) oldR) (multiinsertLR&co new oldL oldR (cdr lat) (lambda (newlat L R) ...)))
       (else (multiinsertLR&co new oldL oldR (cdr lat) (lambda (newlat L R)
                                                         (col (cons (car lat) newlat) L R)))))))
-```
 
-</td><td>
+
 
 未完成的那个collector和新添加的collector很类似。只是对R加1，而不是对L加1；另外，是cons old到 cons new newlat的结果上。
 
-</td></tr><tr><td>
+
 
 那你能填写省略号吗
-</td><td>
-当然了， 最后这个 collector 是
 
-```
+当然了， 最后这个 collector 是
 (lambda (new L R)
   (col (cons oldR (cons new newlat)) L (add1 R)))
-```
 
-</td></tr><tr><td>
 
-(multiinsertLR&co new oldL oldR lat col)   
-的值是什么，其中  
-new是salty，  
-oldL是fish，  
-oldR是chips，  
-lat是(chips and fish or fish and chips)
-</td><td>
-是(col newlat 2 2)的值，其中newlat是  
-(chips salty and salty fish or salty fish and chips salty)
 
-</td></tr><tr><td>
+(multiinsertLR&co new oldL oldR lat col)的值是什么，其中 new是salty，oldL是fish，oldR是chips，lat是(chips and fish or fish and chips)
+
+是(col newlat 2 2)的值，其中newlat是(chips salty and salty fish or salty fish and chips salty)
+
+
 
 
 这个对身体健康吗(译注：指的是chips salty and salty fish or salty fish and chips salty)
-</td><td>
+
 盐太多了。或许点心甜一些。
 
-</td></tr><tr><td>
+
 
 还记得什么是 *-函数吗
-</td><td>
+
 当然了，所有的*-函数都能对各种list
 ——空表
 ——con 原子到list表上的lsit表
 ——cons list表到list表上的lsit表
 
-</td></tr><tr><td>
+
 
 现在写一个函数 evens-only*。它删除网状list组成的list中所有的奇数。下面这是even?
-
-```
 (define even?
   (lambda (n)
     (= (× (÷ n 2) 2) n)
-```
 
-</td><td>
+
 
 我们已经讲过怎么写这种函数， evens-only*只是个练习：
 
-```
 (define evens-only*
   (lambda (l)
     ((null? l) (quote ()))
@@ -1379,39 +1170,35 @@ lat是(chips and fish or fish and chips)
        ((even? (car l)) (cons (car l) (evens-only* (cdr l))))
        (else (evens-only* (cdr l))))
      (else (cons (evens-only* (car l)) (evens-only* (cdr l)))))))
-```
 
-</td></tr><tr><td>
+
 
 (evens-only* l)的值是什么，其中 l是 ((9 1 2 8) 3 10 ((9 9) 7 6) 2)
-</td><td>
+
 ((2 8) 10 (() 6) 2)
 
-</td></tr><tr><td>
 
-如果l是((9 1 2 8) 3 10 ((9 9) 7 6) 2)，  
-那么l中奇数的总和是多少
-</td><td>
+
+如果l是((9 1 2 8) 3 10 ((9 9) 7 6) 2)，那么l中奇数的总和是多少
+
 9+1+3+9+9+7=38
 
-</td></tr><tr><td>
 
-如果l是((9 1 2 8) 3 10 ((9 9) 7 6) 2)，  
-那么l中偶数的乘积是多少
-</td><td>
+
+如果l是((9 1 2 8) 3 10 ((9 9) 7 6) 2)，那么l中偶数的乘积是多少
+
 2×8×10×6×2=1920
 
-</td></tr><tr><td>
+
 
 你能写出一个 evens-only*&co 函数吗，它把奇数从参数中删除来构建网状的list表，同时把所有偶数相乘，奇数相加
-</td><td>
+
 这可满是star哦！
 
-</td></tr><tr><td>
+
 
 下面这里是个要略。你能解释(evens-only*&co (car l) ...) 是干什么的吗
 
-```
 (define evens-only*&co
   (lambda (l col)
     (cond
@@ -1422,88 +1209,69 @@ lat是(chips and fish or fish and chips)
                          (else (evens-only*&co (cdr l) (lambda (newl p s)
                                                          (col newl p (+ (car l) s))))))
                        (else (evens-only*&co (car l) ...))))))
-```
 
-</td><td>					   
-					   
 它访问(car l)中的每一个数，然后收集表中的偶数，得到偶数的乘积，奇数的和。
 
-</td></tr><tr><td>
+
 
 函数 evens-only*&co 在访问了所偶的 (car l)中的数后做什么了
-</td><td>
+
 如同前边的例子一样，使用collector，不过我们还没有定义它。
 
-</td></tr><tr><td>
+
 
 这个collector做了什么
-</td><td>
+
 用evens-only*&co访问(cdr l)中的所有偶数，然后计算了偶数的乘积，奇数的和。
 
-</td></tr><tr><td>
+
 
 这就是说那个collector大体上应该是这样的对么
 
-```
 (lambda (al ap as)
   (evens-only*&co (cdr l)
     ...))
-```
 
-</td><td>
 是的。
 
-</td></tr><tr><td>
+
 
 当(evens-only*&co (cdr l) ...)执行完毕之后呢
 
 那个还没定义的collector就开始执行了
 
-</td></tr><tr><td>
+
 
 
 (evens-only*&co (cer l) ...)的collector做了什么
-</td><td>
-它把list中car和cdr的结果cons到一起，然后做相应的乘积和求和。最后把值传给最开始输入的那个老collector
 
-```
-(lambda (al ap as) ;collector of (evens-only*&co (cer l) ...)
+它把list中car和cdr的结果cons到一起，然后做相应的乘积和求和。最后把值传给最开始输入的那个老collector
+(lambda (al ap as)                  ;collector of (evens-only*&co (cer l) ...)
   (evens-only*&co (cdr l)
     (col (cons al dl) (× ap dp) (+ as ds))))
-```
-	
 笔记：这个情形下，car l不是原子而是表，稍稍麻烦点，(car l)和(cdr l)需要分别递归得到两个部分的偶数乘积和奇数，最后对应相成和相加。
 
-</td></tr><tr><td>
+
 
 
 理解这些了吗
-</td><td>
+
 perfect!
 
-</td></tr><tr><td>
 
-(evens-only*&co l the-last-friend)   
-的值是什么，其中   
-l是((9 1 2 8) 3 10 ((9 9) 7 6) 2)，   
-the-last-friend的定义如下：
 
-```
+(evens-only*&co l the-last-friend)的值是什么，其中 l是((9 1 2 8) 3 10 ((9 9) 7 6) 2)， the-last-friend的定义如下：
 (define the-last-friend
   (lambda (newl product sum)
     (cons sum
       (cons product newl))))
-```
 
-</td><td>	  
-	  
 (38 1920 (2 8) 10 (() 6) 2)
 
 
-</td></tr><tr><td>
+
 
 
 哇哦！你的脑子搅起来了吧？
-</td><td>
+
 去吃块椒盐饼干吧，别忘了芥末哦。
-</td></tr><table>
