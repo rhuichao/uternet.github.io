@@ -1,13 +1,13 @@
 
 @import url(http://fonts.googleapis.com/css?family=Galdeano);
-@import url(http://fonts.googleapis.com/css?family=Buenard:400,700);
+@import url(http://fonts.googleapis.com/css?family=Gentium+Book+Basic:400,700);
 
 body{
     font-size:16px;
     word-spacing:1px;
     margin-left:auto;
     margin-right:auto;
-    font-family:"Buenard","Hiragino Sans GB","Microsoft YaHei","WenQianYi Micro Hei",sans-serif;
+    font-family:"Gentium","Hiragino Sans GB","Microsoft YaHei","WenQianYi Micro Hei",sans-serif;
     color:#000000;
     background-color:#e6e6e6;
     line-height: 150%;
