@@ -73,7 +73,7 @@ pre code{
 
 pre,code{
     font-family:Menlo,"Andale Mono",Consolas,"Courier New",Monaco,monospace;
-    /*font-size:14px;*/
+    font-size:0.8em;
 }
 
 code{
