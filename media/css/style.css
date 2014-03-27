@@ -3,7 +3,7 @@
 @import url(http://fonts.googleapis.com/css?family=Gentium+Book+Basic:400,700);
 
 body{
-    font-size:16px;
+    font-size:1em;
     word-spacing:1px;
     margin-left:auto;
     margin-right:auto;
@@ -65,7 +65,7 @@ ol ul, ul ol, ul ul, ol ol {
 /*代码块*/
 pre code{
     margin:1em 0;
-    font-size:14px;
+    /*font-size:14px;*/
     line-height:1.6;
     display:block;
     overflow:auto;
@@ -73,7 +73,7 @@ pre code{
 
 pre,code{
     font-family:"inconsolata",Menlo,"Andale Mono",Consolas,"Courier New",Monaco,monospace;
-    font-size:14px;
+    /*font-size:14px;*/
 }
 
 code{
@@ -107,7 +107,8 @@ blockquote p{
 
 /* 页面内容*/
 .content{
-    font-size:14px;line-height:24px;
+    /*font-size:14px;*/
+    line-height:24px;
 }
 
 .content h1{
@@ -143,18 +144,21 @@ blockquote p{
 
 .meta{
     text-align:right;
-    font-size:12px;
+    /*font-size:12px;*/
+    font-size:0.8em;
 }
 
 /******************************页面导航（上一页，下一页）************************/
 .pageNav{
     font-weight:bold;
-    font-size:17px;
+    /*font-size:17px;*/
+    font-size:1.2em;
 }
 
 .pageNavInvalid{
     font-weight:bold;
-    font-size:17px;
+    /*font-size:17px;*/
+    font-size:1.2em;
     color:#D0D0D0;
 }
 
@@ -230,7 +234,11 @@ embed,object,iframe{
     display:block;margin:4px auto;
 }
 
-.gist{font-size: 12px;line-height:1.6;}
+.gist{
+    /*font-size: 12px;*/
+    font-size: 0.6em;
+    line-height:1.6;    
+}
 
 /**********************************页脚************************************/
 footer{
@@ -239,7 +247,8 @@ footer{
 }
 
 footer small {
-    font-size: 12px;
+    /*font-size: 12px;*/
+    font-size: 0.6em;
     color: #999;
 }
 
