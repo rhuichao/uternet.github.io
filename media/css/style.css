@@ -152,13 +152,13 @@ blockquote p{
 .pageNav{
     font-weight:bold;
     /*font-size:17px;*/
-    font-size:1.2em;
+    font-size:1.4em;
 }
 
 .pageNavInvalid{
     font-weight:bold;
     /*font-size:17px;*/
-    font-size:1.2em;
+    font-size:1.4em;
     color:#D0D0D0;
 }
 
