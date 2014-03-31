@@ -62,7 +62,7 @@ ol ul, ul ol, ul ul, ol ol {
     margin-left:1em;
 }
 
-/*代码块*/
+/*代码块
 pre code{
     margin:1em 0;
     font-size:0.9em;
@@ -82,6 +82,22 @@ code{
     padding: 2px 2px 2px 2px;
     border-radius: 5px 5px 5px 5px;
 }
+*/
+
+pre {
+
+    overflow: auto;
+    width: 500px;
+    padding: 10px;
+
+}
+code, pre {
+
+    font-family: Consolas,"Lucida Console",Monaco,monospace;
+    background-color: rgb(244, 248, 249);
+    border: 1px solid rgb(153, 194, 202);
+    border-radius: 5px 5px 5px 5px;
+
 
 /*引用块*/
 blockquote{
