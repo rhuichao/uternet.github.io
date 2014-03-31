@@ -321,3 +321,11 @@ footer a {
     box-shadow: 10px 10px 10px rgb(136, 136, 136);
 
 }
+
+.textbox h1 {
+    text-align: center;
+    font-family:"Gentium Book Basic","Galdeano","Hiragino Sans GB","Microsoft YaHei",serif;
+    font-size:1.6em;
+    color:#000;
+    line-height: 150%;
+}
