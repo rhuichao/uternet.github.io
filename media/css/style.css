@@ -62,7 +62,7 @@ ol ul, ul ol, ul ul, ol ol {
     margin-left:1em;
 }
 
-/*代码块
+/*代码块*/
 pre code{
     margin:1em 0;
     font-size:0.9em;
@@ -82,12 +82,12 @@ code{
     padding: 2px 2px 2px 2px;
     border-radius: 5px 5px 5px 5px;
 }
-*/
 
+/*
 pre {
 
     overflow: auto;
-    /*width: 500px;*/
+    width: 500px;
     padding: 10px;
 
 }
@@ -97,7 +97,7 @@ code, pre {
     background-color: rgb(244, 248, 249);
     border: 1px solid rgb(153, 194, 202);
     border-radius: 5px 5px 5px 5px;
-
+*/
 
 /*引用块*/
 blockquote{
@@ -303,7 +303,7 @@ footer a {
     background: #83BF73;
 }
 
-/***********************************文本框**********************************
+/***********************************文本框***********************************/
 .textbox {
 
     border: 1px solid rgb(234, 234, 234);
@@ -320,4 +320,3 @@ footer a {
     box-shadow: 10px 10px 10px rgb(136, 136, 136);
 
 }
-*/
