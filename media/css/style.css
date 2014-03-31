@@ -4,8 +4,8 @@
 
 body{
     font-size:0.9em;
-    /*word-spacing:2px;
-    letter-spacing :2px;*/
+    /*word-spacing:2px;*/
+    letter-spacing :1px;
     margin-left:auto;
     margin-right:auto;
     font-family:"Hiragino Sans GB","Microsoft YaHei","WenQianYi Micro Hei",sans-serif;
