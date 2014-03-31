@@ -18,7 +18,7 @@ vi. 喧闹
 vt. 用球拍打  
 【法】 放荡生活, 有组织的非法活动; 过放荡生活, 忙于社交
 
-scheme本身的名字是**schemer**(阴谋家)  
+scheme本身的名字是 **schemer** (阴谋家)  
 后来去掉一个'r'，变成scheme（计划）
 
 而那本著名的小人书《The Little Schemer》  
