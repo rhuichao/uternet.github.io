@@ -4,7 +4,6 @@
 
 body{
     font-size:0.9em;
-    /*word-spacing:2px;*/
     letter-spacing :0.5px;
     margin-left:auto;
     margin-right:auto;
@@ -12,7 +11,6 @@ body{
     color:#000000;
     background-color:#e6e6e6;
     line-height: 1.5;
-    /*text-shadow:0 1px 0 rgba(255,255,255,0.12);*/
 }
 
 *{
@@ -85,21 +83,6 @@ code{
     border-radius: 3px 3px 3px 3px;
 }
 
-/*
-pre {
-
-    overflow: auto;
-    width: 500px;
-    padding: 10px;
-
-}
-code, pre {
-
-    font-family: Consolas,"Lucida Console",Monaco,monospace;
-    background-color: rgb(244, 248, 249);
-    border: 1px solid rgb(153, 194, 202);
-    border-radius: 5px 5px 5px 5px;
-*/
 
 /*引用块*/
 blockquote{
