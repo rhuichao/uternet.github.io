@@ -323,9 +323,5 @@ footer a {
 }
 
 .textbox h1 {
-    text-align: center;
-    font-family:"Gentium Book Basic","Galdeano","Hiragino Sans GB","Microsoft YaHei",serif;
-    font-size:1.6em;
-    color:#000;
-    line-height: 150%;
+    text-align: left;
 }
