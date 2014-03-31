@@ -316,7 +316,7 @@ footer a {
     font-size: 1.1em;
     background-repeat: no-repeat;
     background-position: 10px center;
-    border-radius: 10px 10px 10px 10px;
-    box-shadow: 5px 5px 5px rgb(136, 136, 136);
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 10px 10px 10px rgb(136, 136, 136);
 
 }
