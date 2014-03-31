@@ -80,6 +80,7 @@ code{
     background-color: rgb(247, 247, 247) ;
     border: 1px dashed rgb(204, 204, 204);
     padding: 2px 2px 2px 2px;
+    border-radius: 5px 5px 5px 5px;
 }
 
 /*引用块*/
@@ -286,4 +287,20 @@ footer a {
     background: #83BF73;
 }
 
-/***********************************表格***********************************/
+/***********************************文本框***********************************/
+.textbox {
+
+    border: 1px solid rgb(234, 234, 234);
+    margin: 15px 0px;
+    padding: 20px 15px 20px 75px;
+    width: 450px;
+    color: rgb(17, 17, 17);
+    background-color: rgb(242, 232, 230);
+    line-height: 1.5em;
+    font-size: 1.1em;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 5px 5px 5px rgb(136, 136, 136);
+
+}
