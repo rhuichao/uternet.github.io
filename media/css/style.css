@@ -62,6 +62,7 @@ ol ul, ul ol, ul ul, ol ol {
 
 /*代码块*/
 pre code{
+    font-family:Menlo,"Andale Mono",Consolas,"Courier New",Monaco,monospace;
     margin:1em 0;
     font-size:0.9em;
     line-height:1.4;
@@ -76,6 +77,7 @@ pre,code{
 }
 
 code{
+    font-family:Menlo,"Andale Mono",Consolas,"Courier New",Monaco,monospace;
     background-color: rgb(247, 247, 247) ;
     border: 1px solid rgb(204, 204, 204);
     padding: 2px 2px 2px 2px;
