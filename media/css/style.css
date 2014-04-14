@@ -325,5 +325,7 @@ footer a {
 
 /****************表格*************/
 table {
-    border: 1px solid;
+    margin-top: 10px;
+    border-collapse: collapse;
+    border: 1px solid rgb(170, 170, 170);
 }
