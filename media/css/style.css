@@ -329,3 +329,21 @@ table {
     border-collapse: collapse;
     border: 1px solid rgb(170, 170, 170);
 }
+
+table.dataintable th {
+
+    vertical-align: baseline;
+    padding: 5px 15px 5px 5px;
+    background-color: rgb(213, 213, 213);
+    border: 1px solid rgb(170, 170, 170);
+    text-align: left;
+}
+
+table.dataintable td {
+
+    vertical-align: text-top;
+    padding: 5px 15px 5px 5px;
+    background-color: rgb(239, 239, 239);
+    border: 1px solid rgb(170, 170, 170);
+
+}
