@@ -330,7 +330,7 @@ table {
     border: 1px solid rgb(170, 170, 170);
 }
 
-table.dataintable th {
+table th {
 
     vertical-align: baseline;
     padding: 5px 15px 5px 5px;
@@ -339,7 +339,7 @@ table.dataintable th {
     text-align: left;
 }
 
-table.dataintable td {
+table td {
 
     vertical-align: text-top;
     padding: 5px 15px 5px 5px;
