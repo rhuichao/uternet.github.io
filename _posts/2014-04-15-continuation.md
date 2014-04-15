@@ -137,3 +137,5 @@ col 变成了
     (cons (car lat) newlat)seen))
  (quote ()) (quote ()))
 ``` 
+
+问题是我要确定那么多个(car lat)的值？？？
