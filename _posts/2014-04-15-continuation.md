@@ -40,102 +40,50 @@ OK! 来给它一些输入，看看发生了什么？
 假设传递的参数是这样：
 
     a = 'tuna
-    lat = '(tuna and salad)
+    lat = '(and tuna)
 
 情况变得复杂了。。。
 
-第一遍：
-
-    (multirember&co 'tuna '(tuna and salad) a-friend)
-
-第二遍：
-
-因为((eq? (car lat) a)的值为真，所以，执行cond的第二个分支，实际上是对下面的表达式求值：
+下面是代入具体参数后的推导：
 
 ```scheme
-(multirember&co 'tuna '(and salad)
-                        (lambda (newlat seen)
-                            (a-friend newlat
-                                (cons (car lat) seen))))
-```
+(multirember&co 'tuna '(and tuna) a-friend)
 
-继续展开  
-现在  
 
-a 还是'tuna  
+(multirember&co 'tuna '(tuna)
+		(lambda (newlat seen)
+		  (a-friend (cons 'and newlat) seen)))
 
-lat 变成了 '(and salad)  
 
-col 不再是a-friend，而是:
-
-```scheme
-    (lambda (newlat seen)
-      (a-friend newlat
-           (cons (car lat) seen)))
-```
-
-第三遍，因为((eq? (car lat) a)的值为假，所以执行第三个cond分支
-
-展开后的表达式是：
-
-```scheme
-(multirember&co 'tuna '(salad)
-                         (lambda (newlat seen)
-                           ((lambda (newlat seen)
-                             (a-friend newlat
-                                       (cons (car lat) seen)))
-                            (cons (car lat) newlat) seen)))
-```
-
-a 还是 'tuna
-lat 变成了 '(salad)
-col 变成了
-
-```scheme
-(lambda (newlat seen)
-  ((lambda (newlat seen)
-    (a-friend newlat
-              (cons (car lat) seen)))
-   (cons (car lat) newlat) seen))
-```
-
-第四遍，((eq? (car lat) a))值为假，执行else分支，展开后是：
-
-```scheme
 (multirember&co 'tuna '()
-                         (lambda (newlat seen)
-                           ((lambda (newlat seen)
-                              ((lambda (newlat seen)
-                                 (a-friend newlat
-                                           (cons (car lat) seen)))
-                               (cons (car lat) newlat) seen))
-                            (cons (car lat) newlat) seen)))
-```
+		(lambda (newlat seen)
+		  ((lambda (newlat seen)
+		     (a-friend (cons 'and newlat) seen))
+		   newlat (cons 'tuna seen))))
 
-第五遍，(null? lat)值为真，执行`(col (quote ()) (quote ()))`  
-现在,col变成了
 
-```scheme
-(lambda (newlat seen)
-   ((lambda (newlat seen)
-      ((lambda (newlat seen)
-          (a-friend newlat
-                    (cons (car lat) seen)))
-       (cons (car lat) newlat) seen))
-    (cons (car lat) newlat) seen)
-```
-
-展开后是
-
-```scheme
 ((lambda (newlat seen)
    ((lambda (newlat seen)
-      ((lambda (newlat seen)
-         (a-friend newlat
-                   (cons (car lat) seen)))
-       (cons (car lat) newlat) seen))
-    (cons (car lat) newlat)seen))
- (quote ()) (quote ()))
-``` 
+      (a-friend (cons 'and newlat) seen))
+    newlat (cons 'tuna seen)))
+ '() '())
 
-问题是我怎么确定那么多个(car lat)的值？？？
+
+((lambda (newlat seen)
+   (a-friend (cons 'and newlat) seen))
+ '() '(tuna))
+
+
+(a-friend '(and) '(tuna))
+```
+
+我花了大概一整天来钻牛角尖，搞到最后大脑已经有些要罢工的感觉。晚上的时候，有那么几分钟的时间思维稍稍清晰，我便一边在emacs中调试一边把式子推导出来了，从最开始的函数调用  
+`(multirember&co 'tuna '(and tuna) a-friend)`  
+得出  
+`(a-friend '(and) '(tuna))`
+
+最后得出结果： #f
+
+相当于在大脑中按单步调试把程序跑了一遍，等我再回过头去看推导的步骤，我发现大脑又罢工了，完全集中不起注意力来。
+
+好吧，去睡吧，希望明天思维会清晰起来。
