@@ -1,6 +1,6 @@
 permalink:     /:year-:month-:day/:title.html
 url:           http://geek-zhu.tk
-author:        Geek_Pig
+author:        Lazy_Pig
 paginate:      15
 markdown:      redcarpet
 redcarpet:
