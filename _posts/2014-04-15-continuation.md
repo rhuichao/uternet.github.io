@@ -9,18 +9,18 @@ date: 2014-04-15
 (define multirember&co
   (lambda (a lat col)
     (cond
-      ((null? lat)
-       (col (quote ()) (quote ())))
-      ((eq? (car lat) a)
-       (multirember&co a (cdr lat)
-                       (lambda (newlat seen)
-                         (col newlat
-                              (cons (car lat) seen)))))
-      (else
-        (multirember&co a (cdr lat)
-                        (lambda (newlat seen)
-                          (col (cons (car lat) newlat)
-                               seen)))))))
+     ((null? lat)
+      (col (quote ()) (quote ())))
+     ((eq? (car lat) a)
+      (multirember&co a (cdr lat)
+                      (lambda (newlat seen)
+                        (col newlat
+                             (cons (car lat) seen)))))
+     (else
+      (multirember&co a (cdr lat)
+                      (lambda (newlat seen)
+                        (col (cons (car lat) newlat)
+                             seen)))))))
 
 (define a-friend
   (lambda (x y)
@@ -39,8 +39,8 @@ OK! 来给它一些输入，看看发生了什么？
 
 假设传递的参数是这样：
 
-    a = 'tuna
-    lat = '(and tuna)
+a = 'tuna
+lat = '(and tuna)
 
 情况变得复杂了。。。
 
@@ -51,15 +51,15 @@ OK! 来给它一些输入，看看发生了什么？
 
 
 (multirember&co 'tuna '(tuna)
-		(lambda (newlat seen)
-		  (a-friend (cons 'and newlat) seen)))
+                (lambda (newlat seen)
+                  (a-friend (cons 'and newlat) seen)))
 
 
 (multirember&co 'tuna '()
-		(lambda (newlat seen)
-		  ((lambda (newlat seen)
-		     (a-friend (cons 'and newlat) seen))
-		   newlat (cons 'tuna seen))))
+                (lambda (newlat seen)
+                  ((lambda (newlat seen)
+                     (a-friend (cons 'and newlat) seen))
+                   newlat (cons 'tuna seen))))
 
 
 ((lambda (newlat seen)
