@@ -1,6 +1,6 @@
 ---
 layout: post
-title: evens-only*&co 推导过程
+title: Unpacking evens-only*&co
 date: 2014-04-20
 ---
 
