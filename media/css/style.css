@@ -11,7 +11,6 @@ body{
     background-color:#e6e6e6;
     line-height: 1.5;
     text-shadow: 0px 0px 0px rgba(0, 0, 0, 0.6), 0px 1px 0px rgba(255, 255, 255, 0.6);
-    text-rendering: optimizeLegibility;
 }
 
 *{
@@ -19,6 +18,7 @@ body{
     margin: 0;
     border:none;
     outline:none;
+    text-rendering: optimizeLegibility;
 }
 
 time {
