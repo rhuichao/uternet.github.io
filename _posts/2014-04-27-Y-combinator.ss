@@ -6,7 +6,8 @@ date: 2014-04-27
 
 卡这里好几天了，杂务又多，今天抽空把TLS第9章的代码敲了一遍，MS有一点点理解了
 
-<pre><code class="scheme language-scheme" data-lang="scheme" >
+```scheme
+
 ;;定义一个盲肠函数，这是一个无限递归函数，永远也不会结束
 (define eternity
   (lambda (x)
@@ -263,6 +264,7 @@ date: 2014-04-27
 ;调用
 ((Y length) '(a b c d e))
 ;=> 5
-</code></pre>
+
+```
 
 至此，推是推导出来了，还是觉得理解不清晰，脑子里还是一团浆糊，帽子依然不够大。
