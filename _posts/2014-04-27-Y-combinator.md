@@ -288,7 +288,8 @@ date: 2014-04-27
       (else (add1 (length (cdr l))))))))
 ```
 
-把上面的部分单独拿出来，这就是 Y-combinator
+把上面的部分单独拿出来，这就是 Y-combinator  
+而下半部分就是匿名的length函数，它需要借助Y-combinator来实现递归.
 
 ```scheme
 (lambda (le)
