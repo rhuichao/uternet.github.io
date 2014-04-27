@@ -333,10 +333,10 @@ OK，把length也define一个名字
 
 ```scheme
 ((Y (lambda (f)
-               (lambda (n)
-                 (cond
-                  ((zero? n) 1)
-                  (else (* n (f (sub1 n))))))))
-          4)
+      (lambda (n)
+        (cond
+         ((zero? n) 1)
+         (else (* n (f (sub1 n))))))))
+ 4)
 => 24
 ```
