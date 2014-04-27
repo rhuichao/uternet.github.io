@@ -269,7 +269,7 @@ date: 2014-04-27
 
 再把玩一下这个Y
 
-```scheme
+```
 ((Y (lambda (f)
                (lambda (n)
                  (cond
