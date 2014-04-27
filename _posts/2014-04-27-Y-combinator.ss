@@ -4,6 +4,7 @@ title: Y-Combinator推导
 date: 2014-04-27
 ---
 
+
 ```scheme
 ;;定义一个盲肠函数，这是一个无限递归函数，永远也不会结束
 (define eternity
