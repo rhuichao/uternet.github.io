@@ -6,18 +6,23 @@ date: 2014-04-27
 
 卡这里好几天了，杂务又多，今天抽空把TLS第9章的代码敲了一遍，MS有一点点理解了
 
-<pre><code class="scheme language-scheme" data-lang="scheme" >
-;;定义一个盲肠函数，这是一个无限递归函数，永远也不会结束
+定义一个盲肠函数，这是一个无限递归函数，永远也不会结束
+
+```scheme
 (define eternity
   (lambda (x)
     (eternity x)))
+```
 
-;;一个匿名函数，只能求出空列表的长度：0
-;;如果列表非空，则(eternity (cdr l))被触发
+一个匿名函数，只能求出空列表的长度：0  
+如果列表非空，则(eternity (cdr l))被触发
+
+```scheme
 ((lambda (l)
    (cond
     ((null? l) 0)
     (else (add1 (eternity (cdr l)))))))
+```
 
 ;;一个匿名函数，只能求出长度小于等于1的列表
 ;;如果列表元素超过1个，(eternity (cdr l))被触发
