@@ -288,7 +288,7 @@ date: 2014-04-27
       (else (add1 (length (cdr l))))))))
 ```
 
-这就是 Y-combinator
+把上面的部分单独拿出来，这就是 Y-combinator
 
 ```scheme
 (lambda (le)
