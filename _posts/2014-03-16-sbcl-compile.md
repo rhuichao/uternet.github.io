@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  SBCL生成可执行代码的方法
+title:  SBCL 以及 Clozure CL 生成可执行文件的方法
 date:   2014-03-16
 ---
+
+#一、SBCL编译单个可执行文件
+
 在SBCL中有一个内置函数 save-lisp-and-die 可以将正在运行的整个SBCL环境dump为一个文件。语法：
 
     (save-lisp-and-die "filename" :toplevel 'main  :executable t :compression t)
@@ -18,9 +21,9 @@ date:   2014-03-16
 
 示例(fib.lisp)：
 
-```scheme
+```lisp
 (defun fib (n)
-  (if (< n 2) 1
+  (if (< n 2) n
     (+ (fib (- n 1))
        (fib (- n 2)))))
            
@@ -59,7 +62,7 @@ date:   2014-03-16
     -rwxr-xr-x 1 user user 9891868  3月 16 11:05 fib
     
     $ time ./fib
-    165580141
+    102334155
 
     real    0m5.051s
     user    0m4.984s
@@ -85,4 +88,121 @@ date:   2014-03-16
 
 一切准备停当后可以卸载掉apt安装的SBCL，然后运行install.sh脚本进行安装自己编译的版本。
 
+#二、Clozure CL编译的方法 
 
+进入REPL，load源文件：
+
+    (load "fib.lisp")
+
+然后调用 ccl:save-application 函数：
+
+    (ccl:save-application "fib_ccl" :toplevel-function 'main :prepend-kernel t)
+
+这样便生成了名为"fib_ccl"的可执行文件。
+
+:toplevel-function  指定程序入口函数  
+:prepend-kernel     设为t，保存内核heap镜像
+
+测试一下
+
+```
+$ time ./fib_ccl
+102334155
+
+real    0m2.100s
+user    0m2.080s
+sys     0m0.016s
+```
+
+比sbcl快一倍还多！
+
+------
+
+再加一个scheme的测试
+
+##这是racket的测试
+
+scheme源文件fib5.ss：
+
+```scheme
+#lang racket
+
+(define fib
+  (lambda (n)
+    (cond
+     ((< n 2) n)
+     (else (+ (fib (- n 1))
+              (fib (- n 2)))))))
+
+(display (fib 40))
+```
+
+编译：
+
+    raco exe fib5.ss
+
+测试：
+
+```
+$ time ./fib5
+102334155
+real    0m4.545s
+user    0m4.488s
+sys     0m0.060s
+```
+
+比sbcl还稍快一点。可见,racket并不象想象中那样弱。
+
+##传说中非常快的Ikarus
+
+原文件fib6.ss：
+
+```scheme
+(import (rnrs))
+(define (fib n)
+  (if (< n 2) n
+      (+ (fib (- n 1))
+         (fib (- n 2)))))
+
+(fib 40)
+```
+
+脚本执行
+
+```
+$ time scheme-script fib6.ss 
+102334155
+real    0m3.505s
+user    0m3.456s
+sys     0m0.040s
+```
+
+成绩很接近。
+
+##Larceny
+
+```
+$ time ~/bin/larceny/scheme-script fib6.ss 
+102334155
+real    0m3.796s
+user    0m3.756s
+sys     0m0.028s
+```
+
+与Ikarus几乎相同。
+
+没有牛粪，怎么能衬托鲜花的美丽呢？
+
+##来看看chicken的
+
+```
+csc fib5.ss
+    
+$ time ./fib5
+102334155
+real    0m31.300s
+user    0m30.994s
+sys     0m0.228s
+```
+
+数量级的差距！
