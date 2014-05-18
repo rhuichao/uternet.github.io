@@ -76,27 +76,35 @@ long long fibonacci_tail(int n, long long acc1, long long acc2)
       1
       (+ (fibonacci (- n 1))
          (fibonacci (- n 2)))))
-         
-(begin
-  (display (fibonacci 40))
-  (newline))
+
 ```
 
 这是尾递归版：
 
-```
+```scheme
 (define (fibonacci n a1 a2)
            (cond
             ((< n 2) a1)
             (else
              (fibonacci (- n 1) a2 (+ a1 a2)))))
 
-(begin
-  (display (fibonacci 40 1 1))
-  (newline))
 ```
 
-这才是阶乘
+在内层定义一个函数包装一个，调用的时候可以用单参数，这样美观一点
+
+```scheme
+(define (fibonacci n)
+  (define (iter n product counter)
+    (cond
+     ((= n 0) 0)
+     ((< n 2) product)
+     (else (iter (- n 1)
+                 counter
+                 (+ product counter)))))
+  (iter n 1 1))
+```
+
+这才是阶乘嘛
 
 ```scheme
 (define (factorial n)
