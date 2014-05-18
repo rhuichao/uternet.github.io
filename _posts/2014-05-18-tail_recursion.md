@@ -95,13 +95,13 @@ long long fibonacci_tail(int n, long long acc1, long long acc2)
 
 ```scheme
 (define (fibonacci n)
-  (define (iter n product counter)
+  (define (iter n t1 t2)
     (cond
      ((= n 0) 0)
-     ((< n 2) product)
+     ((< n 2) t1)
      (else (iter (- n 1)
-                 counter
-                 (+ product counter)))))
+                 t2
+                 (+ t1 t2)))))
   (iter n 1 1))
 
 ;;调用 (fibonacci n)
