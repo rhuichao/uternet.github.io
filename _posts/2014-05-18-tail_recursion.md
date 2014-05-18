@@ -84,6 +84,7 @@ long long fibonacci_tail(int n, long long acc1, long long acc2)
 ```scheme
 (define (fibonacci n a1 a2)
   (cond
+   ((= n 0) 0)
    ((< n 2) a1)
    (else
     (fibonacci (- n 1) a2 (+ a1 a2)))))
