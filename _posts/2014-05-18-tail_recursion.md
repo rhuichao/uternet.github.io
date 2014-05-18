@@ -10,15 +10,15 @@ date: 2014-05-18
 
 短短的一小段代码就发现3个问题：  
 
-一. 先是把函数名都写错了，factorial 是阶乘，可是他的函数体明明算的是斐波那契数列；
+1. 先是把函数名都写错了，factorial 是阶乘，可是他的函数体明明算的是斐波那契数列；
 
-二. main 函数里声明了一个从未用到的变量 i ；
+2. main 函数里声明了一个从未用到的变量 i ；
 
-三. 最搞的是，他在main函数里使用了 scanf 函数来给 factorial 函数传递参数，然后测试程序的运行时间，最后得出尾递归版“快一倍”的结论。当程序运行后，停在那里等着用户输入，这种测试有意义吗？事实上，用gcc来编译，尾递归版快了何止上千倍！
+3. 最搞的是，他在main函数里使用了 scanf 函数来给 factorial 函数传递参数，然后测试程序的运行时间，最后得出尾递归版“快一倍”的结论。当程序运行后，停在那里等着用户输入，这种测试有意义吗？事实上，用gcc来编译，尾递归版快了何止上千倍！
 
 这是我修改的 C 语言 fibonacci 函数普通尾递归版：
 
-```C
+```c
 #include <stdio.h>
 
 long long fibonacci(int n);
@@ -43,7 +43,7 @@ long long fibonacci(int n)
 
 这是尾递归版：
 
-```C
+```c
 #include <stdio.h>
 
 long long fibonacci_tail(int n, long long acc1, long long acc2);
