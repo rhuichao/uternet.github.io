@@ -48,23 +48,22 @@ long long fibonacci(int n)
 ```c
 #include <stdio.h>
 
-long long fibonacci_tail(int n, long long acc1, long long acc2);
 
-int main(void)
+unsigned long long fib(int n, unsigned long long a1, unsigned long long a2)
 {
-    printf("%lld\n", fibonacci_tail(40, 1, 1));
-
-    return 0;
+    if (n < 2)
+        return a1;
+    else
+        return fib(n - 1, a2, a1 + a2);
 }
 
-long long fibonacci_tail(int n, long long acc1, long long acc2)
+int main(int argc, char *argv[])
 {
-    if (n < 2) {
-        return acc1;
-    }
-    else {
-        return fibonacci_tail(n-1, acc2, acc1+acc2);
-    }
+    int n;
+    n = atoi(argv[1]);
+    printf("%llu\n", fib(n,1,1));
+    
+    return 0;
 }
 ```
 
