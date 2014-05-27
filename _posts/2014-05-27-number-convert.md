@@ -82,3 +82,28 @@ exit 0
 ```
 
 我把开头写成`#!/usr/bin/scheme-script` 而不是 `#!/usr/bin/env scheme-script` 的原因是，我的机器上有两个地方能找到 scheme-script 这个程序，位于 /usr/bin 目录下的这个，是 ikarus 提供的，另外一个位于 ~/bin/larceny 目录下，是由 Larceny 提供的。好像 r6rs 标准规定，每个实现应当提供一个叫做 scheme-script 的程序来运行脚本。连可执行文件名都规定好了，hoho！
+
+
+使用方法：
+
+    convert.ss -b 10011
+    => 0x13    19      023     10011
+    
+    convert.ss -o 253
+    => 0xAB    171     0253    10101011
+    
+    convert.ss -x ff
+    => 0xFF    255     0377    11111111
+    
+    convert.ss -d 123
+    => 0x7B    123     0173    1111011    
+    convert.ss 123
+    => 0x7B    123     0173    1111011 ;;转换十进制也可以不加参数
+
+事实上，Scheme 的 string->number 函数可以判断参数的数制，前提是你传给它一个合法的常数，比如：#x32f。`#`号在 shell 里有别的用途，所以要加转义符。
+
+    convert.ss \#x32f
+    => 0x32F   815     01457   1100101111
+    
+    convert.ss \#b110110
+    => 0x36    54      066     110110
