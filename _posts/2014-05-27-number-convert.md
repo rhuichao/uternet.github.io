@@ -48,7 +48,7 @@ echo "obase=2;ibase=${ibase};${num}"|bc
 exit 0
 ```
 
-今天突然想用Scheme再写一个，可是一涉及到输出就比较头疼了。r5rs 标准里定义的输出函数只有两个：display 和 write，这是远远不够用的。标准外的SRFI倒是定义了一些类似于其它语言的输出函数，比如模仿Lisp 的 format 函数，但那是可选的，并非每一个 Scheme 实现都支持。事实上几乎每一个成熟的 Scheme 都会提供标准之外的扩展，但都是以模块的方式实现的。然而，每一个实现调用模块的方式又不一样。于是，想写出能在大多数实现上运行的代码是几乎不可能的。Scheme 大概是可移植性最差的高级语言了。
+今天突然想用Scheme再写一个，可是一涉及到输出就比较头疼了。r5rs 标准里定义的输出函数只有两个：display 和 write，这是远远不够用的。标准外的SRFI倒是定义了一些类似于其它语言的输出函数，比如模仿 Lisp 的 format 函数，但那是可选的，并非每一个 Scheme 实现都支持。事实上几乎每一个成熟的 Scheme 都会提供标准之外的扩展，但都是以模块的方式实现的。然而，每一个实现调用模块的方式又不一样。于是，想写出能在大多数实现上运行的代码是几乎不可能的。Scheme 大概是可移植性最差的高级语言了。
 
 没办法的办法是指定要运行的 Scheme 实现。
 
@@ -81,4 +81,4 @@ exit 0
       (printf "~a\n" (number->string num 2))))))
 ```
 
-我把开头写成`#!/usr/bin/scheme-script` 而不是 `#!/usr/bin/env scheme-script` 的原因是，我的机器上有两个地方能找到 scheme-script这个程序，位于 /usr/bin 目录下的这个，是 ikarus 提供的，另外一个位于 ~/bin/larceny 目录下，是由 Larceny 提供的。好像 r6rs 标准规定，每个实现应当提供这个一个名字的程序来运行脚本。连可执行文件名都规定好了，hoho！
+我把开头写成`#!/usr/bin/scheme-script` 而不是 `#!/usr/bin/env scheme-script` 的原因是，我的机器上有两个地方能找到 scheme-script 这个程序，位于 /usr/bin 目录下的这个，是 ikarus 提供的，另外一个位于 ~/bin/larceny 目录下，是由 Larceny 提供的。好像 r6rs 标准规定，每个实现应当提供一个叫做 scheme-script 的程序来运行脚本。连可执行文件名都规定好了，hoho！
