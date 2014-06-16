@@ -1,0 +1,286 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Conditional expressions</TITLE>
+<META NAME="description" CONTENT="Conditional expressions">
+<META NAME="keywords" CONTENT="schemetutorial">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v99.2beta6">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="schemetutorial.css">
+
+<LINK REL="next" HREF="node6.html">
+<LINK REL="previous" HREF="node4.html">
+<LINK REL="up" HREF="schemetutorial.html">
+<LINK REL="next" HREF="node6.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html225"
+  HREF="node6.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html221"
+  HREF="schemetutorial.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html215"
+  HREF="node4.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html223"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html226"
+  HREF="node6.html">Logical composition operators</A>
+<B> Up:</B> <A NAME="tex2html222"
+  HREF="schemetutorial.html">Scheme Tutorial</A>
+<B> Previous:</B> <A NAME="tex2html216"
+  HREF="node4.html">Getting started</A>
+ &nbsp <B>  <A NAME="tex2html224"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html227"
+  HREF="node5.html#SECTION00510000000000000000">Conditional expressions using if</A>
+<LI><A NAME="tex2html228"
+  HREF="node5.html#SECTION00520000000000000000">Conditional expressions using cond</A>
+<LI><A NAME="tex2html229"
+  HREF="node5.html#SECTION00530000000000000000">Conditional expressions using case</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00500000000000000000">
+Conditional expressions</A>
+</H1>
+
+<P>
+Case analysis can be implemented with the conditional expressions 
+<TT>cond</TT>, <TT>case</TT> and <TT>if</TT>. Also the logical expressions
+<TT>and</TT>, <TT>or</TT> and <TT>not</TT> can be used. 
+
+<P>
+
+<H1><A NAME="SECTION00510000000000000000">
+Conditional expressions using if</A>
+</H1>
+
+<P>
+The syntax of <TT>if</TT> is as follows:
+<PRE>
+(if condition consequent alternative)
+</PRE>
+or
+<PRE>
+(if condition consequent)
+</PRE> 	
+If the condition is true, then the value of consequent is returned,
+otherwise the alternative is returned. If no alternative is given and
+the condition is false, the return value will be unspecified.
+
+<P>
+The usage of <TT>cond</TT> and <TT>if</TT> can best be explained with some
+examples. Let's say we wish to write a procedure that takes two arguments and
+returns the square of the smaller argument. There are several ways of doing 
+this, but let us use an <TT>if</TT> expression to accomplish our task.
+<PRE>
+(define minsquare
+  (lambda (a b)
+    (if (&lt; a b)
+        (square a)
+        (square b))))
+</PRE>
+
+<P>
+<I>minsquare</I> is called with two arguments, for example
+<PRE>
+&gt;(minsquare 4 5)
+16
+</PRE>
+First we check if 4 is smaller than 5, which it is. Hence, the value of
+<I>(square a)</I> is returned. 
+
+<P>
+In some cases it is better to use a logical expression instead of 
+<TT>if</TT> or <TT>cond</TT> expressions. Procedures written using logical
+expressions can usually be written in a clearer and more compact way. Let us
+define a procedure for finding out if three given points form a sawtooth. We
+will write three versions of the procedure. The first one uses <TT>if</TT>, the
+second one uses <TT>cond</TT> and the third one uses logical expressions.
+<PRE>
+(define sawtooth?
+  (lambda (x1 x2 x3)
+    (if (&lt; x1 x2)
+        (&gt; x2 x3)
+        (if (&gt; x1 x2)
+            (&lt; x2 x3)
+            #f))))
+
+(define sawtooth?
+  (lambda (x1 x2 x3)
+    (cond ((&lt; x1 x2) (&gt; x2 x3))
+          ((&gt; x1 x2) (&lt; x2 x3))
+          (else #f))))
+
+(define sawtooth?
+  (lambda (x1 x2 x3)
+    (or (and (&lt; x1 x2) (&gt; x2 x3))
+        (and (&gt; x1 x2) (&lt; x2 x3)))))
+</PRE>
+
+<P>
+
+<H1><A NAME="SECTION00520000000000000000">
+Conditional expressions using cond</A>
+</H1>
+
+<P>
+The <TT>cond</TT> expression has the following syntax:
+
+<P>
+<PRE>
+(cond (condition1 consequent1)
+      (condition2 consequent2)
+      .
+      .
+      .
+      (else alternative))
+</PRE>
+
+<P>
+The conditional expressions are evaluated one at a time until one evaluates 
+to true, in which case the corresponding consequent is evaluated and returned 
+as the value of the whole <TT>cond</TT> expression. If all conditions are 
+false, the <TT>cond</TT> expression will have the value of the alternative 
+specified in the <TT>else</TT> clause. The <TT>else</TT> clause is optional, 
+but if  it is left out and all the conditions are false, the return value will 
+be unspecified. 
+
+<P>
+For example, let's write a procedure that takes three arguments and returns
+the sum of the two smallest arguments. We will write the procedure using
+<TT>cond</TT> expressions:
+<PRE>
+(define sum-of-smallest
+  (lambda (x y z)
+    (cond ((or (and (&lt;= x y) (&lt;= y z))
+               (and (&lt;= y x) (&lt;= x z)))
+           (+ x y))
+          ((or (and (&lt;= x z) (&lt;= z y))
+               (and (&lt;= z x) (&lt;= x y)))
+           (+ x z))
+          (else (+ y z)))))
+</PRE>
+
+<P>
+To see how it works, let's try with a few examples:
+<PRE>
+&gt; (sum-of-smallest 1 2 3)
+3
+&gt; (sum-of-smallest 3 3 3)
+6
+&gt; (sum-of-smallest 10 5 7)
+12
+</PRE>
+
+<P>
+
+<H1><A NAME="SECTION00530000000000000000">
+Conditional expressions using case</A>
+</H1>
+
+<P>
+The <TT>case</TT> expression is a derived expression and has the following
+syntax:
+<PRE>
+(case key clause1 clause2 ...)
+</PRE>
+
+<P>
+The <I>key</I> may be any expression and the clause should have the
+following form:
+
+<P>
+<PRE>
+((datum1 ...) expression1 expression2 ...)
+</PRE>
+
+<P>
+Each <I>datum</I> is an external representation of a Scheme object and they
+must all be distinct. The last clause may be an else clause of the form:
+<PRE>
+(else expr1 expr2 ...)
+</PRE>
+
+<P>
+First <I>key</I> is evaluated and the result is compared against 
+each <I>datum</I>. If the result is equivalent according to <TT>eqv?</TT>
+then the expressions in the corresponding clause are evaluated from left to
+right and the result of the last expression in the clause is returned as the
+result of the <TT>case</TT> expression. If no <I>datum</I> is equivalent to
+the <I>key</I>, the expressions of the <TT>else</TT> clause will be 
+evaluated and returned as the value of the <TT>case</TT> expression. If there 
+is neither a <I>datum</I> equivalent to the <I>key</I> nor an 
+<TT>else</TT> clause, the return value is unspecified.
+
+<P>
+For example:
+<PRE>
+&gt; (case (+ 3 4)
+    ((7) 'seven)
+    ((2) 'two)
+    (else 'nothing))
+seven
+&gt; (case 'a
+    ((a b c d) 'first)
+    ((e f g h) 'second)
+    (else 'rest))
+first
+</PRE>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html225"
+  HREF="node6.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html221"
+  HREF="schemetutorial.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html215"
+  HREF="node4.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html223"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html226"
+  HREF="node6.html">Logical composition operators</A>
+<B> Up:</B> <A NAME="tex2html222"
+  HREF="schemetutorial.html">Scheme Tutorial</A>
+<B> Previous:</B> <A NAME="tex2html216"
+  HREF="node4.html">Getting started</A>
+ &nbsp <B>  <A NAME="tex2html224"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+Timo Lilja
+2001-09-11
+</ADDRESS>
+</BODY>
+</HTML>

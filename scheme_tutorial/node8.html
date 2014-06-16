@@ -1,0 +1,530 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Procedures</TITLE>
+<META NAME="description" CONTENT="Procedures">
+<META NAME="keywords" CONTENT="schemetutorial">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v99.2beta6">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="schemetutorial.css">
+
+<LINK REL="next" HREF="node9.html">
+<LINK REL="previous" HREF="node7.html">
+<LINK REL="up" HREF="schemetutorial.html">
+<LINK REL="next" HREF="node9.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html269"
+  HREF="node9.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html265"
+  HREF="schemetutorial.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html259"
+  HREF="node7.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html267"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html270"
+  HREF="node9.html">Imperative programming</A>
+<B> Up:</B> <A NAME="tex2html266"
+  HREF="schemetutorial.html">Scheme Tutorial</A>
+<B> Previous:</B> <A NAME="tex2html260"
+  HREF="node7.html">Quote and quasiquote</A>
+ &nbsp <B>  <A NAME="tex2html268"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html271"
+  HREF="node8.html#SECTION00810000000000000000">Recursion</A>
+<UL>
+<LI><A NAME="tex2html272"
+  HREF="node8.html#SECTION00811000000000000000">Flat recursion</A>
+<LI><A NAME="tex2html273"
+  HREF="node8.html#SECTION00812000000000000000">Deep recursion</A>
+<LI><A NAME="tex2html274"
+  HREF="node8.html#SECTION00813000000000000000">Tail recursion</A>
+</UL>
+<LI><A NAME="tex2html275"
+  HREF="node8.html#SECTION00820000000000000000">The iteration construct do</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00800000000000000000">
+Procedures</A>
+</H1>
+
+<P>
+Procedures in Scheme are first class, meaning that they can be passed
+as arguments, bound to variables and returned as values from other
+procedures.  Arguments are passed by value. Note that the order in
+which the arguments are evaluated is not defined.  We shall now study
+procedures in further detail.
+
+<P>
+
+<H1><A NAME="SECTION00810000000000000000">
+Recursion</A>
+</H1>
+
+<P>
+Procedures which call themselves within the body of their lambda expression
+are said to be recursive. In general, recursive procedures need a terminating
+condition (otherwise they will run forever) and a recursive step (describing
+how the computation should proceed).
+
+<P>
+We will use one of MzScheme's procedures <TT>trace</TT> to illustrate the
+behaviour of recursive procedures. The procedure <TT>trace</TT> shows the
+intermediate steps as the recursion proceeds as well as the intermediate
+values returned.
+
+<P>
+For example, let us define a procedure for counting the factorial of a number.
+We know that <IMG
+ WIDTH="16" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img3.png"
+ ALT="0!"> equals 1 and we will use this as our terminating 
+condition. Apart from that, we know that <IMG
+ WIDTH="18" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img4.png"
+ ALT="n!"> is the same as <!-- MATH
+ $n\cdot(n-1)!$
+ -->
+<IMG
+ WIDTH="79" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img5.png"
+ ALT="n*(n-1)!">, 
+which gives us our recursive step. We are now ready to define the procedure 
+itself:
+<PRE>
+(define fact
+  (lambda (n)
+    (if (= n 0)                  ; the terminating condition
+        1                        ; returning 1
+        (* n (fact (- n 1))))))  ; the recursive step
+</PRE>
+
+<P>
+Let' see what happens if we try to compute the factorial of 7 by using the
+procedure <TT>trace</TT>:
+<PRE>
+&gt; (fact 7)
+5040
+&gt; (trace fact)
+(fact)
+&gt; (fact 7)
+|(fact 7)
+| (fact 6)
+| |(fact 5)
+| | (fact 4)
+| | |(fact 3)
+| | | (fact 2)
+| | | |(fact 1)
+| | | | (fact 0)
+| | | | 1
+| | | |1
+| | | 2
+| | |6
+| | 24
+| |120
+| 720
+|5040
+5040
+&gt; (untrace fact)
+(fact)
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00811000000000000000">
+Flat recursion</A>
+</H2>
+
+<P>
+If the recursion is applied over the top-level items of a list it is said to
+be flatly recursive. For example, if we have a list (1 2 (3 4)) then the top
+level items are 1, 2 and (3 4).
+
+<P>
+Scheme provides a procedure <TT>append</TT>, which appends
+the lists given as arguments. We will now define our own <I>append</I>
+procedure, which will take two lists as arguments and return a list consisting
+of these arguments. For example, if we have the lists (a b c) and (d e f),
+our procedure <I>append</I> would return (a b c d e f) if these lists were
+given as arguments. 
+
+<P>
+We start by trying to figure out how to append the lists.
+Clearly, we need to find a way to attach the items of the latter list to the
+items of the first list. We also need the procedures <TT>cons</TT>, 
+<TT>car</TT> and <TT>cdr</TT>. To construct our list, we will need to 
+build a new list containing the items. The first element of this list will be
+the first element in the list (a b c) and the last elements will be the
+elements in (d&nbsp;e&nbsp;f). Since (d&nbsp;e&nbsp;f) is a list, we can construct our list by
+consing the elements of our first list with our second list. However, we still
+need to pick out the elements of our first list, one at a time until it is
+empty. By this we find our terminating condition: when the first list is empty,
+return the second list. The second list will then be consed to the elements
+of the list we are constructing, which at this point already contains all
+the elements of the first list.
+<PRE>
+(define append
+  (lambda (ls1 ls2)
+    (if (null? ls1)
+        ls2
+        (cons (car ls1) (append (cdr ls1) ls2)))))
+</PRE>
+
+<P>
+To see how this works, let's use <TT>trace</TT> and see what happens:
+<PRE>
+&gt; (trace append)
+(append)
+&gt; (append '(a b c) '(d e f))
+|(append (a b c) (d e f))
+| (append (b c) (d e f))
+| |(append (c) (d e f))
+| | (append () (d e f))
+| | (d e f)
+| |(c d e f)
+| (b c d e f)
+|(a b c d e f)
+(a b c d e f)
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00812000000000000000">
+Deep recursion</A>
+</H2>
+
+<P>
+Deep recursion is recursion over all of the atomic items of a list structure, 
+i.e. the procedure is applied to the <TT>car</TT> and <TT>cdr</TT> of a list. 
+Deep
+recursion is also referred to as tree recursion. We might have lists containing
+other lists, e.g. (1 2 (3 4 5)). The list as a whole has nesting level 0,
+whereas the top level items 1, 2 and (3 4 5) have the nesting level 1. 
+For example, the element 3 in (1 2 (3 4 (5 (6 7)))) has nesting level 2, 
+whereas the element 7 has nesting level 4.
+
+<P>
+Let's define a procedure for counting the number of atomic items in a list
+structure.
+If the list is empty, it contains 0 elements. If the list is not empty and
+not a pair, it contains 1 element. Otherwise, it contains the number of 
+elements in its <TT>car</TT> plus the number of elements in its <TT>cdr</TT>.
+We are now ready to define our procedure (also found in SICP p. 109):
+<PRE>
+(define count-leaves
+  (lambda (ls)
+    (cond ((null? ls) 0)
+          ((not (pair? ls)) 1)
+          (else (+ (count-leaves (car ls))
+                   (count-leaves (cdr ls)))))))
+</PRE>
+
+<P>
+Let's see how <I>count-leaves</I> works:
+<PRE>
+&gt; (count-leaves '(1 2 3 4))
+4
+&gt; (count-leaves '(1 2 (3 4)))
+4
+&gt; (count-leaves '(1 2 (3 4 (5 6 (7 8) 9 (10 11)))))
+11
+</PRE>
+
+<P>
+To see the procedure calls and return tables of <I>count-leaves</I>, we use
+the procedure <TT>trace</TT>:
+
+<PRE>
+&gt; (trace count-leaves)
+(count-leaves)
+&gt; (count-leaves '(a (b c (d e))))
+|(count-leaves (a (b c (d e))))
+| (count-leaves a)
+| 1
+| (count-leaves ((b c (d e))))
+| |(count-leaves (b c (d e)))
+| | (count-leaves b)
+| | 1
+| | (count-leaves (c (d e)))
+| | |(count-leaves c)
+| | |1
+| | |(count-leaves ((d e)))
+| | | (count-leaves (d e))
+| | | |(count-leaves d)
+| | | |1
+| | | |(count-leaves (e))
+| | | | (count-leaves e)
+| | | | 1
+| | | | (count-leaves ())
+| | | | 0
+| | | |1
+| | | 2
+| | | (count-leaves ())
+| | | 0
+| | |2
+| | 3
+| |4
+| |(count-leaves ())
+| |0
+| 4
+|5
+5
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00813000000000000000">
+Tail recursion</A>
+</H2>
+
+<P>
+A recursive procedure executing an iterative process in constant space is 
+said to be tail-recursive. In other words, instead of having to wait for the
+computation of recursive procedure calls to return with a value needed, thus
+having to construct return tables, we are able to define procedures which
+save the state of a computation in a variable, which, when the terminating
+condition is reached, will be returned as the final value of the procedure.
+Iterative procedures are implemented by using tail recursion. This is actually
+the most important feature to understand together with the fact that the
+intermediate results of the computation will not be saved in a return table,
+but in a variable that by the end of the computation will be returned as the
+final result. Hence, the last thing that a tail-recursive procedure does 
+before terminating is calling itself!
+
+<P>
+Let us take a look at the recursive as well as the iterative version of 
+<I>factorial</I>:
+<PRE>
+;; The recursive version
+(define fact
+  (lambda (n)
+    (if (= n 0)
+        1
+        (* n (fact (- n 1))))))
+
+;; The iterative version used in SICP p.33
+(define (factorial n)
+  (define (iter product counter)
+    (if (&gt; counter n)
+        product
+        (iter (* counter product)
+              (+ counter 1))))
+  (iter 1 1))
+
+;; The iterative version using letrec, equivalent to the one in SICP
+(define factorial
+  (lambda (n)
+    (letrec ((iter
+              (lambda (product counter)
+                (if (&gt; counter n)
+                    product        
+                    (iter (* counter product)
+                          (+ counter 1))))))
+      (iter 1 1)))
+</PRE>
+
+<P>
+What makes the latter procedure iterative is the fact that the variable 
+<I>product</I> will be updated as the computation continues. When the final
+condition is reached, <I>product</I> will be returned. The update is 
+performed when the procedure is called--as you can see, the variable 
+<I>product</I> is an argument (in this case the first) of <I>iter</I> and 
+when <I>iter</I> is recursively called, it is called with the first 
+argument being <TT>(*&nbsp;counter&nbsp;product)</TT>. If the final condition is reached 
+at this point, this argument will be returned, otherwise another 
+tail-recursive step  which updates the <I>product</I> will be taken. 
+
+<P>
+Tail recursion also differs from <I>normal</I> recursion by the fact that
+the procedure called recursively will not be an argument of another procedure,
+e.g. multiplication. The recursive step of the recursive <I>fact</I> is the
+following: 
+<PRE>
+(* n (fact (- n 1))))))
+</PRE>
+
+<P>
+The computation therefore needs to wait for each call to <I>fact</I> to
+return, after which multiplication is applied. Tail recursion does not share
+this wasteful defect. The recursive step of the iterative <I>fact</I> is
+the following:
+
+<P>
+<PRE>
+(iter (* counter product)
+      (+ counter 1))))))
+</PRE>
+
+<P>
+As we can see, <I>iter</I> calls itself recursively without being an 
+argument to any other procedure, thus not needing to wait for any values to
+return. It also saves the state of the computation by passing it as an 
+argument and returning the current state as the final state  when the 
+terminating condition is reached. 
+
+<P>
+Let's use <TT>trace</TT> and see the procedures <I>fact</I> and 
+<I>factorial</I> in action:
+<PRE>
+;; We start with the recursive one
+&gt; (trace fact)
+(fact)
+&gt; (fact 5)
+|(fact 5)
+| (fact 4)
+| |(fact 3)
+| | (fact 2)
+| | |(fact 1)
+| | | (fact 0)
+| | | 1
+| | |1
+| | 2
+| |6
+| 24
+|120
+120
+
+;; and compare this to the iterative one
+&gt; (factorial 5)
+|(factorial 5)
+|120
+120
+</PRE>
+
+<P>
+Actually, the iterative version performs equally many calls, but the 
+procedure <TT>trace</TT> does not show them. The following calls are made:
+<PRE>
+(iter 1 1)
+(iter 1 2)
+(iter 2 3)
+(iter 6 4)
+(iter 24 5)
+(iter 120 6)
+
+==&gt; 120
+</PRE>
+
+<P>
+What <TT>trace</TT> does make clear is the fact that no return tables are
+needed.
+
+<P>
+Even if tail recursive procedures are more efficient in most cases, they are 
+not usually as straightforward to implement as recursive ones. It takes some
+insight and some practice, but the reader is encouraged to try to figure out
+how to write a recursive procedure tail-recursively. 
+
+<P>
+
+<H1><A NAME="SECTION00820000000000000000"></A>
+<A NAME="do"></A>
+<BR>
+The iteration construct do
+</H1>
+Scheme provides a rather complex iteration construct <TT>do</TT>
+<A NAME="tex2html14"
+  HREF="footnode.html#foot923"><SUP>6.1</SUP></A>, which specifies a set of variables to be bound, how
+they are to  be initialized and how they are to be updated on each
+iteration.
+
+<P>
+The syntax of <TT>do</TT> is the following:
+
+<P>
+<PRE>
+(do ((var1 init1 step1)
+     ...)
+    (test expr ...)
+  command ...)
+</PRE>
+
+<P>
+First the <I>init</I> expressions are evaluated in some unspecified
+order and the results are stored in the bindings of the variables
+<I>var1...</I> After this the iteration can begin. First
+<I>test</I> is evaluated. If
+<I>test</I> is true, the following expressions are evaluated from left to
+right and the value of the last <I>expr</I> is returned. The
+iteration then terminates. If <I>test</I> evaluates to false, then
+the <I>command</I> expressions are evaluated in  order for
+effect. The <I>step</I> expressions are evaluated and the result is
+stored in the variables <I>var1&nbsp;...</I>, which are bound to fresh
+locations. The next iteration can now begin. Note that it is an error
+for a  variable to occur more than once in the list of variables.
+
+<P>
+For example, the following expression binds the string ``foobar'' to the
+variable <I>str</I> and the value 0 to the variable <I>i</I>. The variable
+<I>i</I> will be increased by one for each iteration until <I>i</I> equals
+the length of <I>str</I>. When this happens, <I>str</I> will be returned,
+otherwise the character at index <I>i</I> in <I>str</I> will be set to
+the character&nbsp;<I>b</I>.
+
+<P>
+<PRE>
+&gt; (do ((str (string #\f #\o #\o #\b #\a #\r))
+       (i 0 (+ i 1)))
+      ((= i (string-length str)) str)
+    (string-set! str i #\b))
+"bbbbbb"
+</PRE>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html269"
+  HREF="node9.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html265"
+  HREF="schemetutorial.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html259"
+  HREF="node7.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html267"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html270"
+  HREF="node9.html">Imperative programming</A>
+<B> Up:</B> <A NAME="tex2html266"
+  HREF="schemetutorial.html">Scheme Tutorial</A>
+<B> Previous:</B> <A NAME="tex2html260"
+  HREF="node7.html">Quote and quasiquote</A>
+ &nbsp <B>  <A NAME="tex2html268"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+Timo Lilja
+2001-09-11
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,819 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Getting started</TITLE>
+<META NAME="description" CONTENT="Getting started">
+<META NAME="keywords" CONTENT="schemetutorial">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v99.2beta6">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="schemetutorial.css">
+
+<LINK REL="next" HREF="node5.html">
+<LINK REL="previous" HREF="node3.html">
+<LINK REL="up" HREF="schemetutorial.html">
+<LINK REL="next" HREF="node5.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html204"
+  HREF="node5.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html200"
+  HREF="schemetutorial.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html194"
+  HREF="node3.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html202"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html205"
+  HREF="node5.html">Conditional expressions</A>
+<B> Up:</B> <A NAME="tex2html201"
+  HREF="schemetutorial.html">Scheme Tutorial</A>
+<B> Previous:</B> <A NAME="tex2html195"
+  HREF="node3.html">Introduction</A>
+ &nbsp <B>  <A NAME="tex2html203"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html206"
+  HREF="node4.html#SECTION00410000000000000000">Syntax</A>
+<LI><A NAME="tex2html207"
+  HREF="node4.html#SECTION00420000000000000000">Expressions</A>
+<LI><A NAME="tex2html208"
+  HREF="node4.html#SECTION00430000000000000000">Define</A>
+<LI><A NAME="tex2html209"
+  HREF="node4.html#SECTION00440000000000000000">Lambda</A>
+<LI><A NAME="tex2html210"
+  HREF="node4.html#SECTION00450000000000000000">Let, let* and letrec</A>
+<UL>
+<LI><A NAME="tex2html211"
+  HREF="node4.html#SECTION00451000000000000000">Let</A>
+<LI><A NAME="tex2html212"
+  HREF="node4.html#SECTION00452000000000000000">Let*</A>
+<LI><A NAME="tex2html213"
+  HREF="node4.html#SECTION00453000000000000000">Named let</A>
+<LI><A NAME="tex2html214"
+  HREF="node4.html#SECTION00454000000000000000">Letrec</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00400000000000000000">
+Getting started</A>
+</H1>
+
+<P>
+The best way to get started with Scheme is by playing around with it. This 
+tutorial will show you what you are able to do with Scheme as a language. To 
+get the best out of learning Scheme and this tutorial, start the interpreter 
+and feed it! Try the examples in this tutorial, modify them and see what 
+happens. At the same time, try to understand why the interpreter returns the 
+answer it does. Don't hesitate to try even the most crazy ideas--nobody said 
+that the learning process had to be dead serious.
+
+<P>
+
+<H1><A NAME="SECTION00410000000000000000">
+Syntax</A>
+</H1>
+
+<P>
+The Scheme syntax is extremely simple: it consists of parentheses (lots of 
+them) and prefix notation. This means that the operator comes leftmost, 
+followed by the operands, for example:
+
+<P>
+<PRE>
+(+ 1 2 3 4)
+</PRE>
+
+<P>
+Parentheses are used to define what is to be computed. In many languages, it
+is possible to add extra parentheses without affecting the program, but this is
+not the case in Scheme. Adding extra parentheses will most likely result in
+errors or other unfortunate behaviour.
+
+<P>
+Comments begin with a semicolon and continue until the end of the line.
+
+<P>
+<PRE>
+(+ 1 2 3 4)  ; this is a comment
+</PRE>
+
+<P>
+The syntax is described formally in <IMG
+ WIDTH="46" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1.png"
+ ALT="R5RS">.
+
+<P>
+
+<H1><A NAME="SECTION00420000000000000000">
+Expressions</A>
+</H1>
+
+<P>
+There are two types of expressions: primitive and derived. 
+
+<P>
+Primitive  expressions are, for example, variable references, literal 
+expressions, assignments, conditionals, procedures and procedure calls.
+
+<P>
+An expression consisting of a variable is a variable reference, for example:
+<PRE>
+&gt; (define a 10)
+&gt; a
+10
+</PRE>
+
+<P>
+Literal expressions are expressions created using <TT>quote</TT> or ', which 
+are equivalent, for example:
+<PRE>
+&gt; (quote a)
+a
+&gt; 'a
+a
+</PRE>
+
+<P>
+Numbers, characters, strings and booleans need not be quoted since they
+evaluate to themselves:
+<PRE>
+&gt; 5
+5
+&gt; #\a
+#\a
+&gt; "foobar"
+"foobar"
+&gt; #t
+#t
+</PRE>
+
+<P>
+Assignments are performed using <TT>set!</TT>, for example:
+<PRE>
+&gt; (define a 10)
+&gt; a
+10
+&gt; (set! a 5)
+&gt; a
+5
+</PRE>
+
+<P>
+Primitive conditional expressions are constructed using <TT>if</TT>, for
+example:
+<PRE>
+(if (&lt; a 10)
+    1
+    a)
+</PRE>
+
+<P>
+Procedures are created using <TT>lambda</TT> and called by enclosing in
+parentheses expressions for the procedure to be called and the arguments to
+be passed to it:
+<PRE>
+;; Creating a procedure
+&gt; (lambda (x) (* x x))
+#&lt;procedure&gt;
+
+;; Calling a procedure
+&gt; (* 2 10)
+20
+&gt; ((if (= 2 (* 2 1)) + *) 2 3)
+5
+&gt; (floor 3.5)
+3.0
+</PRE>
+
+<P>
+Derived expressions are expressions that are implemented in terms of other
+expressions instead of being implemented directly. Conditionals using
+<TT>cond</TT> and <TT>let</TT> expressions are examples of derived expressions.
+Derived expressions can be defined as macros. For more information on 
+macros, see <IMG
+ WIDTH="46" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1.png"
+ ALT="R5RS">.
+
+<P>
+Conditionals using <TT>cond</TT> can be constructed using nested <TT>if</TT>
+expressions:
+<PRE>
+(define a 10)
+
+;; Conditional expression using nested if expressions
+(if (&lt; a 10)
+    a
+    (if (&gt; a 20)
+        (* a a)
+        0))
+
+;; Conditional expression using cond
+(cond ((&lt; a 10) a)
+      ((&gt; a 20) (* a a))
+      (else 0))
+</PRE>
+
+<P>
+The <TT>let</TT> expressions could be rewritten using <TT>lambda</TT>,
+for example:
+<PRE>
+(let ((a 10)
+      (b 20))
+  (* a b))
+</PRE>
+
+<P>
+is equivalent to 
+
+<P>
+<PRE>
+((lambda (a b) (* a b)) 10 20)
+</PRE>
+
+<P>
+
+<P>
+
+<H1><A NAME="SECTION00430000000000000000">
+Define</A>
+</H1>
+<TT>Define</TT> is used to bind a name to a computational object. 
+
+<P>
+The syntax of the <TT>define</TT> expression is as follows:
+<PRE>
+(define var expr)
+</PRE>
+
+<P>
+The <I>expr</I> part is evaluated and the value is then bound to the variable
+<I>var</I>. A variable is a symbol to which a value can be assigned and this
+variable is then said to be bound to the given value.
+
+<P>
+Let's start with a simple example:
+<PRE>
+(define a 2)
+</PRE>
+
+<P>
+The third expression is evaluated and has in this case the value of 2. This
+value is then bound to the symbol <I>a</I>.  We can now use the variable in 
+other expressions, e.g.
+<PRE>
+&gt;(+ a 3)
+5
+</PRE>
+
+<P>
+The expression can of course be more complex than the one mentioned above.
+
+<P>
+<PRE>
+(define b (+ 25 (* 3 25)))
+</PRE>
+
+<P>
+<I>b</I> is now bound to the value of the expression, i.e. 100.
+
+<P>
+Also procedures can be named with <TT>define</TT>. Let's say we wish to write a
+procedure for squaring a given argument <I>x</I>. Since we will be calling
+this procedure many times and we do not wish to write <TT>(* x x)</TT> over 
+and over 
+again, we will need a means of abstraction. The syntax for procedure 
+definition is:
+<PRE>
+(define (name formal_parameters) body)
+</PRE>
+
+<P>
+For example, let us create a procedure <I>square</I>, which takes one
+argument and returns its square<A NAME="tex2html3"
+  HREF="footnode.html#foot196"><SUP>2.1</SUP></A>:
+
+<P>
+<PRE>
+(define (square x)
+  (* x x))
+</PRE>
+
+<P>
+<I>square</I> is the name of the procedure definition in the environment, 
+<I>x</I> is the formal parameter and <TT>(* x x)</TT> is the body of the 
+procedure.  When the procedure is called, e.g. <TT>(square 8)</TT>, 
+<I>x</I> will be replaced 
+with 8 and the value of the expression <TT>(* 8 8)</TT>, i.e. 64,  will be returned.
+
+<P>
+<TT>Define</TT> can be conveniently used to declare global variables and to 
+name  procedures. It is a simple but strong means of abstraction. 
+However, it should never be used to define local 
+variables!<A NAME="tex2html4"
+  HREF="footnode.html#foot197"><SUP>2.2</SUP></A>
+<P>
+
+<H1><A NAME="SECTION00440000000000000000"></A>
+<A NAME="lambda"></A>
+<BR>
+Lambda
+</H1>
+The <TT>lambda</TT> expression has the following syntax: 
+
+<P>
+<PRE>
+(lambda formal-parameters body)
+</PRE>
+
+<P>
+The keyword <TT>lambda</TT> is followed by a list of arguments (zero
+or more) and a body. A <TT>lambda</TT> expression evaluates to a
+procedure, which can be applied to appropriate arguments. When the
+procedure is  applied, the arguments are bound  to the corresponding
+values and the body is evaluated. The only difference between the
+procedure resulting from a <TT>lambda</TT> expression and a procedure
+created by using define is that the procedure  created by the
+<TT>lambda</TT> expression has not been associated with a name in the
+environment.
+
+<P>
+As mentioned above, <TT>lambda</TT> expressions return a
+procedure. Let's start by  creating a procedure taking one argument
+and returning the argument multiplied by 2.
+<PRE>
+&gt; (lambda (x) (* 2 x))
+#&lt;procedure&gt;
+</PRE>
+
+<P>
+Now, to use the procedure mentioned above we have to provide it with an
+argument, e.g. 5. This is done in the following way:
+
+<P>
+<PRE>
+&gt; ((lambda (x) (* 2 x)) 5)
+10
+</PRE>
+
+<P>
+We can also bind the procedure to a name, just as we did earlier with
+<TT>define</TT>. Rewriting the procedure <I>square</I> using <TT>lambda</TT> 
+would result in the following:
+
+<P>
+<PRE>
+(define square
+  (lambda (x)
+    (* x x)))
+</PRE>
+
+<P>
+So, what is the difference between binding the procedure using
+<TT>lambda</TT>  and  using <TT>define</TT> ? The answer is simple:
+<I>practically none</I><A NAME="tex2html5"
+  HREF="footnode.html#foot319"><SUP>2.3</SUP></A>.  The example above is exactly the same as the following:
+
+<P>
+<PRE>
+(define (square x)
+  (* x x))
+</PRE>
+
+<P>
+The latter example is only syntactic sugar for the former example.
+It is usually considered better programming style to write procedures using 
+<TT>lambda</TT> expressions. We will therefore stick to using 
+<TT>lambda</TT> expressions in the future. However, there are people who 
+consider the latter style better since it is more compact, so you are likely to
+see procedures written in both ways. Practically it is of little importance
+in which way you choose to write your programs, the important things are that
+you are consistent about the way you write procedures and that you are able to
+understand procedures written either way.
+
+<P>
+Let us take a look at another example. We want to write a procedure for 
+computing Fibonacci numbers. The procedure will take one integer <I>n</I> as 
+an argument and return the <I>n</I>th Fibonacci number. Further description
+of the procedure can be found in <I>Structure and Interpretation of
+Computer Programs</I>. We will write two versions of the procedure--one that uses
+a <TT>lambda</TT> expression and one that does not<A NAME="tex2html6"
+  HREF="footnode.html#foot291"><SUP>2.4</SUP></A>:
+
+<P>
+<PRE>
+;; A procedure for counting the n:th Fibonacci number
+;; See SICP, p. 37
+(define fib
+  (lambda (n)
+    (cond ((= n 0) 0)  
+          ((= n 1) 1)
+          (else (+ (fib (- n 1))
+                   (fib (- n 2)))))))
+
+;; The same procedure written without using lambda
+(define (fib n)
+  (cond ((= n 0) 0)  
+        ((= n 1) 1)
+        (else (+ (fib (- n 1))
+                 (fib (- n 2))))))
+</PRE>
+
+<P>
+The procedure fib is called in the following way:
+<PRE>
+&gt;(fib 5)
+5
+</PRE>
+<I>n</I> is then substituted with 5 and the body of the procedure is 
+evaluated.
+
+<P>
+It is also possible for the <TT>lambda</TT> expressions to take more than one
+argument. For example, we want to compute the sum of two given arguments
+<I>x</I> and <I>y</I> and give the procedure the marvellous name 
+<I>sum</I>:
+<PRE>
+(define sum
+  (lambda (x y)
+    (+ x y)))
+</PRE>
+
+<P>
+It is also possible to take an arbitrary number of arguments. For example,
+let's rewrite the procedure <I>sum</I> to take an arbitrary number of
+arguments<A NAME="tex2html7"
+  HREF="footnode.html#foot320"><SUP>2.5</SUP></A>:
+<PRE>
+(define sum
+  (lambda (x . y)
+    (apply + x y)))
+</PRE>
+
+<P>
+Dotted notation is usually used for denoting the possibility of taking
+an arbitrary number of arguments. The arguments after the dot is
+represented as a list<A NAME="tex2html8"
+  HREF="footnode.html#foot321"><SUP>2.6</SUP></A>, which may be empty. The arguments before the dot
+are required. Hence, the procedure above expects at least one
+argument.
+
+<P>
+It is also possible to write procedures taking 0-<IMG
+ WIDTH="14" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="n"> arguments. 
+For example, if we want to write a procedure <I>list</I><A NAME="tex2html9"
+  HREF="footnode.html#foot322"><SUP>2.7</SUP></A> that constructs and
+returns a list of its arguments, we can omit the dot and write it using 
+<TT>lambda</TT>:
+<PRE>
+(define list
+  (lambda args args))
+</PRE>
+
+<P>
+Note that both the dot and the parenthesis has disappeared and that
+<I>args</I> is a list! We can, of course, rewrite this without using
+<TT>lambda</TT>, but in that case we are not allowed to omit the dot:
+<PRE>
+(define (list . args) 
+  args)
+</PRE>  
+
+<P>
+The procedures are practically equivalent, but the latter looks more
+cryptic than the former. To see how they work, let's take a look at a
+few examples:
+<PRE>
+&gt; (list 1 2 3)
+(1 2 3)
+&gt; (list)
+()
+</PRE>  
+
+<P>
+
+<H1><A NAME="SECTION00450000000000000000">
+Let, let* and letrec</A>
+</H1>
+
+<P>
+<TT>Let</TT>, <TT>let*</TT> and <TT>letrec</TT> are used to create local 
+variables. The syntax of these three forms are the same. The difference
+lies in the regions they establish for their variable bindings and in which 
+order the variables are bound.
+There is also a construct called named <TT>let</TT>, which is a variant of 
+<TT>let</TT>. Some prefer to say that named <TT>let</TT> is merely a variant
+of the syntax of <TT>let</TT>.
+
+<P>
+
+<H2><A NAME="SECTION00451000000000000000">
+Let</A>
+</H2>
+
+<P>
+The syntax of the <TT>let</TT> expression is the following:
+<PRE>
+(let ((var1 exp1) 
+      (var2 exp2) 
+      .
+      .
+      . 
+      (varn expn))
+  body)
+</PRE>
+
+<P>
+<TT>Let</TT> is only syntactic sugar for an underlying <TT>lambda</TT>
+application:
+
+<P>
+<PRE>
+((lambda (var1 var2 ... varn)
+   body)
+ exp1 exp2 ... expn)
+</PRE>
+
+<P>
+Each variable is bound to the corresponding expression. The scope of the
+variables is within the body of the <TT>let</TT> expression. However, 
+<TT>let</TT> binds the variables as locally as possible to where they are used 
+and the values of the variables are computed outside the <TT>let</TT> 
+expression. This matters when  the  expressions providing the values for the 
+local variables depend upon variables with the same names as the local 
+variables. 
+
+<P>
+Let's start with a simple example:
+<PRE>
+&gt;(let ((x 2) (y 10))
+   (+ x y))
+12
+</PRE>
+
+<P>
+<I>x</I> is bound to 2 and <I>y</I> is bound to 10. The scope of x and
+y are within the body of the <TT>let</TT> expression, that is, within 
+<TT>(+ x y)</TT>, which  yields the answer 12.
+
+<P>
+The <TT>let</TT> expression in the example above is equivalent to the 
+following <TT>lambda</TT> expression:
+<PRE>
+((lambda (x y) (+ x y)) 2 10)
+</PRE>
+
+<P>
+As mentioned above, <TT>let</TT> binds variables as locally as possible. 
+Consider the following expression:
+
+<P>
+<PRE>
+&gt;(define x 10)
+
+&gt;(+ (let ((x 5))
+      (* x (+ x 2)))
+    x)
+45
+</PRE>
+
+<P>
+The body of the <TT>let</TT> expression is the expression 
+<PRE>
+(* x (+ x 2))
+</PRE>
+
+<P>
+The value of <I>x</I> is 5, as bound with <TT>let</TT>. Hence, the value of 
+the <TT>let</TT> expression is 35. Now, this will be added to another variable 
+<I>x</I>.  This <I>x</I> has  absolutely nothing to do with the <I>x</I> 
+bound in the <TT>let</TT> expression, it just  happened to share the same name.
+The value of this  outside <I>x</I> is 10. Now the values of the outside 
+<I>x</I> and the <TT>let</TT> expression are applied to <TT>+</TT>, which 
+yields the answer 45. 
+
+<P>
+The values of the variables are computed outside <TT>let</TT>. Consider the 
+following expression:
+<PRE>
+&gt;(define x 10)
+
+&gt;(let ((x 5)
+      (y (* x 2)))
+  (+ x y))
+25
+</PRE>
+
+<P>
+The variable <I>x</I> will be bound to the value 5 and the variable 
+<I>y</I> will be bound to 20, not to 10. This is because the <I>x</I> in 
+the expression for <I>y</I> is computed outside the <TT>let</TT> expression and the 
+value of that <I>x</I> is 10. 
+
+<P>
+Keep in mind that <TT>let</TT> is used to create local variables, whereas
+<TT>define</TT> is usually used to create global variables!
+
+<P>
+What if we wanted to use the <I>x</I> declared in the <TT>let</TT> 
+expression mentioned above? Well, Scheme provides another form of <TT>let</TT>,
+i.e. <TT>let*</TT>.
+
+<P>
+
+<H2><A NAME="SECTION00452000000000000000">
+Let*</A>
+</H2>
+
+<P>
+The syntax of <TT>let*</TT> is similar to that of <TT>let</TT>:
+<PRE>
+(let* ((var1 exp1) 
+       (var2 exp2) 
+       .
+       .
+       . 
+       (varn expn))
+  body)
+</PRE>
+
+<P>
+The semantics, however, is somewhat different. 
+<TT>let*</TT> is equivalent to a sequence of nested <TT>let</TT> expressions:
+<PRE>
+(let ((var1 expr1))
+  (let ((var2 expr2))
+    (let ...
+      (let ((varn exprn))
+        body) ... )))
+</PRE>
+
+<P>
+The bindings in a <TT>let*</TT> expression are evaluated from left to right, 
+which means that the value of a variable may contain variables from previous 
+bindings.
+
+<P>
+Consider the example studied above rewritten with a <TT>let*</TT> expression:
+<PRE>
+&gt;(define x 10)
+
+&gt;(let* ((x 5)
+       	(y (* x 2)))
+   (+ x y))
+15
+</PRE>
+
+<P>
+The value of the <TT>let*</TT> expression is 15, since the variable 
+<I>x</I> bound in the <TT>let</TT> expression will be used when computing
+the value for the variable <I>y</I>. The value of <I>x</I> is 5. 
+Now, the body of the <TT>let*</TT> expression is computed and the result is 15.
+
+<P>
+
+<H2><A NAME="SECTION00453000000000000000"></A>
+<A NAME="nlet"></A>
+<BR>
+Named let
+</H2>
+Named <TT>let</TT><A NAME="tex2html10"
+  HREF="footnode.html#foot488"><SUP>2.8</SUP></A> provides a 
+more general looping construct than <TT>do</TT><A NAME="tex2html11"
+  HREF="footnode.html#foot489"><SUP>2.9</SUP></A>. It is 
+usually used for iteration, but can also be used to express recursions. 
+Named <TT>let</TT> has the 
+following syntax:
+<PRE>
+(let var bindings body)
+</PRE>
+
+<P>
+The syntax and semantics are the same as for <TT>let</TT>, but 
+the <I>var</I> part is bound within <I>body</I> to a procedure, whose 
+formal arguments are the bound variables (in <I>bindings</I>) and whose body 
+is <I>body</I>.  It is now possible to invoke <I>body</I> repeatedly by
+calling the procedure named by <I>var</I>.
+
+<P>
+Let us write a procedure computing factorials using named <TT>let</TT>:
+<PRE>
+(define factorial
+  (lambda (n)
+    (let iter ((product 1)
+               (counter 1))
+      (if (&gt; counter n)
+          product
+          (iter (* counter product) (+ counter 1))))))
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00454000000000000000">
+Letrec</A>
+</H2>
+
+<P>
+The syntax for <TT>letrec</TT> is the following:
+<PRE>
+(letrec ((var1 val1)
+         (var2 val2)
+         .
+         .
+         .
+         (varn valn))
+  body)
+</PRE>
+
+<P>
+The idea behind <TT>letrec</TT> expressions is to allow recursion in the 
+definition of the variables bound locally. The scope of the variables include
+the other variables as well as the body. Any procedure body containing 
+internal definitions can be converted into a completely equivalent 
+<TT>letrec</TT> expression. Let's see how to convert the procedure
+for counting factorials into an equivalent procedure using a <TT>letrec</TT> 
+expression instead of internal definitions:
+<PRE>
+;; The procedure factorial taken from SICP, p. 33 
+(define (factorial n)
+  (define (iter product counter)
+    (if (&gt; counter n)
+        product
+        (iter (* counter product)
+              (+ counter 1))))
+  (iter 1 1))
+</PRE>
+
+<PRE>
+;; The procedure factorial rewritten using letrec
+(define factorial
+  (lambda (n)
+    (letrec ((iter
+              (lambda (product counter)
+                (if (&gt; counter n)
+                    product
+                    (iter (* counter product)
+                          (+ counter 1))))))
+      (iter 1 1)))
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html204"
+  HREF="node5.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html200"
+  HREF="schemetutorial.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html194"
+  HREF="node3.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html202"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html205"
+  HREF="node5.html">Conditional expressions</A>
+<B> Up:</B> <A NAME="tex2html201"
+  HREF="schemetutorial.html">Scheme Tutorial</A>
+<B> Previous:</B> <A NAME="tex2html195"
+  HREF="node3.html">Introduction</A>
+ &nbsp <B>  <A NAME="tex2html203"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+Timo Lilja
+2001-09-11
+</ADDRESS>
+</BODY>
+</HTML>
