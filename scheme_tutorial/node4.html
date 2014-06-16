@@ -80,14 +80,15 @@ that the learning process had to be dead serious.
 <P>
 
 <H1><A NAME="SECTION00410000000000000000">
-Syntax</A>
+语法</A>
 </H1>
 
 <P>
 The Scheme syntax is extremely simple: it consists of parentheses (lots of 
 them) and prefix notation. This means that the operator comes leftmost, 
 followed by the operands, for example:
-
+<P>
+Scheme 的语法极端简单：它由前置操作符和括号（大量的括号）构成。这意味着操作符总是在最左边，紧跟着的是操作数，比如：
 <P>
 <PRE>
 (+ 1 2 3 4)
@@ -101,14 +102,16 @@ errors or other unfortunate behaviour.
 
 <P>
 Comments begin with a semicolon and continue until the end of the line.
-
+<P>
+括号用来定义什么东西将被计算。可以添加额外的括号，而不会影响该程序，但是在Scheme中不能这么干，多余的括号将引起错误。<P>
+注释从一个分号开始，并一直到行结束。
 <P>
 <PRE>
-(+ 1 2 3 4)  ; this is a comment
+(+ 1 2 3 4)  ; 这是一段注释
 </PRE>
 
 <P>
-The syntax is described formally in <IMG
+正式的语法描述是 <IMG
  WIDTH="46" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
  SRC="img1.png"
  ALT="R5RS">.
@@ -116,16 +119,19 @@ The syntax is described formally in <IMG
 <P>
 
 <H1><A NAME="SECTION00420000000000000000">
-Expressions</A>
+表达式</A>
 </H1>
 
 <P>
 There are two types of expressions: primitive and derived. 
+<P>
+有两种类型的表达式：原始表达式和派生表达式。
 
 <P>
 Primitive  expressions are, for example, variable references, literal 
 expressions, assignments, conditionals, procedures and procedure calls.
-
+<p>
+原始表达式：比如变量引用、字面表达式、赋值、条件表达式、过程及过程调用。
 <P>
 An expression consisting of a variable is a variable reference, for example:
 <PRE>
@@ -135,8 +141,7 @@ An expression consisting of a variable is a variable reference, for example:
 </PRE>
 
 <P>
-Literal expressions are expressions created using <TT>quote</TT> or ', which 
-are equivalent, for example:
+字面表达式由 <TT>quote</TT> 或者 '创建, 它们是等价的, 比如:
 <PRE>
 &gt; (quote a)
 a
@@ -147,6 +152,8 @@ a
 <P>
 Numbers, characters, strings and booleans need not be quoted since they
 evaluate to themselves:
+<P>
+数字、字符、字符串和布尔值不需要引用，当它们自求值的时候。
 <PRE>
 &gt; 5
 5
@@ -160,6 +167,8 @@ evaluate to themselves:
 
 <P>
 Assignments are performed using <TT>set!</TT>, for example:
+<P>
+使用 set! 进行赋值，比如：
 <PRE>
 &gt; (define a 10)
 &gt; a
@@ -172,6 +181,8 @@ Assignments are performed using <TT>set!</TT>, for example:
 <P>
 Primitive conditional expressions are constructed using <TT>if</TT>, for
 example:
+<P>
+原始的条件表达式由 if 构成，比如：
 <PRE>
 (if (&lt; a 10)
     1
@@ -182,12 +193,14 @@ example:
 Procedures are created using <TT>lambda</TT> and called by enclosing in
 parentheses expressions for the procedure to be called and the arguments to
 be passed to it:
+<P>
+过程由 lambda 创建，通过圆括号包围起来的表达式调用并传递参数：
 <PRE>
-;; Creating a procedure
+;; 创建一个过程(匿名函数)
 &gt; (lambda (x) (* x x))
 #&lt;procedure&gt;
 
-;; Calling a procedure
+;; 调用一个过程
 &gt; (* 2 10)
 20
 &gt; ((if (= 2 (* 2 1)) + *) 2 3)
@@ -205,7 +218,8 @@ macros, see <IMG
  WIDTH="46" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
  SRC="img1.png"
  ALT="R5RS">.
-
+<P>
+派生表达式
 <P>
 Conditionals using <TT>cond</TT> can be constructed using nested <TT>if</TT>
 expressions:
