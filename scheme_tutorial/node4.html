@@ -76,7 +76,8 @@ and feed it! Try the examples in this tutorial, modify them and see what
 happens. At the same time, try to understand why the interpreter returns the 
 answer it does. Don't hesitate to try even the most crazy ideas--nobody said 
 that the learning process had to be dead serious.
-
+<P>
+  学习 Scheme 最好的起步是变着法地玩弄它。这篇教程将展示你可以用 Scheme 做什么。立刻运行 Scheme 解释器，尝试教程里的样例，尝试修改样例，看看会发生什么。同时，尝试理解解释器的回答。别担心这会搞坏你的电脑。
 <P>
 
 <H1><A NAME="SECTION00410000000000000000">
@@ -103,7 +104,7 @@ errors or other unfortunate behaviour.
 <P>
 Comments begin with a semicolon and continue until the end of the line.
 <P>
-括号用来定义什么东西将被计算。可以添加额外的括号，而不会影响该程序，但是在Scheme中不能这么干，多余的括号将引起错误。<P>
+括号用来定义什么东西将被计算。在大多数的语言中，可以添加额外的括号，而不会影响该程序，但是在Scheme中不能这么干，多余的括号将引起错误。<P>
 注释从一个分号开始，并一直到行结束。
 <P>
 <PRE>
@@ -219,21 +220,23 @@ macros, see <IMG
  SRC="img1.png"
  ALT="R5RS">.
 <P>
-派生表达式
+派生表达式由其它表达式实现，而不是直接实现。cond 和 let 就是派生表达式。派生表达式可以通过宏来定义。更多关于宏的信息，请查看r5rs。
 <P>
 Conditionals using <TT>cond</TT> can be constructed using nested <TT>if</TT>
 expressions:
+<P>
+cond 条件表达式可以通来嵌套的 if 表达式来实现。
 <PRE>
 (define a 10)
 
-;; Conditional expression using nested if expressions
+;; 嵌套的 if 表达式
 (if (&lt; a 10)
     a
     (if (&gt; a 20)
         (* a a)
         0))
 
-;; Conditional expression using cond
+;; cond 条件表达式
 (cond ((&lt; a 10) a)
       ((&gt; a 20) (* a a))
       (else 0))
@@ -242,6 +245,8 @@ expressions:
 <P>
 The <TT>let</TT> expressions could be rewritten using <TT>lambda</TT>,
 for example:
+<P>
+let 表达式可以用 lambda 来重写:
 <PRE>
 (let ((a 10)
       (b 20))
@@ -249,7 +254,7 @@ for example:
 </PRE>
 
 <P>
-is equivalent to 
+  等价于
 
 <P>
 <PRE>
@@ -266,7 +271,11 @@ Define</A>
 <TT>Define</TT> is used to bind a name to a computational object. 
 
 <P>
+Define 用于将一个对象绑定到一个名字上。
+<p>
 The syntax of the <TT>define</TT> expression is as follows:
+<P>
+  缺省的语法是：
 <PRE>
 (define var expr)
 </PRE>
@@ -277,7 +286,10 @@ The <I>expr</I> part is evaluated and the value is then bound to the variable
 variable is then said to be bound to the given value.
 
 <P>
-Let's start with a simple example:
+  <I>expr</I>部分先被求值，然后求出的值被绑定到变量<I>var</I>上。变量是一个指向具体的值的符号。
+
+<P>
+让我们从一个简单的示例开始:
 <PRE>
 (define a 2)
 </PRE>
@@ -286,6 +298,8 @@ Let's start with a simple example:
 The third expression is evaluated and has in this case the value of 2. This
 value is then bound to the symbol <I>a</I>.  We can now use the variable in 
 other expressions, e.g.
+<P>
+  第3个表达式被求值（2）,然后这个值被绑定到符号<I>a</I>。现在，我们可以在其它的表达式中使用这个变量了。
 <PRE>
 &gt;(+ a 3)
 5
@@ -293,7 +307,8 @@ other expressions, e.g.
 
 <P>
 The expression can of course be more complex than the one mentioned above.
-
+<P>
+  当然，表达式可以比上面的更复杂。
 <P>
 <PRE>
 (define b (+ 25 (* 3 25)))
@@ -301,7 +316,8 @@ The expression can of course be more complex than the one mentioned above.
 
 <P>
 <I>b</I> is now bound to the value of the expression, i.e. 100.
-
+<P>
+  现在，<I>b</I>被绑定到表达式的值（100）。
 <P>
 Also procedures can be named with <TT>define</TT>. Let's say we wish to write a
 procedure for squaring a given argument <I>x</I>. Since we will be calling
@@ -309,15 +325,18 @@ this procedure many times and we do not wish to write <TT>(* x x)</TT> over
 and over 
 again, we will need a means of abstraction. The syntax for procedure 
 definition is:
+<P>
+  同样，过程(函数)也可以用 define 来命名。比方说，我们想写一个过程（函数）来计算给定参数<I>x</I>的平方。当我们要多次使用这个函数的时候，如果不们不想一次又一次地输入 (* x x)，我们就需要一种抽象的方法。函数定义的语法是：
 <PRE>
-(define (name formal_parameters) body)
+(define (名字 形参) 函数体)
 </PRE>
 
 <P>
 For example, let us create a procedure <I>square</I>, which takes one
 argument and returns its square<A NAME="tex2html3"
   HREF="footnode.html#foot196"><SUP>2.1</SUP></A>:
-
+<P>
+  例如，让我们写一个过程 square，接收一个参数，并返回它的平方。
 <P>
 <PRE>
 (define (square x)
@@ -330,7 +349,8 @@ argument and returns its square<A NAME="tex2html3"
 procedure.  When the procedure is called, e.g. <TT>(square 8)</TT>, 
 <I>x</I> will be replaced 
 with 8 and the value of the expression <TT>(* 8 8)</TT>, i.e. 64,  will be returned.
-
+<P>
+  square 是函数定义在环境中的名字，x 是形参，而 (* x x)是函数体。当函数被调用，比如 (square 8) , x 将被替换成 8，然后表达式 (* 8 8) 的值将被返回（64）。
 <P>
 <TT>Define</TT> can be conveniently used to declare global variables and to 
 name  procedures. It is a simple but strong means of abstraction. 
@@ -338,17 +358,19 @@ However, it should never be used to define local
 variables!<A NAME="tex2html4"
   HREF="footnode.html#foot197"><SUP>2.2</SUP></A>
 <P>
-
+define 可以用于声明全局变量，或者命名函数。它是一个简单但强大的抽象方法。但是，从来不用它定义局部变量。
+<P>
 <H1><A NAME="SECTION00440000000000000000"></A>
 <A NAME="lambda"></A>
 <BR>
 Lambda
 </H1>
-The <TT>lambda</TT> expression has the following syntax: 
-
+The <TT>lambda</TT> expression has the following syntax:
+<P>
+lambda 表达式的语法是：
 <P>
 <PRE>
-(lambda formal-parameters body)
+(lambda 形参 函数体)
 </PRE>
 
 <P>
@@ -361,11 +383,14 @@ procedure resulting from a <TT>lambda</TT> expression and a procedure
 created by using define is that the procedure  created by the
 <TT>lambda</TT> expression has not been associated with a name in the
 environment.
-
+<P>
+关键字 lambda 跟随着一个参数列表（可以为空，或者多个参数），然后是函数体。lambda 求值的结果是一个匿名函数，这个匿名函数可以被应用到适当的参数上，参数被绑定到正确的值，然后函数体被求值。使用 lambda 和 define 创建函数唯一的不同是，使用 lambda 创建的函数在环境中没有与一个名字关联。
 <P>
 As mentioned above, <TT>lambda</TT> expressions return a
 procedure. Let's start by  creating a procedure taking one argument
 and returning the argument multiplied by 2.
+<P>
+上面提到的 lambda 表达式返回一个函数。让我们开始创建一个函数，接受一个参数，并且返回参数的2倍值。
 <PRE>
 &gt; (lambda (x) (* 2 x))
 #&lt;procedure&gt;
@@ -374,7 +399,8 @@ and returning the argument multiplied by 2.
 <P>
 Now, to use the procedure mentioned above we have to provide it with an
 argument, e.g. 5. This is done in the following way:
-
+<P>
+使用上面的函数，我们需要传递给它一个参数，比如：5.
 <P>
 <PRE>
 &gt; ((lambda (x) (* 2 x)) 5)
@@ -385,7 +411,8 @@ argument, e.g. 5. This is done in the following way:
 We can also bind the procedure to a name, just as we did earlier with
 <TT>define</TT>. Rewriting the procedure <I>square</I> using <TT>lambda</TT> 
 would result in the following:
-
+<P>
+我们也可以给函数绑定一个名字，就象我们之前用 define 做的一样。使用 lambda 重写 square 函数：
 <P>
 <PRE>
 (define square
@@ -398,7 +425,8 @@ So, what is the difference between binding the procedure using
 <TT>lambda</TT>  and  using <TT>define</TT> ? The answer is simple:
 <I>practically none</I><A NAME="tex2html5"
   HREF="footnode.html#foot319"><SUP>2.3</SUP></A>.  The example above is exactly the same as the following:
-
+<P>
+那么，使用 lambda 和 define 定义函数有什么区别吗？简单的回答是：几乎没有区别。上面的函数和下面这个函数是相同的。
 <P>
 <PRE>
 (define (square x)
@@ -415,7 +443,8 @@ see procedures written in both ways. Practically it is of little importance
 in which way you choose to write your programs, the important things are that
 you are consistent about the way you write procedures and that you are able to
 understand procedures written either way.
-
+<P>
+  事实上，后者仅仅是前者的语法糖衣。通常认为，用 lambda 来写程序是一种比较好的编程风格，所以，接下来我们将坚持使用 lambda 来定义函数。但是，也有人认为后者更好，更紧凑。所以，用这两种风格写的代码你可能都会遇到。事实上，选择哪一种风格并不重要，重要的是编程风格的一致性以及你能够理解用两种方法写的函数。
 <P>
 Let us take a look at another example. We want to write a procedure for 
 computing Fibonacci numbers. The procedure will take one integer <I>n</I> as 
@@ -424,7 +453,8 @@ of the procedure can be found in <I>Structure and Interpretation of
 Computer Programs</I>. We will write two versions of the procedure--one that uses
 a <TT>lambda</TT> expression and one that does not<A NAME="tex2html6"
   HREF="footnode.html#foot291"><SUP>2.4</SUP></A>:
-
+<P>
+让我们看看另外的示例。我们想写一个计算裴波那契数列的函数。该函数接受一个整数 n 作为参数，返回第 n 个裴波那契数。关于本程序更进一步的说明可以在 SICP 中找到。我们将写两个版本的函数，一个版本使用 lambda, 另一个版本不使用 lambda。
 <P>
 <PRE>
 ;; A procedure for counting the n:th Fibonacci number
@@ -446,18 +476,23 @@ a <TT>lambda</TT> expression and one that does not<A NAME="tex2html6"
 
 <P>
 The procedure fib is called in the following way:
+<P>
+fib 函数可以通过下面的方式调用：
 <PRE>
 &gt;(fib 5)
 5
 </PRE>
 <I>n</I> is then substituted with 5 and the body of the procedure is 
 evaluated.
-
+<P>
+  n 被具体的参数 5 取代，然后函数体被求值。
 <P>
 It is also possible for the <TT>lambda</TT> expressions to take more than one
 argument. For example, we want to compute the sum of two given arguments
 <I>x</I> and <I>y</I> and give the procedure the marvellous name 
 <I>sum</I>:
+<p>
+lambda 表达式也可以接受更多的参数。比如我们想计算 x y 这两个数的和，并且给函数取一个神奇的名字：sum：
 <PRE>
 (define sum
   (lambda (x y)
@@ -469,6 +504,8 @@ It is also possible to take an arbitrary number of arguments. For example,
 let's rewrite the procedure <I>sum</I> to take an arbitrary number of
 arguments<A NAME="tex2html7"
   HREF="footnode.html#foot320"><SUP>2.5</SUP></A>:
+<p>
+参数也可以是任意数量的。让我们改写 sum 函数，让它接受任意数量的参数：
 <PRE>
 (define sum
   (lambda (x . y)
@@ -492,6 +529,10 @@ For example, if we want to write a procedure <I>list</I><A NAME="tex2html9"
   HREF="footnode.html#foot322"><SUP>2.7</SUP></A> that constructs and
 returns a list of its arguments, we can omit the dot and write it using 
 <TT>lambda</TT>:
+<p>
+句点通常用于代表可变数量的参数，句点后面的参数代表一个列表——它可以为空。句点前的参数是必需的。所以，上面的函数需要最少一个参数。
+<br>
+也可以写出接受 0-n 个参数的函数来。比如下面的 list 函数。它接受任意的参数，返回用它们构造的列表。我们可能使用 lambda 并且省略句点：
 <PRE>
 (define list
   (lambda args args))
@@ -501,6 +542,8 @@ returns a list of its arguments, we can omit the dot and write it using
 Note that both the dot and the parenthesis has disappeared and that
 <I>args</I> is a list! We can, of course, rewrite this without using
 <TT>lambda</TT>, but in that case we are not allowed to omit the dot:
+<p>
+注意，括号和句点都不见了，args是一个列表。当然，我们也可以不使用 lambda, 如果那样，句点就不能省略了：
 <PRE>
 (define (list . args) 
   args)
@@ -510,6 +553,8 @@ Note that both the dot and the parenthesis has disappeared and that
 The procedures are practically equivalent, but the latter looks more
 cryptic than the former. To see how they work, let's take a look at a
 few examples:
+<p>
+两种写法几乎没区别，但是后者看起来比前者更模糊。让我们用一些小例子测试看看它们如何工作：
 <PRE>
 &gt; (list 1 2 3)
 (1 2 3)
