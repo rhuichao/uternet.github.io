@@ -33,7 +33,11 @@ TD.eqno			{ }	/* equation-number cells */
  
 pre {
     font-family: Consolas, 'Liberation Mono', 'DejaVu Sans Mono', 'Courier New', monospace;
+    font-size: 13px;
+    background-color: rgb(245, 245, 245);
+    color: rgb(51, 51, 51);
     border: 1px solid #ccc;
+    border-radius: 3px 3px 3px 3px;
     word-wrap: break-word;
     padding: 6px 10px;
     line-height: 19px;
