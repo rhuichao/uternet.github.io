@@ -576,7 +576,9 @@ order the variables are bound.
 There is also a construct called named <TT>let</TT>, which is a variant of 
 <TT>let</TT>. Some prefer to say that named <TT>let</TT> is merely a variant
 of the syntax of <TT>let</TT>.
-
+<P>
+let let* letrec 用来创建局部变量。它们三者的语法是相同的，不同之处在于变量的作用域及顺序。<br>
+还有一种命名的 let 结构，这是 let 的一个变种。有些人喜欢说，命名的 let 仅仅是一个 let 语法的变种。
 <P>
 
 <H2><A NAME="SECTION00451000000000000000">
@@ -585,6 +587,8 @@ Let</A>
 
 <P>
 The syntax of the <TT>let</TT> expression is the following:
+<p>
+let 表达式的语法如下：
 <PRE>
 (let ((var1 exp1) 
       (var2 exp2) 
@@ -598,7 +602,8 @@ The syntax of the <TT>let</TT> expression is the following:
 <P>
 <TT>Let</TT> is only syntactic sugar for an underlying <TT>lambda</TT>
 application:
-
+<P>
+事实上 let 仅仅是 lambda 的语法糖衣：
 <P>
 <PRE>
 ((lambda (var1 var2 ... varn)
@@ -614,9 +619,12 @@ and the values of the variables are computed outside the <TT>let</TT>
 expression. This matters when  the  expressions providing the values for the 
 local variables depend upon variables with the same names as the local 
 variables. 
-
+<P>
+每一个变量被绑定到对应的表达式，变量的作用域仅存在于 let 表达式的 body 内部。无论如何，let 把变量的作用域尽量局限在它们有可能被使用的的地方，以及变量的值在 let 表达式外部被计算（不知道啥意思）。这一点很重要（不知所云，大抵是变量作用域及命名冲突的意思）
 <P>
 Let's start with a simple example:
+<P>
+让我们从一个简单的例子开始：
 <PRE>
 &gt;(let ((x 2) (y 10))
    (+ x y))
@@ -627,10 +635,13 @@ Let's start with a simple example:
 <I>x</I> is bound to 2 and <I>y</I> is bound to 10. The scope of x and
 y are within the body of the <TT>let</TT> expression, that is, within 
 <TT>(+ x y)</TT>, which  yields the answer 12.
-
+<P>
+x 绑定到 2, 而 y 绑定到 10.它们的作用域是 body 内部 ——> <code>(+ x y)</code>，由它生成答案 12。
 <P>
 The <TT>let</TT> expression in the example above is equivalent to the 
 following <TT>lambda</TT> expression:
+<P>
+上面的 let 表达式与下面的 lambda 表达式是等价的：
 <PRE>
 ((lambda (x y) (+ x y)) 2 10)
 </PRE>
@@ -638,19 +649,23 @@ following <TT>lambda</TT> expression:
 <P>
 As mentioned above, <TT>let</TT> binds variables as locally as possible. 
 Consider the following expression:
-
+<P>
+在上面提到过，let 尽可能地局限变量的作用域。<br>
+请思考下面的表达式：
 <P>
 <PRE>
-&gt;(define x 10)
+&gt;(define x 10)       ;;声明一个全局变量 x = 10
 
-&gt;(+ (let ((x 5))
-      (* x (+ x 2)))
-    x)
-45
+&gt;(+ (let ((x 5))     ;;声明一个局部变量 x = 5
+      (* x (+ x 2))) ;;这里使用的是局部变量,结果是 (* 5 (+ 5 2)) = 35
+    x)               ;;这里的 x 是全局变量，值是 10，
+45                   ;;(+ 35 10) = 45
 </PRE>
 
 <P>
 The body of the <TT>let</TT> expression is the expression 
+<P>
+let 表达式的 body 是下面的表达式：
 <PRE>
 (* x (+ x 2))
 </PRE>
@@ -663,7 +678,8 @@ bound in the <TT>let</TT> expression, it just  happened to share the same name.
 The value of this  outside <I>x</I> is 10. Now the values of the outside 
 <I>x</I> and the <TT>let</TT> expression are applied to <TT>+</TT>, which 
 yields the answer 45. 
-
+<P>
+看代码注释就好。
 <P>
 The values of the variables are computed outside <TT>let</TT>. Consider the 
 following expression:
@@ -671,8 +687,8 @@ following expression:
 &gt;(define x 10)
 
 &gt;(let ((x 5)
-      (y (* x 2)))
-  (+ x y))
+      (y (* x 2))) ;;要注意啊，这里的 x 是引用上面的全局变量，因为这里不属于 body
+  (+ x y))         ;;这才是 body
 25
 </PRE>
 
@@ -685,12 +701,14 @@ value of that <I>x</I> is 10.
 <P>
 Keep in mind that <TT>let</TT> is used to create local variables, whereas
 <TT>define</TT> is usually used to create global variables!
-
+<P>
+要注意，let 用于创建局部变量，而 define 通常用于创建全局变量！
 <P>
 What if we wanted to use the <I>x</I> declared in the <TT>let</TT> 
 expression mentioned above? Well, Scheme provides another form of <TT>let</TT>,
 i.e. <TT>let*</TT>.
-
+<P>
+如果我们想在上面的 let 表达式中引用刚刚声明的局部变量怎么办？Scheme 提供另外的一个 let*
 <P>
 
 <H2><A NAME="SECTION00452000000000000000">
@@ -699,6 +717,8 @@ Let*</A>
 
 <P>
 The syntax of <TT>let*</TT> is similar to that of <TT>let</TT>:
+<P>
+let* 的语法与 let 类似:
 <PRE>
 (let* ((var1 exp1) 
        (var2 exp2) 
@@ -712,6 +732,8 @@ The syntax of <TT>let*</TT> is similar to that of <TT>let</TT>:
 <P>
 The semantics, however, is somewhat different. 
 <TT>let*</TT> is equivalent to a sequence of nested <TT>let</TT> expressions:
+<P>
+语义上有些差别。let* 相当于嵌套的 let 表达式：
 <PRE>
 (let ((var1 expr1))
   (let ((var2 expr2))
@@ -724,14 +746,16 @@ The semantics, however, is somewhat different.
 The bindings in a <TT>let*</TT> expression are evaluated from left to right, 
 which means that the value of a variable may contain variables from previous 
 bindings.
-
+<P>
+let* 中的绑定从左到右求值，这意味着早先定义的变量可以被后面的定义引用。
 <P>
 Consider the example studied above rewritten with a <TT>let*</TT> expression:
+<P>思考下面这个用 let* 重写的表达式：
 <PRE>
 &gt;(define x 10)
 
 &gt;(let* ((x 5)
-       	(y (* x 2)))
+       	(y (* x 2))) ;;这里的 x = 5, 而不是全局变量 x 的 10
    (+ x y))
 15
 </PRE>
@@ -756,6 +780,9 @@ more general looping construct than <TT>do</TT><A NAME="tex2html11"
 usually used for iteration, but can also be used to express recursions. 
 Named <TT>let</TT> has the 
 following syntax:
+<P>
+命名的 let 提供了一种比 do 更通用的循环结构。它通常用于迭代，但是也可以用来表示递归。<br>
+下面是语法：
 <PRE>
 (let var bindings body)
 </PRE>
@@ -766,14 +793,17 @@ the <I>var</I> part is bound within <I>body</I> to a procedure, whose
 formal arguments are the bound variables (in <I>bindings</I>) and whose body 
 is <I>body</I>.  It is now possible to invoke <I>body</I> repeatedly by
 calling the procedure named by <I>var</I>.
-
+<P>
+语法和语义与 let 相似，但是 var（变量）部分是一个函数，它使用"绑定"部分定义的值作为参数。它的函数体就是 body 部分。现在，可以通过调用 var 来重复地执行函数体（递归）。
 <P>
 Let us write a procedure computing factorials using named <TT>let</TT>:
+<P>
+让我们用 let 写一个计算阶乘和函数：
 <PRE>
 (define factorial
   (lambda (n)
-    (let iter ((product 1)
-               (counter 1))
+    (let iter ((product 1)  ;;相当于C里面的for循环赋初值，递归过程中这里的值不再起作用
+               (counter 1)) ;;而是在调用时传递进来
       (if (&gt; counter n)
           product
           (iter (* counter product) (+ counter 1))))))
@@ -787,6 +817,8 @@ Letrec</A>
 
 <P>
 The syntax for <TT>letrec</TT> is the following:
+<P>
+下面是 letrec 的语法：
 <PRE>
 (letrec ((var1 val1)
          (var2 val2)
@@ -805,6 +837,8 @@ internal definitions can be converted into a completely equivalent
 <TT>letrec</TT> expression. Let's see how to convert the procedure
 for counting factorials into an equivalent procedure using a <TT>letrec</TT> 
 expression instead of internal definitions:
+<P>
+letrec 背后的观念就是允许在局部变量定义中递归。变量的作用域包括 body 部分，以及其它变量的定义部分 。任何函数体内部的定义可以完整地改写为等价的 letrec 表达式。让我们看看如何把计算阶乘的函数改写为使用 letrec 表达式来替换内部定义。
 <PRE>
 ;; The procedure factorial taken from SICP, p. 33 
 (define (factorial n)
