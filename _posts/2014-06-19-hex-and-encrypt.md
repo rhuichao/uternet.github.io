@@ -6,7 +6,7 @@ date: 2014-06-19
 
 先放用 C 写的版本。
 
-##一、十六进制查看器：
+一、十六进制查看器：
 
 ```c
 /******************************
@@ -88,7 +88,7 @@ int main(int argc, char *argv[])
 
 本来代码很短，之所以搞这么乱是因为我想模仿 hexdump 的输出。
 
-##二、异或加密
+二、异或加密
 
 ```c
 #include <stdio.h>
@@ -125,7 +125,7 @@ int main(int argc, char *argv[])
 }
 ```
 
-##三、用 Scheme 写的十六进制查看器
+三、用 Scheme 写的十六进制查看器
 
 ```scheme
 #!/usr/local/bin/csi -s
@@ -186,7 +186,7 @@ int main(int argc, char *argv[])
   (bin f))
 ```
 
-##四、Scheme 版的加密工具
+四、Scheme 版的加密工具
 
 ```scheme
 #!/usr/local/bin/csi -s
