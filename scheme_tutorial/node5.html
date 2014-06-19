@@ -58,7 +58,8 @@ Conditional expressions</A>
 Case analysis can be implemented with the conditional expressions 
 <TT>cond</TT>, <TT>case</TT> and <TT>if</TT>. Also the logical expressions
 <TT>and</TT>, <TT>or</TT> and <TT>not</TT> can be used. 
-
+<P>
+情况判断可以用条件表达式 cond、if、case来实现，也可以配合使用逻辑表达式 and、or 还有 not。
 <P>
 
 <H1><A NAME="SECTION00510000000000000000">
@@ -77,7 +78,8 @@ or
 If the condition is true, then the value of consequent is returned,
 otherwise the alternative is returned. If no alternative is given and
 the condition is false, the return value will be unspecified.
-
+<P>
+如果条件判断为真（#t），consequent的值被返回，否则，alternative的值被返回。如果条件判断为假，并且没有给出 alternative ，那么返回值未定义（MS由Scheme实现自己决定）。
 <P>
 The usage of <TT>cond</TT> and <TT>if</TT> can best be explained with some
 examples. Let's say we wish to write a procedure that takes two arguments and
