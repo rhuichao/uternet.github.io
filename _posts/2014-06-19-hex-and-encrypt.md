@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
             if (count % 16 == 0) {
                 printf(" |");
                 for (i = 0; i < 16; i++) {
-                    if (temp[i] > 32 && temp[i] < 127)
+                    if (temp[i] > 31 && temp[i] < 127)
                         putchar(temp[i]);  //试图以ASCII输出
                     else
                         putchar('.');      //不可打印字符用 . 代替
