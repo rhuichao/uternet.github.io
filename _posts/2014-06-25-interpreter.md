@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 把王垠的 scheme 解释器改了一下
-date: 2014-06-20
+date: 2014-06-25
 ---
 
 王垠的[这个](http://www.yinwang.org/blog-cn/2012/08/01/interpreter/)解释器比起 The Little Schemer 第10章那个，简单得多，很容易就搞懂了。当然也差了一些东西，比如 quote cond 等。如果把这些东西加上去，两者也就差不多一样了。它们唯一的区别是，王垠的版本用 association list 来保存环境，而 TLS 里的那个用三层嵌套的列表来干这个事，结果很容易就被绕晕了。
