@@ -426,7 +426,8 @@ argument to any other procedure, thus not needing to wait for any values to
 return. It also saves the state of the computation by passing it as an 
 argument and returning the current state as the final state  when the 
 terminating condition is reached. 
-
+<P>
+如我们所见，iter 递归调用它自己，不需要任何其它的过程。这样就不须要等待任何返回值。它总是把计算的状态作为参数传递给下一次递归，并且当递归终止的条件触发时直接返回当前状态。
 <P>
 Let's use <TT>trace</TT> and see the procedures <I>fact</I> and 
 <I>factorial</I> in action:
@@ -492,7 +493,8 @@ Scheme provides a rather complex iteration construct <TT>do</TT>
   HREF="footnode.html#foot923"><SUP>6.1</SUP></A>, which specifies a set of variables to be bound, how
 they are to  be initialized and how they are to be updated on each
 iteration.
-
+<P>
+Scheme 提供了一个相当复杂的迭代结构 do。它指定了一个变量绑定的集合，以及它们怎么初始化，以及在每一次迭代时它们怎么更新。
 <P>
 The syntax of <TT>do</TT> is the following:
 
@@ -517,7 +519,11 @@ effect. The <I>step</I> expressions are evaluated and the result is
 stored in the variables <I>var1&nbsp;...</I>, which are bound to fresh
 locations. The next iteration can now begin. Note that it is an error
 for a  variable to occur more than once in the list of variables.
-
+<P>
+首先，init 表达式会以某种次序求值，结果绑定到 var1... 
+<br>
+然后，迭代开始。首先，test 表达式被求值，如果结果为真，紧跟在 test 后面的表达式被从左到右逐一求值，并返回最后一个表达式的值，迭代终止。如果 test 的结果为假，command 表达式被求值，然后 step 表达式被求值，结果再次绑定到变量 var... 下一次迭代开始。<br>
+注意，一个变量不止一次出现在变量列表中是一个错误。
 <P>
 For example, the following expression binds the string ``foobar'' to the
 variable <I>str</I> and the value 0 to the variable <I>i</I>. The variable
@@ -525,7 +531,8 @@ variable <I>str</I> and the value 0 to the variable <I>i</I>. The variable
 the length of <I>str</I>. When this happens, <I>str</I> will be returned,
 otherwise the character at index <I>i</I> in <I>str</I> will be set to
 the character&nbsp;<I>b</I>.
-
+<P>
+例如，下面的表达式把字符串"foobar"绑定到变量 str，把值 0 绑定到变量 i。每一次迭代变量 i 都会自加 1, 直到变量 i 的值等于 str 的长度。当这一切都发生了, str 会被作为返回值返回。
 <P>
 <PRE>
 &gt; (do ((str (string #\f #\o #\o #\b #\a #\r))
