@@ -532,7 +532,7 @@ the length of <I>str</I>. When this happens, <I>str</I> will be returned,
 otherwise the character at index <I>i</I> in <I>str</I> will be set to
 the character&nbsp;<I>b</I>.
 <P>
-例如，下面的表达式把字符串"foobar"绑定到变量 str，把值 0 绑定到变量 i。每一次迭代变量 i 都会自加 1, 直到变量 i 的值等于 str 的长度。当这一切都发生了, str 会被作为返回值返回。
+例如，下面的表达式把字符串"foobar"绑定到变量 str，把值 0 绑定到变量 i。每一次迭代变量 i 都会自加 1, 直到变量 i 的值等于 str 的长度。当这一切都发生了, str 会被作为返回值返回。否则，str 里面，被 i 索引的字母会被赋值成字母 b。
 <P>
 <PRE>
 &gt; (do ((str (string #\f #\o #\o #\b #\a #\r))
