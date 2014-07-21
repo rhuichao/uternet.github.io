@@ -1,5 +1,5 @@
 permalink:     /:year-:month-:day/:title.html
-url:           http://geek-zhu.tk
+url:           http://uternet.github.io
 author:        Lazy_Pig
 paginate:      15
 markdown:      redcarpet
