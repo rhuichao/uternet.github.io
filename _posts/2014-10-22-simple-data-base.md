@@ -151,16 +151,13 @@ plist 是啥？ Scheme 里有同样的东西吗？不知道
                (update-if-match test (cdr db) replace)))))
 
 (define (update-item item replace)
-  (let ((title (if (field-exists? 'title replace)
-                   (get-field-value 'title replace)
+  (let ((title (or (get-field-value 'title replace)
                    (title-of item)))
-        (artist (if (field-exists? 'artist replace)
-                    (get-field-value 'artist replace)
+        (artist (or (get-field-value 'artist replace)
                     (artist-of item)))
-        (rating (if (field-exists? 'rating replace)
-                    (get-field-value 'rating replace)
+        (rating (or (get-field-value 'rating replace)
                     (rating-of item)))
-        (ripped (if (field-exists? 'ripped replace)
+        (ripped (if (field-exists? 'ripped replace) ;;必需先检查是否传入了'ripped,否则无法把#f传递进去
                     (get-field-value 'ripped replace)
                     (ripped-of item))))
     (list title artist rating ripped)))
@@ -198,10 +195,13 @@ plist 是啥？ Scheme 里有同样的东西吗？不知道
 4、查找记录
 
     (select (where '字段 "匹配值")) 
-    #字段 是引用的symbol类型，包括 'title 'artist 'rating 'ripped 四个
-    #字段和匹配值可以指定多对
+
+字段 是引用的symbol类型，包括 'title 'artist 'rating 'ripped 四个   
+字段和匹配值可以指定多对
 
 5、更新记录
 
-    (update (where '字段 "匹配值") '字段 "替换值") #字段与匹配值以及字段与替换值可以指定多对
+    (update (where '字段 "匹配值") '字段 "替换值") 
+
+字段与匹配值以及字段与替换值可以指定多对
 
