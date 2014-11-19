@@ -219,3 +219,40 @@ ex.ConversionError	字符串到数值的转换含有非法（非数值）字符
 ex.ValueOutOfRange	当前操作的值过大
 ex.StringOverflow	试图将过大的字符串存入一个字符串变量
 ```
+
+#三、标准库
+
+##stdio
+
+预定义常量：
+
+    nl              换行
+    stdio.beel      ASCII响铃
+    stdio.bs        ASCII退格
+    stdio.tab       ASCII tab
+    stdio.if        ASCII换行符
+    stdio.cr        ASCII回车符
+
+例程（函数）：
+
+    stdout.newln();  //等效于：
+    stdout.put(nl);
+    
+    stdout.puti8( 123 );        //输出8位有符号整数
+    stdout.puti16( dx );        //输出16位有符号整数
+    stdout.puti32( edx );       //输出32位有符号整数
+    
+    //下面的例程按指定的宽度输出数值
+    stdout.puti8Size(Value8, width, padchar);
+    stdout.puti16Size(Value16, width, padchar);
+    stdout.puti32Size(Value32, width, padchar);
+    
+    //Value 可以是常量、寄存器、或者是内存单元
+    //width 可以是-256 ～ +256之间的任意常量、或者是32位的寄存器以及内存单元
+    //width 指定的是最小宽度，如果数值超过这个宽度，则正常显示；如果数值达不到这个宽度
+    //则用 padchar 指定的字符填充，padchar 可以是一个ASCII码、单个字符，或者8位寄存器
+    //width 为负值的情况暂时没搞懂，我认为翻译这本书的家伙也搞不懂自己在讲什么。
+    //刚发现 p31 的一个错误，第8行代码是 add(1, ColCnt), 被搞成了 dd(1, ColCnt)
+    
+    
+    
