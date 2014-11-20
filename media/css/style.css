@@ -66,13 +66,13 @@ ol ul, ul ol, ul ul, ol ol {
 /*代码块*/
 pre,code{
     font-family:Menlo,"Andale Mono",Consolas,"Courier New",Monaco,monospace;
-    font-size:0.9em;
+    font-size:13px;
     
 }
 
 pre code{
     margin:1em 0;
-    font-size:0.9em;
+    font-size:13px;
     line-height:1.4;
     display:block;
     overflow:auto;
