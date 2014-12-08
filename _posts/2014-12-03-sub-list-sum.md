@@ -27,7 +27,7 @@ date: 2014-12-03
 ```scheme
 (define (sub-list-sum lst)
   (let iter ((lst lst) (max 0) (current 0))
-    (cond ((null? lst) (list max start end))
+    (cond ((null? lst) max)
           (else
            (let ((tmp (+ current (car lst))))
              (cond ((> tmp max)
