@@ -93,7 +93,7 @@ Racket 中还有一个类似于 in-range 的函数 in-naturals，起点总是从
 
 ###in-list, in-vector, in-string
 
-分别在列表、矢量、字符串上进行迭代。数列、列表、矢量、字符串都是天然的序列，有趣的是，Racket 可以不需要 in-range、in-string、in-list 等函数显式地生成一个序列，以上数据类型可直接用于 for 结构中：
+分别在列表、矢量、字符串上进行迭代。数列、列表、矢量、字符串都是天然的序列，有趣的是，Racket 可以不需要 in-range、in-string、in-list 等函数显式地生成一个流，以上数据类型可直接用于 for 结构中：
 
 ```scheme
 > (for ((i '((a 1) (b 2) (c 3))))
