@@ -107,7 +107,7 @@ Racket 中还有一个类似于 in-range 的函数 in-naturals，起点总是从
 
 ##for 和 for*
 
-可以同时在多个序列上并行迭代：
+for 可以同时在多个序列上并行迭代：
 
 ```scheme
 > (for ([i (in-range 1 4)]
