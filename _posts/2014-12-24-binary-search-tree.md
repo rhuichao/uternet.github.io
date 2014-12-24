@@ -75,7 +75,7 @@ data: 2014-12-24
 ```
 
 
-有副作用的写法，写了个插入函数，删除函数不知道要怎么写了,另外还有一个问题，当传参数是个空表时，也没有副作用，必须在调用时显式地执行 set!
+有副作用的写法，写了个插入函数，删除函数不知道要怎么写了,另外还有一个问题，当传入参数是个空表时，也没有副作用，必须在调用时显式地执行 set!, 容易搞混。
 
 ```scheme
 (define (insert BST val)
@@ -84,10 +84,10 @@ data: 2014-12-24
     (list val '() '()))
    ((= val (car BST))
     BST)
-   ((< val (car BST))
-    (set-car! (cdr BST)
+   ((< val (car BST))        ;;每个分支有两个语句
+    (set-car! (cdr BST)      ;;1 修改值，纯纯的副作用
           (insert (left BST) val))
-    BST)
+    BST)                     ;;2 还得返回点什么东西，递归要用到这个返回值
    (else
     (set-car! (cddr BST)
           (insert (right BST) val))
